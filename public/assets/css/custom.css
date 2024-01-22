@@ -1,3 +1,163 @@
+@font-face {
+    font-family: 'ZenKaku';
+    src: url("../fonts/ZenKakuGothicNew-Regular.ttf");
+}
+@font-face {
+    font-family: 'Noto-Sans';
+    src: url("../fonts/NotoSans-Bold.ttf");
+}
+@font-face {
+    font-family: 'Noto-Regular';
+    src: url("../fonts/NotoSans-Regular.ttf");
+}
+
+a{
+    text-decoration: none !important;
+}
+
 body {
     background-color: #ecedf8;
+    font-family: 'ZenKaku';
+    overflow-y:hidden;
+    display: flex;
+}
+
+.main-sidebar-menu{
+    width:350px;
+    height:94vh;
+    margin:30px 0 30px 30px;
+    background-color: #fff;
+    padding-left:14px;
+    padding-right:62px;
+    border-radius:35px;
+    box-shadow: 0px 0px 10px 1px rgba(1, 0, 87, 0.1);
+}
+
+.main-sidebar-menu-item{
+    margin-bottom:10px;
+    border-radius:25px;
+    transition: all 0.5s ease;
+    padding:5px 10px;
+}
+
+.main-sidebar-menu-item:hover{
+    background-color: #010057;
+    border-radius: 25px;
+}
+
+.main-sidebar-menu-item:hover, .main-sidebar-menu-item:hover .nav-link, .main-sidebar-menu-item:hover .nav-link i{
+    color:#fff !important;
+}
+
+
+.main-sidebar-menu-item .nav-link{
+    color:#2b2b35 !important;
+    font-size: 16px;
+    border-radius: 20px;
+    transition: all 0.5s ease;
+}
+
+.main-sidebar-menu-item .nav-link i{
+    font-size: 20px;
+    padding-right:15px;
+    color:#010057;
+    border-radius: 20px;
+    transition: all 0.7s ease;
+}
+.main-ul{
+    margin-top:40px;
+}
+
+
+.logo-tmstore{
+    margin-top:40px !important;
+}
+
+.logo-tmstore img{
+    width:180px;
+    height:85px;
+}
+.page-title{
+    margin-top: 80px;
+    margin-left:60px;
+    font-family: 'Noto-Sans';
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.content{
+    
+    margin:60px 30px 30px 60px;
+    padding:70px 60px;
+    min-height:79vh;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 1px rgba(1, 0, 87, 0.1);
+    border-radius:35px;
+}
+
+td{
+    padding-top:30px !important;
+    padding-bottom:20px !important;
+}
+.table th,
+.table td {
+    padding-right: 50px; /* Задайте нужный вам отступ между столбцами */
+}
+
+
+
+
+
+table{
+    flex-grow: 1;
+    width: 100%;
+    padding:70px 60px;
+}
+
+.table thead{
+    border-bottom:1px solid rgba(43,43,53,0.1);
+}
+
+.table tbody tr{
+    padding-top:30px;
+    padding-bottom:30px;
+    border-bottom:1px solid rgba(43,43,53,0.1);
+}
+
+
+.table thead tr th{
+    font-family: 'Noto-Sans';
+    color:#2b2b35;
+    font-size: 18px;
+}
+
+.table-icon{
+    font-size:22px;
+    color:#010057;
+}
+
+.input-label-col label{
+    font-size:18px;
+    font-family: 'Noto-Sans';
+    color:#2b2b35;
+    margin-bottom: 15px;
+   
+}
+
+.input-label-col input{
+    padding:14px 20px;
+    border-radius:10px;
+    border:1px solid #010057;
+    min-width:310px;
+}
+
+.input-label-col input::placeholder{
+    font-family: 'Noto-Regular';
+    font-size:14px;
+    color:rgba(43,43,53,0.5);
+}
+
+.input-label-col input, label{
+    display: block;
+    margin-right:50px;
 }
