@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,13 @@ Route::get('/', function () {
 Route::get('/edit', function () {
     return view('users.edit');
 });
+Route::get('/test', function () {
+    return view('test');
+});
+Route::post('/upload', function (Request $request) {
+    // return view('test');
+    var_dump($request->images);
+});
 
 
 
@@ -34,6 +42,9 @@ Route::get('/categories/edit', function () {
 Route::get('/advertisements', function () {
     return view('advertisements.advertisements');
 });
+Route::get('/advertisements/edit', function () {
+    return view('advertisements.edit');
+});
 
 
 
@@ -48,6 +59,9 @@ Route::get('/cities/edit', function () {
 
 Route::get('/banners', function () {
     return view('banners.banners');
+});
+Route::get('/banners/edit', function () {
+    return view('banners.edit');
 });
 
 

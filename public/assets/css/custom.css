@@ -1,163 +1,495 @@
 @font-face {
-    font-family: 'ZenKaku';
+    font-family: "ZenKaku";
     src: url("../fonts/ZenKakuGothicNew-Regular.ttf");
 }
 @font-face {
-    font-family: 'Noto-Sans';
+    font-family: "Noto-Sans";
     src: url("../fonts/NotoSans-Bold.ttf");
 }
 @font-face {
-    font-family: 'Noto-Regular';
+    font-family: "Noto-Regular";
     src: url("../fonts/NotoSans-Regular.ttf");
 }
 
-a{
+a {
     text-decoration: none !important;
+    color: #fff;
+}
+
+a:hover {
+    color: #fff;
+}
+
+p {
+    margin-bottom: 0 !important;
 }
 
 body {
     background-color: #ecedf8;
-    font-family: 'ZenKaku';
-    overflow-y:hidden;
+    font-family: "ZenKaku";
+    overflow-y: hidden;
     display: flex;
 }
 
-.main-sidebar-menu{
-    width:350px;
-    height:94vh;
-    margin:30px 0 30px 30px;
+input {
+    outline: none;
+}
+
+
+
+.main-sidebar-menu {
+    /* width: 350px; */
+    /* height: 100%; */
+    margin: 30px 60px 30px 30px;
     background-color: #fff;
-    padding-left:14px;
-    padding-right:62px;
-    border-radius:35px;
+    padding-left: 14px;
+    padding-right: 62px;
+    border-radius: 35px;
     box-shadow: 0px 0px 10px 1px rgba(1, 0, 87, 0.1);
 }
 
-.main-sidebar-menu-item{
-    margin-bottom:10px;
-    border-radius:25px;
+.main-sidebar-menu-item {
+    margin-bottom: 10px;
+    border-radius: 25px;
     transition: all 0.5s ease;
-    padding:5px 10px;
+    padding: 5px 10px;
 }
 
-.main-sidebar-menu-item:hover{
+.main-sidebar-menu-item:hover {
     background-color: #010057;
     border-radius: 25px;
 }
 
-.main-sidebar-menu-item:hover, .main-sidebar-menu-item:hover .nav-link, .main-sidebar-menu-item:hover .nav-link i{
-    color:#fff !important;
+.main-sidebar-menu-item:hover,
+.main-sidebar-menu-item:hover .nav-link,
+.main-sidebar-menu-item:hover .nav-link i {
+    color: #fff !important;
 }
 
-
-.main-sidebar-menu-item .nav-link{
-    color:#2b2b35 !important;
+.main-sidebar-menu-item .nav-link {
+    color: #2b2b35 !important;
     font-size: 16px;
     border-radius: 20px;
     transition: all 0.5s ease;
 }
 
-.main-sidebar-menu-item .nav-link i{
+.main-sidebar-menu-item .nav-link i {
     font-size: 20px;
-    padding-right:15px;
-    color:#010057;
+    padding-right: 15px;
+    color: #010057;
     border-radius: 20px;
     transition: all 0.7s ease;
 }
-.main-ul{
-    margin-top:40px;
+.main-ul {
+    margin-top: 40px;
 }
 
-
-.logo-tmstore{
-    margin-top:40px !important;
+.logo-tmstore {
+    margin-top: 40px !important;
 }
 
-.logo-tmstore img{
-    width:180px;
-    height:85px;
+.logo-tmstore img {
+    width: 180px;
+    height: 85px;
 }
-.page-title{
+.page-title {
     margin-top: 80px;
-    margin-left:60px;
-    font-family: 'Noto-Sans';
+    margin-right: 100px;
+    font-family: "Noto-Sans";
     font-size: 22px;
     font-weight: 700;
 }
 
-.content{
-    
-    margin:60px 30px 30px 60px;
-    padding:70px 60px;
-    min-height:79vh;
+.content {
+    margin: 60px 30px 30px 0;
+    padding: 70px 60px;
+    max-height: 79vh;
     background-color: #fff;
     box-shadow: 0px 0px 10px 1px rgba(1, 0, 87, 0.1);
-    border-radius:35px;
+    border-radius: 35px;
+    overflow-y: auto;
 }
 
-td{
-    padding-top:30px !important;
-    padding-bottom:20px !important;
+td {
+    padding-top: 30px !important;
+    padding-bottom: 20px !important;
 }
 .table th,
 .table td {
     padding-right: 50px; /* Задайте нужный вам отступ между столбцами */
 }
 
-
-
-
-
-table{
+table {
     flex-grow: 1;
     width: 100%;
-    padding:70px 60px;
+    padding: 70px 60px;
 }
 
-.table thead{
-    border-bottom:1px solid rgba(43,43,53,0.1);
+.table thead {
+    border-bottom: 1px solid rgba(43, 43, 53, 0.1);
 }
 
-.table tbody tr{
-    padding-top:30px;
-    padding-bottom:30px;
-    border-bottom:1px solid rgba(43,43,53,0.1);
+.table tbody tr {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(43, 43, 53, 0.1);
 }
 
-
-.table thead tr th{
-    font-family: 'Noto-Sans';
-    color:#2b2b35;
+.table thead tr th {
+    font-family: "Noto-Sans";
+    color: #2b2b35;
     font-size: 18px;
 }
 
-.table-icon{
-    font-size:22px;
-    color:#010057;
+.table-icon {
+    font-size: 22px;
+    color: #010057;
+    margin-right: 10px;
 }
 
-.input-label-col label{
-    font-size:18px;
-    font-family: 'Noto-Sans';
-    color:#2b2b35;
+.input-label-col label {
+    display: block;
+    margin-right: 10px;
+    font-size: 18px;
+    font-family: "Noto-Sans";
+    color: #2b2b35;
     margin-bottom: 15px;
-   
 }
 
-.input-label-col input{
-    padding:14px 20px;
-    border-radius:10px;
-    border:1px solid #010057;
-    min-width:310px;
+.input-label-col input {
+    display: block;
+    margin-right: 50px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: 1px solid #010057;
+    min-width: 310px;
 }
 
-.input-label-col input::placeholder{
-    font-family: 'Noto-Regular';
-    font-size:14px;
+.input-label-col textarea {
+    display: block;
+    margin-right: 50px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: 1px solid #010057;
+    outline: none;
+    margin-bottom: 25px;
+}
+
+.input-label-col input::placeholder {
+    font-family: "Noto-Regular";
+    margin: 0;
+    font-size: 14px;
+    vertical-align: middle; /* Центрирование текста по вертикали */
+    line-height: inherit;
+    color: rgba(43, 43, 53, 0.5);
+}
+
+.modal-button {
+    padding: 14px 20px;
+    margin-right: 50px;
+    border-radius: 10px;
+    border: 1px solid #010057;
+    min-width: 310px;
+    min-height: 54px;
+    outline: none;
+    background-color: #fff;
+    color: rgba(43, 43, 53, 0.5);
+    font-size: 14px;
+    font-family: "Noto-Regular";
+    text-align: start;
+}
+.selected-text-color {
+    color: #2b2b35; /* Установите цвет текста кнопки для выбранной опции */
+}
+
+.modal-content {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(1, 0, 87, 0.3);
+    max-height:260px;
+    max-width:380px;
+}
+
+.modal-body {
+    padding: 0;
+    overflow:auto;
+}
+
+.modal-header {
+    border: none;
+}
+
+.modal-footer {
+    border: none;
+}
+
+.modal-title {
+    font-family: "Noto-Sans";
+    color: #2b2b35;
+}
+
+.close {
+    border: none;
+    background-color: fff;
+    color: #2b2b35;
+}
+
+.modal-body p {
+    color: #2b2b35;
+    font-size: 14px;
+    font-family: "Noto-Regular";
+    padding: 10px 0px 10px 20px;
+    border-bottom: 1px solid rgba(43, 43, 53, 0.1);
+}
+
+.modal-select-button {
+    background-color: #010057;
+    font-family: "Noto-Regular";
+    font-size: 12px;
+    border: none;
+    padding: 10px 12px;
+}
+
+.modal-select-button:hover {
+    background-color: rgba(1, 0, 87, 0.6);
+}
+.category-option, .city-option, .user-option {
+    transition: all 0.3s ease;
+}
+
+.category-option:hover,
+.category-option.selected, .city-option:hover, .city-option.selected, .user-option:hover, .user-option.selected{
+    background-color: rgba(1, 0, 87, 0.7);
+    color: #fff;
+}
+
+.cancel-button {
+    background-color: #ffbf00;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Noto-Regular";
+    margin-right: 30px !important;
+    border-radius: 10px;
+}
+.save-button {
+    background-color: #72cc50;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Noto-Regular";
+    border-radius: 10px;
+}
+
+.cancel-button i,
+.save-button i,
+.create-button i {
+    margin-left: 5px !important;
+    font-size: 16px;
+}
+
+.cancel-button:hover {
+    background-color: rgba(255, 191, 0, 0.7);
+}
+.save-button:hover {
+    background-color: rgba(114, 204, 80, 0.7);
+}
+
+.create-button {
+    background-color: #010057;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Noto-Regular";
+    border-radius: 10px;
+}
+
+.create-button:hover {
+    background-color: rgba(1, 0, 87, 0.8);
+}
+#upload-container {
+    display: block;
+    margin-right: 50px;
+    height: 210px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: 1px solid #010057;
+    outline: none;
+    margin-bottom: 25px;
+}
+
+#upload-container img {
+    width: 40%;
+    margin-bottom: 20px;
+    user-select: none;
+}
+
+#upload-container label {
+    font-weight: bold;
+}
+
+#upload-container label:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#upload-container div {
+    position: relative;
+    z-index: 10;
+}
+
+#upload-container input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    position: absolute;
+    z-index: -10;
+}
+
+#upload-container label.focus {
+    outline: 1px solid #0078d7;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+#upload-container.dragover {
+    background-color: rgba(1, 0, 87, 0.1);
+}
+.upload-label {
+    font-family: "Noto-Regular" !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+    vertical-align: middle !important; /* Центрирование текста по вертикали */
+    line-height: inherit !important;
+    color: rgba(43, 43, 53, 0.5) !important;
+    font-weight: 300 !important;
+}
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+input[type="date"] {
+    position: relative;
+}
+input[type="date"]::after {
+    content: "";
+    background: url("../fonts/svg/calendar-event.svg") no-repeat center;
+    background-size: contain;
+    width: 18px;
+    height: 18px;
+    font-size: 16px; /* Размер иконки */
+    color: #010057; /* Цвет иконки */
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    pointer-events: none; /* Это предотвращает взаимодействие с псевдоэлементом */
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: #fff;
+    background: transparent;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    z-index: -10;
+}
+
+input[type="date"]::-webkit-input-placeholder {
+    z-index: 99;
+    color: #fff;
+}
+
+input[type="date"]:placeholder {
+    z-index: 99;
+    color: #fff;
+}
+
+input[type="date"]:not(.has-value):before {
+    content: attr(placeholder);
+    width: 0;
+    color: #fff;
+    height: 10px;
+}
+
+.elevate-adv-button {
+    margin-top: 50px;
+    background-color: rgba(1, 0, 87, 0.1);
+    width: 240px;
+    height: 50px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 14px 20px;
+    color: #2b2b35;
+    font-size: 16px;
+    font-family: "Noto-Sans";
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.elevate-adv-button:hover {
+    background-color: rgba(1, 0, 87, 0.4);
+}
+
+.accordion-button {
+    display: block;
+    margin-right: 50px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: 1px solid #010057;
+    width: 310px;
+    min-height:54px;
     color:rgba(43,43,53,0.5);
 }
+.accordion-body {
+    width: 310px;
+}
 
-.input-label-col input, label{
-    display: block;
-    margin-right:50px;
+.select-container{
+    min-width:304px;
+    box-shadow: 0 0 10px rgba(1, 0, 87, 0.3);
+    border-radius:10px;
+}
+.select-container p{
+    padding:20px 0px 10px 55px;
+    border-bottom: 1px solid rgba(43, 43, 53, 0.1);
+    color:#2b2b35;
+    font-family:'Noto-Regular';
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+}
+.select-container p:last-child{
+    padding-bottom:20px;
+}
+.select-container p:hover{
+    background-color: rgba(1,0,87,0.7);
+    color:#fff;
+}
+.select-container p:last-child, .select-container p:hover:last-child{    
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+}
+
+.select-container p:first-child, .select-container p:hover:first-child{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.status-option.selected{
+    background-color: rgba(1,0,87,0.7);
+    color:#fff;
 }

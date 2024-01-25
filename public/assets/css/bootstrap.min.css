@@ -3194,9 +3194,9 @@ fieldset:disabled .btn {
 .btn-check:focus + .btn-primary,
 .btn-primary:focus {
     color: #fff;
-    background-color: #0b5ed7;
+    /* background-color: #0b5ed7;
     border-color: #0a58ca;
-    box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+    box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5); */
 }
 
 .btn-check:active + .btn-primary,
@@ -3205,23 +3205,23 @@ fieldset:disabled .btn {
 .btn-primary:active,
 .show > .btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #0a58ca;
-    border-color: #0a53be;
+    /* background-color: #0a58ca;
+    border-color: #0a53be; */
 }
 
-.btn-check:active + .btn-primary:focus,
+/* .btn-check:active + .btn-primary:focus,
 .btn-check:checked + .btn-primary:focus,
 .btn-primary.active:focus,
 .btn-primary:active:focus,
 .show > .btn-primary.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
-}
+} */
 
 .btn-primary.disabled,
 .btn-primary:disabled {
     color: #fff;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    /* background-color: #0d6efd;
+    border-color: #0d6efd; */
 }
 
 .btn-secondary {
@@ -5081,9 +5081,9 @@ fieldset:disabled .btn {
 }
 
 .accordion-button:not(.collapsed) {
-    color: #0c63e4;
-    background-color: #e7f1ff;
-    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
+    /* color: #0c63e4; */
+    /* background-color: #e7f1ff; */
+    /* box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125); */
 }
 
 .accordion-button:not(.collapsed)::after {
@@ -5115,9 +5115,9 @@ fieldset:disabled .btn {
 
 .accordion-button:focus {
     z-index: 3;
-    border-color: #86b7fe;
+    /* border-color: #86b7fe; */
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    /* box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); */
 }
 
 .accordion-header {
@@ -5126,7 +5126,7 @@ fieldset:disabled .btn {
 
 .accordion-item {
     background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    /* border: 1px solid rgba(0, 0, 0, 0.125); */
 }
 
 .accordion-item:first-of-type {
@@ -5134,10 +5134,10 @@ fieldset:disabled .btn {
     border-top-right-radius: 0.25rem;
 }
 
-.accordion-item:first-of-type .accordion-button {
+/* .accordion-item:first-of-type .accordion-button {
     border-top-left-radius: calc(0.25rem - 1px);
     border-top-right-radius: calc(0.25rem - 1px);
-}
+} */
 
 .accordion-item:not(:first-of-type) {
     border-top: 0;
@@ -5148,18 +5148,18 @@ fieldset:disabled .btn {
     border-bottom-left-radius: 0.25rem;
 }
 
-.accordion-item:last-of-type .accordion-button.collapsed {
+/* .accordion-item:last-of-type .accordion-button.collapsed {
     border-bottom-right-radius: calc(0.25rem - 1px);
     border-bottom-left-radius: calc(0.25rem - 1px);
-}
+} */
 
-.accordion-item:last-of-type .accordion-collapse {
+/* .accordion-item:last-of-type .accordion-collapse {
     border-bottom-right-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
-}
+} */
 
 .accordion-body {
-    padding: 1rem 1.25rem;
+    padding: 1rem 0rem;
 }
 
 .accordion-flush .accordion-collapse {
@@ -6079,7 +6079,7 @@ fieldset:disabled .btn {
     z-index: 1040;
     width: 100vw;
     height: 100vh;
-    background-color: #000;
+    /* background-color: #000; */
 }
 
 .modal-backdrop.fade {

@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title', 'Пользователи')
-@section('page-title')
-    <p>Пользователи</p>
+@section('buttons')
+    @include('layouts.button', ['create' => false])
 @endsection
 @section('content')
     <div class="input-group-flex d-flex">
