@@ -81,7 +81,7 @@
             <input id="file-input" type="file" name="file" multiple>
             <label for="file-input" class="upload-label">Выберите или перетащите сюда несколько фотографий для загрузки в ваше объявление(до 10 фото)</label>
             <div class="success" style="display:none;">Worked!</div>
-            <div class="uploaded-carousel"><img class="uploaded-image" src=""></div>
+            <div class="uploaded-container"></div>
         </form>
     </div>
     

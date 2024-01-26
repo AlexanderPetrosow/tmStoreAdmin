@@ -355,9 +355,19 @@ table {
     margin-bottom: 20px;
     user-select: none;
 }
-.uploaded-carousel{
+.uploaded-carousel {
+    height: 200px; /* Замените на желаемую высоту слайдера */
     background-color: red;
+    overflow: hidden; /* Чтобы скрыть избыточное содержимое */
 }
+
+.uploaded-carousel img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+    user-select: none;
+}
+
 #upload-container label {
     font-weight: bold;
 }

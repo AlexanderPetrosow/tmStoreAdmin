@@ -1,14 +1,10 @@
-
 $(document).ready(function () {
 	var dropZone = $('#upload-container');
-	// var uploadedCarousel = $('.uploaded-carousel .slick-list .slick-track'); // Слайдер
-	var uploadedCarousel = $('.slick-track'); // Слайдер
-	
+
 	$('#file-input').change(function () {
 		let files = this.files;
 		sendFiles(files);
 	});
-
 
 	dropZone.on('drag dragstart dragend dragover dragenter dragleave drop', function (event) {
 		event.preventDefault();
@@ -36,22 +32,26 @@ $(document).ready(function () {
 	function sendFiles(files) {
 		let maxFileSize = 5242880;
 		let Data = new FormData();
-
+	
 		$(files).each(function (index, file) {
 			if ((file.size <= maxFileSize) && ((file.type == 'image/png') || (file.type == 'image/jpeg'))) {
 				Data.append('images[]', file);
 				let reader = new FileReader();
 				reader.onload = function (e) {
+					console.log('Изображение загружено:', e.target.result);
 					// Создаем новый элемент изображения для каждой картинки
-					var imgElement = $('<img class="uploaded-image">');
-					imgElement.attr('src', e.target.result);
-			
+					var imgElement = document.createElement('img');
+					imgElement.className = 'uploaded-image';
+					imgElement.src = e.target.result;
+	
 					// Добавляем элемент изображения к контейнеру
-					$(uploadedCarousel).append(imgElement);
+					$('.uploaded-carousel .slick-track').append(imgElement);
+	
+					// Обновляем слайдер
+					initSlider();
 				};
 				reader.readAsDataURL(file);
 			}
-			
 		});
 		$.ajax({
 			url: dropZone.attr('action'),
@@ -64,11 +64,11 @@ $(document).ready(function () {
 				$('.success').fadeIn();
 			}
 		});
-		initSlider();
 	}
+	
+	// Инициализация слайдера
 	function initSlider() {
 		$('.uploaded-carousel').slick({
-		// uploadedCarousel.slick({
 			slidesToShow: 3, // Количество отображаемых слайдов одновременно
 			slidesToScroll: 1, // Количество прокручиваемых слайдов
 			infinite: true,
@@ -77,8 +77,6 @@ $(document).ready(function () {
 			dots: false, // Показывать точки навигации
 			variableWidth: true
 		});
-		
 	}
 	
 });
-
