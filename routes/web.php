@@ -78,3 +78,6 @@ Route::get('/news/edit', function () {
 Route::get('/chat', function () {
     return view('chat.chat');
 });
+Route::get('/chat/edit', function () {
+    return view('chat.edit');
+});

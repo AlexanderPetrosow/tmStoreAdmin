@@ -23,6 +23,14 @@ $(document).ready(function () {
         $(".vip-status-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
         $(this).addClass("selected"); // Добавляем класс к текущему выбору
     });
+    $(".main-page-banner-option").click(function () {
+        $(".main-page-banner-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
+        $(this).addClass("selected"); // Добавляем класс к текущему выбору
+    });
+    $(".adv-page-banner-option").click(function () {
+        $(".adv-page-banner-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
+        $(this).addClass("selected"); // Добавляем класс к текущему выбору
+    });
 
 
     $("#category-select-button").click(function () {
@@ -78,6 +86,22 @@ $(".district-option").click(function () {
     accordionButton.css("color", "#2b2b35");
     accordionButton.trigger("click");
     $('.districtValue').val(selectedDistrict);
+});
+$(".main-page-banner-option").click(function () {
+    var selectedStatus = $(this).data("value");
+    var accordionButton = $("#mainPageBannerAccordion").find(".accordion-button");
+    accordionButton.text(selectedStatus);
+    accordionButton.css("color", "#2b2b35");
+    accordionButton.trigger("click");
+    $('.mainPageBannerValue').val(selectedStatus);
+});
+$(".adv-page-banner-option").click(function () {
+    var selectedStatus = $(this).data("value");
+    var accordionButton = $("#advPageBannerAccordion").find(".accordion-button");
+    accordionButton.text(selectedStatus);
+    accordionButton.css("color", "#2b2b35");
+    accordionButton.trigger("click");
+    $('.advPageBannerValue').val(selectedStatus);
 });
 
 

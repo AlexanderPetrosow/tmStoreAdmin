@@ -39,7 +39,7 @@
         </div>
     </div>
     
-    <div class="input-label-col">
+    <div class="input-label-col mw-670">
         <label for="name">Описание</label>
         <textarea name="description" id="" cols="30" rows="10"></textarea>
     </div>
@@ -53,7 +53,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-center m-auto" id="cityModalTitle">Выберите категорию</h5>
+                        <h5 class="modal-title text-center m-auto" id="cityModalTitle">Выберите город</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -81,10 +81,10 @@
             <input id="file-input" type="file" name="file" multiple>
             <label for="file-input" class="upload-label">Выберите или перетащите сюда несколько фотографий для загрузки в ваше объявление(до 10 фото)</label>
             <div class="success" style="display:none;">Worked!</div>
+            <div class="uploaded-carousel"><img class="uploaded-image" src=""></div>
         </form>
     </div>
     
-    {{-- <div class="uploaded-carousel"><img class="uploaded-image" src="" alt=""></div> --}}
     <div class="input-group-flex d-flex mb-4">
         <div class="input-label-col">
             <label for="name">Номер телефона</label>

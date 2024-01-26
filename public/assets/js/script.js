@@ -1,8 +1,9 @@
 
 $(document).ready(function () {
 	var dropZone = $('#upload-container');
-	var uploadedCarousel = $('.uploaded-carousel'); // Слайдер
-
+	// var uploadedCarousel = $('.uploaded-carousel .slick-list .slick-track'); // Слайдер
+	var uploadedCarousel = $('.slick-track'); // Слайдер
+	
 	$('#file-input').change(function () {
 		let files = this.files;
 		sendFiles(files);
@@ -41,13 +42,16 @@ $(document).ready(function () {
 				Data.append('images[]', file);
 				let reader = new FileReader();
 				reader.onload = function (e) {
-					// Создаем элемент изображения и добавляем его в слайдер
+					// Создаем новый элемент изображения для каждой картинки
 					var imgElement = $('<img class="uploaded-image">');
 					imgElement.attr('src', e.target.result);
-					uploadedCarousel.append(imgElement);
+			
+					// Добавляем элемент изображения к контейнеру
+					$(uploadedCarousel).append(imgElement);
 				};
 				reader.readAsDataURL(file);
-			};
+			}
+			
 		});
 		$.ajax({
 			url: dropZone.attr('action'),
@@ -63,13 +67,18 @@ $(document).ready(function () {
 		initSlider();
 	}
 	function initSlider() {
-        uploadedCarousel.slick({
-            slidesToShow: 3, // Количество отображаемых слайдов одновременно
-            slidesToScroll: 1, // Количество прокручиваемых слайдов
-            infinite: true, // Бесконечная прокрутка
-            arrows: true, // Показывать стрелки навигации
-            dots: true // Показывать точки навигации
-        });
-    }
+		$('.uploaded-carousel').slick({
+		// uploadedCarousel.slick({
+			slidesToShow: 3, // Количество отображаемых слайдов одновременно
+			slidesToScroll: 1, // Количество прокручиваемых слайдов
+			infinite: true,
+			autoplay: true, // Бесконечная прокрутка
+			arrows: true, // Показывать стрелки навигации
+			dots: false, // Показывать точки навигации
+			variableWidth: true
+		});
+		
+	}
+	
 });
 

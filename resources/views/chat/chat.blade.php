@@ -21,7 +21,7 @@
                     <td>Otto</td>
                     <td>
                         <div class="d-flex justify-content-end">
-                            <i class="ti ti-pencil table-icon"></i>
+                            <a href="/chat/edit"><i class="ti ti-pencil table-icon"></i></a>
                             <i class="ti ti-ban table-icon"></i>
                             <i class="ti ti-trash table-icon"></i>
                         </div>

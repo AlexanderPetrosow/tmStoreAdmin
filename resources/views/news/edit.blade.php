@@ -4,15 +4,15 @@
     @include('layouts.button', ['create' => false])
 @endsection
 @section('content')
-    <div class="input-group-flex d-flex mb-4">
-        <div class="input-label-col">
+    <div class="input-group-flex d-flex justify-content-between mb-4">
+        <div class="input-label-col mw-580">
             <div class="d-flex">
                 <label for="phone">Заголовок</label>
                 <img src="{{asset('/assets/images/ru.png')}}" alt="" width="24" height="24">
             </div>
             <input type="text" name="name" placeholder="Введите заголовок на русском">
         </div>
-        <div class="input-label-col">
+        <div class="input-label-col mw-580">
             <div class="d-flex">
                 <label for="phone">Заголовок</label>
                 <img src="{{asset('/assets/images/tm.png')}}" alt="" width="24" height="24">
@@ -20,15 +20,15 @@
             <input type="text" name="phone" placeholder="Введите заголовок на туркменском">
         </div>
     </div>
-    <div class="input-group-flex d-flex mb-4">
-        <div class="input-label-col">
+    <div class="input-group-flex d-flex justify-content-between mb-4">
+        <div class="input-label-col mw-580">
             <div class="d-flex">
                 <label for="phone">Содержание</label>
                 <img src="{{asset('/assets/images/ru.png')}}" alt="" width="24" height="24">
             </div>
             <textarea name="description" id="" cols="30" rows="10"></textarea>
         </div>
-        <div class="input-label-col">
+        <div class="input-label-col mw-580">
             <div class="d-flex">
                 <label for="phone">Содержание</label>
                 <img src="{{asset('/assets/images/tm.png')}}" alt="" width="24" height="24">
