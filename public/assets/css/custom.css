@@ -10,6 +10,10 @@
     font-family: "Noto-Regular";
     src: url("../fonts/NotoSans-Regular.ttf");
 }
+
+#baseLayout {
+    display: flex;
+}
 ::-webkit-scrollbar {
     display: none;
 }
@@ -155,6 +159,10 @@ table {
     font-size: 22px;
     color: #010057;
     margin-right: 10px;
+}
+
+.input-group-flex {
+    display: flex;
 }
 
 .input-label-col label {
@@ -350,22 +358,10 @@ table {
     margin-bottom: 25px;
 }
 
-#upload-container img {
-    width: 150px;
-    margin-bottom: 20px;
-    user-select: none;
-}
 .uploaded-carousel {
     height: 200px; /* Замените на желаемую высоту слайдера */
-    background-color: red;
+    /* background-color: red; */
     overflow: hidden; /* Чтобы скрыть избыточное содержимое */
-}
-
-.uploaded-carousel img {
-    width: 150px;
-    height: auto;
-    margin-bottom: 20px;
-    user-select: none;
 }
 
 #upload-container label {
@@ -407,6 +403,39 @@ table {
     color: rgba(43, 43, 53, 0.5) !important;
     font-weight: 300 !important;
 }
+
+.uploaded-image {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    margin: 20px 30px 15px 0px;
+}
+
+.delete-slide-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute !important;
+    background-color: #e0e0e5;
+    top: 10px;
+    right: 20px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.delete-slide-button i {
+    color: #e30000;
+    font-size: 20px;
+}
+
+.uploaded-image img {
+    object-fit: cover;
+}
+
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
@@ -491,6 +520,8 @@ input[type="date"]:not(.has-value):before {
     border: 1px solid #010057;
     width: 310px;
     min-height: 54px;
+    font-family: "Noto-Regular";
+    font-size: 14px;
     color: rgba(43, 43, 53, 0.5);
 }
 .accordion-body {
@@ -498,7 +529,7 @@ input[type="date"]:not(.has-value):before {
 }
 
 .select-container {
-    min-width: 304px;
+    width: 310px;
     box-shadow: 0 0 10px rgba(1, 0, 87, 0.3);
     border-radius: 10px;
 }
@@ -605,15 +636,236 @@ input[type="date"]:not(.has-value):before {
     margin-bottom: 20px;
 }
 
+.mobile-none {
+    display: block;
+}
 
-.mobile-none{
-    display:block;
+#navbarContainer {
+    display: none !important;
+}
+.navbar-toggler i {
+    color: #fff !important;
+}
+.input-group-flex #newsInputFlex {
+    justify-content: space-between !important;
+}
+
+@media (min-width: 1620px) {
+    .main-sidebar-menu {
+        width: 350px !important;
+    }
+}
+
+@media (max-width: 1700px) {
+    .main-sidebar-menu {
+        width: 300px;
+    }
+
+    .page-title p {
+        font-size: 20px;
+    }
+    .cancel-button,
+    .save-button {
+        padding: 8px 18px;
+    }
+
+    .content {
+        margin-left: 180px;
+    }
+    .page-title {
+        margin-left: 180px;
+    }
+
+    .input-label-col input {
+        min-width: 280px;
+    }
+
+    .modal-button {
+        min-width: 280px;
+    }
+
+    .input-label-col textarea {
+        min-width: 610px;
+    }
+
+    #upload-container {
+        width: 610px;
+    }
+
+    .accordion-button,
+    .select-container {
+        width: 280px;
+    }
+    .textarea-mobile-block{
+        display:block !important;
+    }
 }
 
 
 
-@media(max-width:991px){
-    .mobile-none{
+@media (max-width: 1100px) {
+    .input-label-col input {
+        min-width: 290px;
+    }
+
+    .modal-button {
+        min-width: 290px;
+    }
+
+    .input-label-col textarea {
+        min-width: 630px;
+    }
+
+    #upload-container {
+        width: 630px;
+    }
+    .accordion-button,
+    .select-container {
+        width: 290px;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .input-label-col input {
+        min-width: 250px;
+    }
+    /* .input-label-col input::placeholder{
+        font-size:12px;
+    } */
+
+    .modal-button {
+        min-width: 250px;
+    }
+
+    .input-label-col textarea {
+        min-width: 550px;
+    }
+
+    #upload-container {
+        width:550px;
+    }
+    .accordion-button,
+    .select-container {
+        width: 250px;
+    }
+ 
+}
+
+@media (max-width: 991px) {
+    .mobile-none {
         display: none !important;
+    }
+
+    #baseLayout {
+        display: block !important;
+    }
+
+    #navbarContainer {
+        display: block !important;
+        background-color: #010057;
+    }
+
+    .page-title-mobile {
+        font-size: 16px;
+        font-family: "Noto-Sans";
+        color: #fff;
+    }
+
+    .message.incoming,
+    .message.outgoing {
+        max-width: 360px;
+        font-size: 14px;
+    }
+
+    .content {
+        height: 100vh;
+        margin: 0;
+        border-radius: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 30px;
+    }
+
+    .input-group-flex #newsInputFlex {
+        justify-content: baseline !important;
+    }
+    .navbar-nav{
+        margin-top:20px;
+    }
+    .offcanvas{
+        box-shadow: 0px 0px 10px 1px rgba(1, 0, 87, 0.1);
+    }
+    .offcanvas-start{
+        border-right:none;
+        width:280px;
+    }
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: -250px; /* Adjust the left value to control the initial position */
+        width: 250px; /* Set the width of the side menu */
+        height: 100%;
+        background-color: #fff; /* Background color of the side menu */
+        transition: left 0.3s; /* Add a smooth transition effect */
+    }
+
+    .navbar-collapse.show {
+        left: 0; /* Display the side menu when it's open */
+    }
+
+
+    /* Push the page content when the side menu is open */
+    .navbar-collapse.show ~ .page-content {
+        margin-left: 250px; /* Match the width of the side menu */
+        transition: margin-left 0.3s;
+    }
+    .close-sidebar-button i{
+        color:#010057;
+    }
+}
+
+   
+
+@media (max-width: 768px) {
+    .input-group-flex {
+        display: block !important;
+    }
+    .input-label-col input {
+        margin-bottom: 15px;
+    }
+    .input-label-col textarea {
+        min-width: 500px;
+    }
+    #upload-container {
+        width: 500px;
+    }
+
+    #upload-container{
+        height:240px;
+    }
+}
+
+@media(max-width:575px){
+    .modal-button{
+        margin-bottom:15px;
+    }
+    .accordion-button{
+        margin-bottom:15px;
+    }
+}
+
+@media (max-width: 520px) {
+    .message.incoming,
+    .message.outgoing {
+        max-width: 300px;
+    }
+
+   
+    .input-label-col textarea {
+        min-width: 300px;
+    }
+    #upload-container {
+        width: 300px;
     }
 }

@@ -81,11 +81,12 @@
             <input id="file-input" type="file" name="file" multiple>
             <label for="file-input" class="upload-label">Выберите или перетащите сюда несколько фотографий для загрузки в ваше объявление(до 10 фото)</label>
             <div class="success" style="display:none;">Worked!</div>
-            <div class="uploaded-container"></div>
+            <div class="uploaded-carousel"></div>
+            <div class="test-class"></div>
         </form>
     </div>
     
-    <div class="input-group-flex d-flex mb-4">
+    <div class="input-group-flex  mb-4">
         <div class="input-label-col">
             <label for="name">Номер телефона</label>
             <input type="text" name="name" placeholder="Введите название на русском">
@@ -95,7 +96,7 @@
             <input type="text" name="name" placeholder="Введите название на русском">
         </div>
     </div>
-    <div class="input-group-flex d-flex mb-4">
+    <div class="input-group-flex  mb-4">
         <div class="input-label-col">
             <label for="name">Пользователь</label>
             <button class="modal-button" data-bs-toggle="modal" data-bs-target="#userModal" id="userModalButton">Выберите пользователя</button>
@@ -147,8 +148,8 @@
             </div>
         </div>
     </div>
-    <div class="input-group-flex d-flex mb-4">
-        <div class="input-label-col">
+    <div class="input-group-flex  mb-4">
+        <div class="input-label-col ">
             <label for="name">Вип-статус</label>
             <div class="accordion" id="vipStatusAccordion">
                 <div class="accordion-item">

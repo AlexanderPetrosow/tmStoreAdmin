@@ -11,22 +11,75 @@
 </head>
 
 <body>
-    <div class="d-flex w-100 ">
-        <div class="col-12 d-md-none">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+    <div class="w-100 " id="baseLayout">
+        <div class="col-12" id="navbarContainer">
+            <nav class="navbar navbar-expand-lg navbar-light ">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                    <i class="ti ti-menu-2"></i>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="page-title-mobile m-auto">@yield('title')</div>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                    aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header flex-row flex-row-reverse">
+                        <button type="button" class="btn text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"><i class="ti ti-x" style="color:#010057; font-size:18px; font-weight:700"></i></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div>
+                            <ul class="navbar-nav">
+                                <li class="nav-item main-sidebar-menu-item">
+                                    <a class="nav-link active" href="/">
+                                        <i class="ti ti-users"></i> Пользователи
+                                    </a>
+                                </li>
+                                <li class="nav-item main-sidebar-menu-item">
+                                    <a class="nav-link" href="/categories">
+                                        <i class="ti ti-category"></i> Категория
+                                    </a>
+                                </li>
+                                <li class="nav-item main-sidebar-menu-item">
+                                    <a class="nav-link" href="/advertisements">
+                                        <i class="ti ti-clipboard-text"></i> Объявления
+                                    </a>
+                                </li>
+                                <li class="nav-item main-sidebar-menu-item">
+                                    <a class="nav-link" href="/cities">
+                                        <i class="ti ti-map-pin"></i> Города
+                                    </a>
+                                </li>
+                                <li class="nav-item main-sidebar-menu-item">
+                                    <a class="nav-link" href="/banners">
+                                        <i class="ti ti-photo"></i> Баннеры
+                                    </a>
+                                </li>
+                                <li class="nav-item main-sidebar-menu-item">
+                                    <a class="nav-link" href="/news">
+                                        <i class="ti ti-news"></i> Новости
+                                    </a>
+                                </li>
+                                <li class="nav-item main-sidebar-menu-item">
+                                    <a class="nav-link" href="/chat">
+                                        <i class="ti ti-message-circle-2"></i> Чат с пользователем
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn close-sidebar-button" type="button">
+                            <i class="ti ti-x"></i>
+                        </button>
+                    </div>
                     <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">
+                        <li class="nav-item main-sidebar-menu-item">
+                            <a class="nav-link active" href="/">
                                 <i class="ti ti-users"></i> Пользователи
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item main-sidebar-menu-item">
                             <a class="nav-link" href="/categories">
                                 <i class="ti ti-category"></i> Категория
                             </a>
@@ -57,7 +110,7 @@
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
             </nav>
         </div>
         <div class="col-2 mobile-none">
@@ -108,9 +161,9 @@
 
 
         <!-- Page Content -->
-        <div class="col-10">
+        <div class="col-lg-10 col-sm-12">
 
-            <div class="page-title">
+            <div class="page-title mobile-none">
                 {{-- @yield('page-title') --}}
                 <div class="d-flex justify-content-between m-auto">
 
@@ -122,6 +175,10 @@
                 </div>
             </div>
             <div class="content">
+                <div class="d-flex d-lg-none d-sm-block mb-4 text-end">
+
+                    @yield('buttons')
+                </div>
                 @yield('content')
             </div>
         </div>

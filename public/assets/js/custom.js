@@ -58,56 +58,63 @@ $(document).ready(function () {
         $('.cityValue').val(selectedCity);
     });
 
-    
-
-$(".status-option").click(function () {
-    var selectedStatus = $(this).data("value");
-    var accordionButton = $("#statusAccordion").find(".accordion-button");
-    
-    accordionButton.text(selectedStatus);
-    accordionButton.css("color", "#2b2b35");
-    accordionButton.trigger("click");
-    $('.statusValue').val(selectedStatus);
-});
-
-$(".vip-status-option").click(function () {
-    var selectedVipStatus = $(this).data("value");
-    var accordionButton = $("#vipStatusAccordion").find(".accordion-button");
-    accordionButton.text(selectedVipStatus);
-    accordionButton.css("color", "#2b2b35");
-    accordionButton.trigger("click");
-    $('.vipStatusValue').val(selectedVipStatus);
-});
-
-$(".district-option").click(function () {
-    var selectedDistrict = $(this).data("value");
-    var accordionButton = $("#districtAccordion").find(".accordion-button");
-    accordionButton.text(selectedDistrict);
-    accordionButton.css("color", "#2b2b35");
-    accordionButton.trigger("click");
-    $('.districtValue').val(selectedDistrict);
-});
-$(".main-page-banner-option").click(function () {
-    var selectedStatus = $(this).data("value");
-    var accordionButton = $("#mainPageBannerAccordion").find(".accordion-button");
-    accordionButton.text(selectedStatus);
-    accordionButton.css("color", "#2b2b35");
-    accordionButton.trigger("click");
-    $('.mainPageBannerValue').val(selectedStatus);
-});
-$(".adv-page-banner-option").click(function () {
-    var selectedStatus = $(this).data("value");
-    var accordionButton = $("#advPageBannerAccordion").find(".accordion-button");
-    accordionButton.text(selectedStatus);
-    accordionButton.css("color", "#2b2b35");
-    accordionButton.trigger("click");
-    $('.advPageBannerValue').val(selectedStatus);
-});
 
 
+    $(".status-option").click(function () {
+        var selectedStatus = $(this).data("value");
+        var accordionButton = $("#statusAccordion").find(".accordion-button");
+
+        accordionButton.text(selectedStatus);
+        accordionButton.css("color", "#2b2b35");
+        accordionButton.trigger("click");
+        $('.statusValue').val(selectedStatus);
+    });
+
+    $(".vip-status-option").click(function () {
+        var selectedVipStatus = $(this).data("value");
+        var accordionButton = $("#vipStatusAccordion").find(".accordion-button");
+        accordionButton.text(selectedVipStatus);
+        accordionButton.css("color", "#2b2b35");
+        accordionButton.trigger("click");
+        $('.vipStatusValue').val(selectedVipStatus);
+    });
+
+    $(".district-option").click(function () {
+        var selectedDistrict = $(this).data("value");
+        var accordionButton = $("#districtAccordion").find(".accordion-button");
+        accordionButton.text(selectedDistrict);
+        accordionButton.css("color", "#2b2b35");
+        accordionButton.trigger("click");
+        $('.districtValue').val(selectedDistrict);
+    });
+    $(".main-page-banner-option").click(function () {
+        var selectedStatus = $(this).data("value");
+        var accordionButton = $("#mainPageBannerAccordion").find(".accordion-button");
+        accordionButton.text(selectedStatus);
+        accordionButton.css("color", "#2b2b35");
+        accordionButton.trigger("click");
+        $('.mainPageBannerValue').val(selectedStatus);
+    });
+    $(".adv-page-banner-option").click(function () {
+        var selectedStatus = $(this).data("value");
+        var accordionButton = $("#advPageBannerAccordion").find(".accordion-button");
+        accordionButton.text(selectedStatus);
+        accordionButton.css("color", "#2b2b35");
+        accordionButton.trigger("click");
+        $('.advPageBannerValue').val(selectedStatus);
+    });
 
 
-  
+
+    $('.navbar-toggler').click(function () {
+        $('#navbarNav').toggleClass('show');
+    });
+
+    // Закрывать сайдбар по клику на кнопку "Закрыть"
+    $('.close-sidebar-button').click(function () {
+        $('#navbarNav').removeClass('show');
+    });
+
 
 })
 
