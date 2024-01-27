@@ -38,16 +38,10 @@ $(document).ready(function () {
             Data.append('images[]', file);
             let reader = new FileReader();
             reader.onload = function (e) {
-                // // Создаем новый элемент изображения для каждой картинки
-                // var imgElement = $('<img class="uploaded-image">');
-                // imgElement.attr('src', e.target.result);
-
+              
                 $('.uploaded-carousel').slick('slickAdd', '<div><img class="uploaded-image" src="' + e.target.result + '" alt="Изображение"><div class="delete-slide-button"><i class="ti ti-trash"></i></div></div>');
-                // $('.uploaded-carousel .slick-track').append('<img class="uploaded-image slick-slide" src="'+ e.target.result +'">');
-
-                // // Обновляем слайдер
-                // $('.uploaded-carousel').slick('refresh');
-				console.log(e.target.result);
+                
+				// console.log(e.target.result);
             };
             reader.readAsDataURL(file);
         }

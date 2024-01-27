@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,3 +82,5 @@ Route::get('/chat', function () {
 Route::get('/chat/edit', function () {
     return view('chat.edit');
 });
+
+Route::post('/fetch-files', 'FileController@fetchFiles');

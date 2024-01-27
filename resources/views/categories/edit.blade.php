@@ -50,10 +50,36 @@
                 </div>
             </div>
         </div>
-    
-    <div class="input-label-col">
-        <label for="phone">Иконка</label>
-        <input type="text" name="phone" placeholder="Выберите иконку">
-    </div>
+
+        <div class="input-label-col">
+            <label for="phone">Иконка</label>
+            <form action="/fetch-files" method="POST" >
+                <button class="modal-button" data-bs-toggle="modal" data-bs-target="#iconModal"
+                    id="iconModalButton">Выберите
+                    иконку</button>
+                <input type="hidden" class="iconValue">
+                <!-- Modal -->
+                <div class="modal fade" id="iconModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center m-auto" id="iconModalTitle">Выберите иконку</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ul class="icon-list"></ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary modal-select-button" data-bs-dismiss="modal"
+                                    id="icon-select-button">Выбрать</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection

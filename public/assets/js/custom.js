@@ -57,6 +57,14 @@ $(document).ready(function () {
         $(".city-option").removeClass("selected"); // Удаляем класс после выбора
         $('.cityValue').val(selectedCity);
     });
+    $("#icon-select-button").click(function () {
+        var selectedIcon = $(".selected").data("value");
+        $("#iconModalButton").text(selectedIcon);
+        $("#iconModalButton").attr("data-selected", selectedIcon);
+        $("#iconModalButton").addClass("selected-text-color"); // Добавляем класс для цвета текста кнопки
+        $(".icon-option").removeClass("selected"); // Удаляем класс после выбора
+        $('.iconValue').val(selectedIcon);
+    });
 
 
 
@@ -115,6 +123,60 @@ $(document).ready(function () {
         $('#navbarNav').removeClass('show');
     });
 
+
+    // Функция для создания и отображения иконок
+    function displayIcons() {
+        var iconContainer = $('.icon-list'); // Элемент, в котором будут отображаться иконки
+
+        // $.ajax({
+        //     url: '/fetch-files',
+        //     method: 'POST',
+        //     headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
+        //     success: function(response) {
+        //         var files = JSON.parse(response);
+        //         var fileList = $('#fileList');
+        //         fileList.empty();
+        //         console.log(files);
+        //         for (var i = 0; i < files.length; i++) {
+        //             var iconName = files[i].replace('.svg', '');
+        //             var iconHTML = '<i class="ti ti-' + iconName + '"></i>';
+        //             iconContainer.append(iconHTML);
+
+                   
+        //             // var iconCopy = $(iconHTML);
+        //             // iconCopy.addClass('modal-icon'); // Добавляем класс для стилизации
+                  
+        //         }
+        //     },
+        //     error: function(xhr, status, error) {
+        //         console.error("Ошибка при выполнении запроса:", status, error);
+        //     }
+            
+        // });
+        $('#iconModal').on('click', function() {
+            $.ajax({
+                url: '/fetch-files',
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
+                success: function(response) {
+                    var files = JSON.parse(response);
+                    var fileList = $('.icon-list');
+                    fileList.empty();
+                    for (var i = 0; i < files.length; i++) {
+                        fileList.append('<li>' + files[i] + '</li>');
+                    }
+                },
+                error: function() {
+                    alert('Произошла ошибка при загрузке файлов.');
+                }
+            });
+        });
+    }
+
+    $('#iconModalButton').on('click', function() {
+        displayIcons();
+    });
+    
 
 })
 
