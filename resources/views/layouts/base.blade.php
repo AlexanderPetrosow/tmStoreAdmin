@@ -29,7 +29,7 @@
                         <div>
                             <ul class="navbar-nav">
                                 <li class="nav-item main-sidebar-menu-item">
-                                    <a class="nav-link active" href="/">
+                                    <a class="nav-link active" href="/users">
                                         <i class="ti ti-users"></i> Пользователи
                                     </a>
                                 </li>
@@ -161,27 +161,23 @@
 
 
         <!-- Page Content -->
-        <div class="col-lg-10 col-sm-12">
-
+        <form method="POST" class="col-lg-10 col-sm-12">
+            @csrf
             <div class="page-title mobile-none">
-                {{-- @yield('page-title') --}}
                 <div class="d-flex justify-content-between m-auto">
-
                     <p>@yield('title')</p>
                     <div class="d-flex">
-
                         @yield('buttons')
                     </div>
                 </div>
             </div>
             <div class="content">
                 <div class="d-flex d-lg-none d-sm-block mb-4 text-end">
-
                     @yield('buttons')
                 </div>
                 @yield('content')
             </div>
-        </div>
+        </form>
     </div>
     @include('layouts.scripts')
 </body>

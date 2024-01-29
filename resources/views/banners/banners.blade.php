@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title', 'Баннеры')
 @section('buttons')
-    @include('layouts.button', ['create' => true])
+    @include('layouts.button', ['create' => true, 'route' => 'banners'])
 @endsection
 @section('content')
     <table class="table">

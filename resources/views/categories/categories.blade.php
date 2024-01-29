@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title', 'Категории')
 @section('buttons')
-    @include('layouts.button', ['create' => true])
+    @include('layouts.button', ['create' => true, 'route' => 'categories'])
 @endsection
 @section('content')
     <table class="table">
@@ -24,7 +24,7 @@
                     <td>Нет</td>
                     <td>
                         <div class="d-flex justify-content-end">
-                            <a href="/categories/edit"><i class="ti ti-pencil table-icon"></i></a>
+                            <a href="/categories/edit/1"><i class="ti ti-pencil table-icon"></i></a>
                             <i class="ti ti-ban table-icon"></i>
                             <i class="ti ti-trash table-icon"></i>
                         </div>

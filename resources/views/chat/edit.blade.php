@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title', 'Чат')
 @section('buttons')
-    @include('layouts.button', ['create' => false])
+    @include('layouts.button')
 @endsection
 @section('content')
     <div class="chat-content">

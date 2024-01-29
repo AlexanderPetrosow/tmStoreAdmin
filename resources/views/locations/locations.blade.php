@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title', 'Города')
 @section('buttons')
-    @include('layouts.button', ['create' => true])
+    @include('layouts.button', ['create' => true, 'route' => 'cities'])
 @endsection
 @section('content')
     <table class="table">
