@@ -53,11 +53,11 @@
 
         <div class="input-label-col">
             <label for="phone">Иконка</label>
-            <form action="/fetch-files" method="POST" >
+            
                 <button class="modal-button" data-bs-toggle="modal" data-bs-target="#iconModal"
                     id="iconModalButton">Выберите
                     иконку</button>
-                <input type="hidden" class="iconValue">
+                <input type="hidden" id="iconValue">
                 <!-- Modal -->
                 <div class="modal fade" id="iconModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -70,7 +70,12 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <ul class="icon-list"></ul>
+                                <ul class="icon-list d-flex flex-wrap m-auto"></ul>
+                                <div id="preloader">
+                                    <div class="spinner-border" role="status">
+                                        {{-- <span class="sr-only">Loading...</span> --}}
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary modal-select-button" data-bs-dismiss="modal"
@@ -79,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+           
         </div>
     </div>
 @endsection

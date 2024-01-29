@@ -68,7 +68,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary modal-select-button"
-                            data-bs-dismiss="modal" id="city-select-button">Выбрать</button>
+                            data-bs-dismiss="modal" id="city-select-button" disabled>Выбрать</button>
                             <input type="hidden" class="cityValue">
                     </div>
                 </div>
@@ -111,6 +111,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <input type="text" placeholder="Введите имя для поиска" class="m-auto mb-3">
                         <p class="user-option" data-value="Байрам Байрамов">Байрам Байрамов</p>
                         <p class="user-option" data-value="Аннамередов Аннамеред">Аннамередов Аннамеред</p>
                         <p class="user-option" data-value="Велиев Вели">Велиев Вели</p>

@@ -16,6 +16,9 @@ use App\Http\Controllers;
 */
 
 Route::get('/', function () {
+    return view('auth');
+});
+Route::get('/users', function () {
     return view('users.users');
 });
 Route::get('/edit', function () {
@@ -83,4 +86,4 @@ Route::get('/chat/edit', function () {
     return view('chat.edit');
 });
 
-Route::post('/fetch-files', 'FileController@fetchFiles');
+Route::post('/fetch-files', 'App\Http\Controllers\FileController@fetchFiles');

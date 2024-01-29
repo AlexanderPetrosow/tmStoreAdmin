@@ -29,7 +29,7 @@
                         <div>
                             <ul class="navbar-nav">
                                 <li class="nav-item main-sidebar-menu-item">
-                                    <a class="nav-link active" href="/">
+                                    <a class="nav-link active" href="/users">
                                         <i class="ti ti-users"></i> Пользователи
                                     </a>
                                 </li>
@@ -67,60 +67,16 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="collapse navbar-collapse" id="navbarNav">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn close-sidebar-button" type="button">
-                            <i class="ti ti-x"></i>
-                        </button>
-                    </div>
-                    <ul class="navbar-nav">
-                        <li class="nav-item main-sidebar-menu-item">
-                            <a class="nav-link active" href="/">
-                                <i class="ti ti-users"></i> Пользователи
-                            </a>
-                        </li>
-                        <li class="nav-item main-sidebar-menu-item">
-                            <a class="nav-link" href="/categories">
-                                <i class="ti ti-category"></i> Категория
-                            </a>
-                        </li>
-                        <li class="nav-item main-sidebar-menu-item">
-                            <a class="nav-link" href="/advertisements">
-                                <i class="ti ti-clipboard-text"></i> Объявления
-                            </a>
-                        </li>
-                        <li class="nav-item main-sidebar-menu-item">
-                            <a class="nav-link" href="/cities">
-                                <i class="ti ti-map-pin"></i> Города
-                            </a>
-                        </li>
-                        <li class="nav-item main-sidebar-menu-item">
-                            <a class="nav-link" href="/banners">
-                                <i class="ti ti-photo"></i> Баннеры
-                            </a>
-                        </li>
-                        <li class="nav-item main-sidebar-menu-item">
-                            <a class="nav-link" href="/news">
-                                <i class="ti ti-news"></i> Новости
-                            </a>
-                        </li>
-                        <li class="nav-item main-sidebar-menu-item">
-                            <a class="nav-link" href="/chat">
-                                <i class="ti ti-message-circle-2"></i> Чат с пользователем
-                            </a>
-                        </li>
-                    </ul>
-                </div> --}}
             </nav>
         </div>
         <div class="col-2 mobile-none">
             <div class="sidebar main-sidebar-menu">
                 <div class="logo-tmstore m-auto text-center">
-                    <img src="{{ asset('/assets/images/logotest.png') }}" alt="">
+                    <p class="logo-p">TM STORE</p>
                 </div>
                 <ul class="nav flex-column main-ul">
                     <li class="nav-item main-sidebar-menu-item">
-                        <a class="nav-link active" href="/">
+                        <a class="nav-link active" href="/users">
                             <i class="ti ti-users"></i> Пользователи
                         </a>
                     </li>
@@ -168,6 +124,7 @@
                 <div class="d-flex justify-content-between m-auto">
 
                     <p>@yield('title')</p>
+                    
                     <div class="d-flex">
 
                         @yield('buttons')

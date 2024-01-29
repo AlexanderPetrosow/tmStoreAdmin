@@ -1,35 +1,63 @@
 $(document).ready(function () {
+
+    $("#categoryModal").on("show.bs.modal", function () {
+        $("#category-select-button").prop("disabled", true);
+    });
     $(".category-option").click(function () {
-        $(".category-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
-        $(this).addClass("selected"); // Добавляем класс к текущему выбору
+        $(".category-option").removeClass("selected"); 
+        $(this).addClass("selected"); 
+        $("#category-select-button").prop("disabled", false);
+    });
+
+
+
+    $("#userModal").on("show.bs.modal", function () {
+        
+        $("#user-select-button").prop("disabled", true);
     });
     $(".user-option").click(function () {
-        $(".user-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
-        $(this).addClass("selected"); // Добавляем класс к текущему выбору
+        $(".user-option").removeClass("selected"); 
+        $(this).addClass("selected");
+        $("#user-select-button").prop("disabled", false);
+    });
+
+
+
+    $("#cityModal").on("show.bs.modal", function () {
+        
+        $("#city-select-button").prop("disabled", true);
     });
     $(".city-option").click(function () {
-        $(".city-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
-        $(this).addClass("selected"); // Добавляем класс к текущему выбору
+        $(".city-option").removeClass("selected"); 
+        $(this).addClass("selected"); 
+        $("#city-select-button").prop("disabled", false);
+       
     });
+
+
     $(".district-option").click(function () {
-        $(".district-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
-        $(this).addClass("selected"); // Добавляем класс к текущему выбору
+        $(".district-option").removeClass("selected"); 
+        $(this).addClass("selected"); 
     });
     $(".status-option").click(function () {
-        $(".status-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
-        $(this).addClass("selected"); // Добавляем класс к текущему выбору
+        $(".status-option").removeClass("selected"); 
+        $(this).addClass("selected"); 
     });
     $(".vip-status-option").click(function () {
-        $(".vip-status-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
-        $(this).addClass("selected"); // Добавляем класс к текущему выбору
+        $(".vip-status-option").removeClass("selected"); 
+        $(this).addClass("selected"); 
     });
     $(".main-page-banner-option").click(function () {
-        $(".main-page-banner-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
-        $(this).addClass("selected"); // Добавляем класс к текущему выбору
+        $(".main-page-banner-option").removeClass("selected"); 
+        $(this).addClass("selected"); 
     });
     $(".adv-page-banner-option").click(function () {
-        $(".adv-page-banner-option").removeClass("selected"); // Удаляем класс с предыдущего выбора
-        $(this).addClass("selected"); // Добавляем класс к текущему выбору
+        $(".adv-page-banner-option").removeClass("selected"); 
+        $(this).addClass("selected"); 
+    });
+    $(".category-page-banner-option").click(function () {
+        $(".category-page-banner-option").removeClass("selected"); 
+        $(this).addClass("selected"); 
     });
 
 
@@ -37,32 +65,34 @@ $(document).ready(function () {
         var selectedCategory = $(".selected").data("value");
         $("#categoryModalButton").text(selectedCategory);
         $("#categoryModalButton").attr("data-selected", selectedCategory);
-        $("#categoryModalButton").addClass("selected-text-color"); // Добавляем класс для цвета текста кнопки
-        $(".category-option").removeClass("selected"); // Удаляем класс после выбора
+        $("#categoryModalButton").addClass("selected-text-color"); 
+        $(".category-option").removeClass("selected"); 
         $('.categoryValue').val(selectedCategory);
     });
     $("#user-select-button").click(function () {
         var selectedUser = $(".selected").data("value");
         $("#userModalButton").text(selectedUser);
         $("#userModalButton").attr("data-selected", selectedUser);
-        $("#userModalButton").addClass("selected-text-color"); // Добавляем класс для цвета текста кнопки
-        $(".user-option").removeClass("selected"); // Удаляем класс после выбора
+        $("#userModalButton").addClass("selected-text-color"); 
+        $(".user-option").removeClass("selected"); 
         $('.user').val(selectedUser);
     });
+    $("#city-select-button").prop("disabled", true);
+    
     $("#city-select-button").click(function () {
         var selectedCity = $(".selected").data("value");
         $("#cityModalButton").text(selectedCity);
         $("#cityModalButton").attr("data-selected", selectedCity);
-        $("#cityModalButton").addClass("selected-text-color"); // Добавляем класс для цвета текста кнопки
-        $(".city-option").removeClass("selected"); // Удаляем класс после выбора
+        $("#cityModalButton").addClass("selected-text-color"); 
+        $(".city-option").removeClass("selected"); 
         $('.cityValue').val(selectedCity);
     });
     $("#icon-select-button").click(function () {
         var selectedIcon = $(".selected").data("value");
         $("#iconModalButton").text(selectedIcon);
         $("#iconModalButton").attr("data-selected", selectedIcon);
-        $("#iconModalButton").addClass("selected-text-color"); // Добавляем класс для цвета текста кнопки
-        $(".icon-option").removeClass("selected"); // Удаляем класс после выбора
+        $("#iconModalButton").addClass("selected-text-color"); 
+        $(".icon-option").removeClass("selected"); 
         $('.iconValue').val(selectedIcon);
     });
 
@@ -111,6 +141,14 @@ $(document).ready(function () {
         accordionButton.trigger("click");
         $('.advPageBannerValue').val(selectedStatus);
     });
+    $(".category-page-banner-option").click(function () {
+        var selectedStatus = $(this).data("value");
+        var accordionButton = $("#categoryBannerAccordion").find(".accordion-button");
+        accordionButton.text(selectedStatus);
+        accordionButton.css("color", "#2b2b35");
+        accordionButton.trigger("click");
+        $('.categoryBannerValue').val(selectedStatus);
+    });
 
 
 
@@ -118,65 +156,79 @@ $(document).ready(function () {
         $('#navbarNav').toggleClass('show');
     });
 
-    // Закрывать сайдбар по клику на кнопку "Закрыть"
+ 
     $('.close-sidebar-button').click(function () {
         $('#navbarNav').removeClass('show');
     });
 
 
-    // Функция для создания и отображения иконок
+
+    var selectedIconValue = null;
+    var iconsLoaded = false; 
+
     function displayIcons() {
-        var iconContainer = $('.icon-list'); // Элемент, в котором будут отображаться иконки
+        var iconContainer = $('.icon-list');
+        var iconModalButton = $('#iconModalButton');
+        var iconSelectButton = $('#icon-select-button');
+        var iconValue = $('#iconValue');
+        var preloader = $('#preloader');
 
-        // $.ajax({
-        //     url: '/fetch-files',
-        //     method: 'POST',
-        //     headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
-        //     success: function(response) {
-        //         var files = JSON.parse(response);
-        //         var fileList = $('#fileList');
-        //         fileList.empty();
-        //         console.log(files);
-        //         for (var i = 0; i < files.length; i++) {
-        //             var iconName = files[i].replace('.svg', '');
-        //             var iconHTML = '<i class="ti ti-' + iconName + '"></i>';
-        //             iconContainer.append(iconHTML);
+        iconSelectButton.prop('disabled', true);
 
-                   
-        //             // var iconCopy = $(iconHTML);
-        //             // iconCopy.addClass('modal-icon'); // Добавляем класс для стилизации
-                  
-        //         }
-        //     },
-        //     error: function(xhr, status, error) {
-        //         console.error("Ошибка при выполнении запроса:", status, error);
-        //     }
-            
-        // });
-        $('#iconModal').on('click', function() {
-            $.ajax({
-                url: '/fetch-files',
-                method: 'POST',
-                headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
-                success: function(response) {
-                    var files = JSON.parse(response);
-                    var fileList = $('.icon-list');
-                    fileList.empty();
-                    for (var i = 0; i < files.length; i++) {
-                        fileList.append('<li>' + files[i] + '</li>');
-                    }
-                },
-                error: function() {
-                    alert('Произошла ошибка при загрузке файлов.');
+        if (!iconsLoaded) {
+            preloader.show();
+        }
+
+        $.ajax({
+            url: '/fetch-files',
+            method: 'POST',
+            dataType: 'json',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
+            success: function(response) {
+                iconContainer.empty();
+                for (var i = 0; i < response.length; i++) {
+                    var iconHTML = '<i class="fs-2 ti ti-' + response[i] + '"></i>';
+                    iconContainer.append(iconHTML);
                 }
-            });
+
+                preloader.hide();
+                iconsLoaded = true; 
+
+                iconContainer.off('click').on('click', 'i', function() {
+                    iconContainer.find('i').removeClass('selected');
+                    $(this).addClass('selected');
+
+                    selectedIconValue = response[$(this).index()];
+                    iconModalButton.html('<i class="ti ti-' + selectedIconValue + '"></i>');
+                    iconSelectButton.prop('disabled', false);
+
+                    iconValue.val(selectedIconValue);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Ошибка при выполнении запроса:", status, error);
+            }
         });
     }
 
     $('#iconModalButton').on('click', function() {
-        displayIcons();
+        // Вызываем функцию только если иконки еще не загружены
+        if (!iconsLoaded) {
+            displayIcons();
+        }
     });
-    
 
-})
+    $('#icon-select-button').on('click', function() {
+        $('#iconModal').modal('hide');
+    });
+
+
+});
+
+
+
+
+
+
+
 
