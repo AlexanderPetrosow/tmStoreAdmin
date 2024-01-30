@@ -6,7 +6,7 @@
                 </button>
         </a>
         @else
-                <button class="btn btn-primary cancel-button m-auto text-center mr-5">
+                <button type="button" class="btn btn-primary cancel-button m-auto text-center mr-5">
                         <a href={{ url()->previous() }}> Отменить<i class="ti ti-ban m-auto"></i></a>
                 </button>
                 <button type="submit" class="btn btn-primary save-button m-auto text-center">

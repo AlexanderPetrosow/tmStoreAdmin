@@ -3,12 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Users;
+use App\Models\Category;
 
 $path = 'App\Http\Controllers';
 
 // Redirect
 Route::get('/', function () {
     return redirect('/users');
+});
+
+// Auth
+Route::get('/auth', function () {
+    return view('auth');
 });
 
 // Users
@@ -30,14 +36,21 @@ Route::get('/users/delete/{id}', $path . '\UsersController@deleteUser');
 
 // Categories
 Route::get('/categories', function () {
-    return view('categories.categories');
+    $category = Category::orderBy('updated_at', 'DESC')->get();
+    return view('categories.categories', ['category'=>$category]);
 });
 Route::get('/categories/add', function () {
-    return view('categories.edit');
+    $department = Category::where('parent', 0)->get();
+    return view('categories.edit', ['department'=>$department]);
 });
+Route::post('/categories/add', $path . '\CategoryController@addCategory');
 Route::get('/categories/edit/{id}', function ($id) {
-    return view('categories.edit');
+    $department = Category::where('parent', 0)->get();
+    return view('categories.edit', ['department'=>$department]);
 });
+Route::post('/categories/edit/{id}', $path . '\CategoryController@editCategory');
+Route::get('/categories/status/{id}', $path . '\CategoryController@statusCategory');
+Route::get('/categories/delete/{id}', $path . '\CategoryController@deleteCategory');
 
 // Advertisements
 Route::get('/advertisements', function () {
@@ -89,16 +102,6 @@ Route::get('/chat', function () {
 });
 Route::get('/chat/edit', function () {
     return view('chat.edit');
-});
-
-// Other
-Route::post('/upload', function (Request $request) {
-    // return view('test');
-    var_dump($request->images);
-});
-
-Route::get('/test', function () {
-    return view('test');
 });
 
 Route::post('/fetch-files', $path . '\FileController@fetchFiles');

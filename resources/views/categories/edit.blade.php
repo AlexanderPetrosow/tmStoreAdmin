@@ -10,22 +10,24 @@
                 <label for="name">Название</label>
                 <img src="{{ asset('/assets/images/ru.png') }}" alt="" width="24" height="24">
             </div>
-            <input type="text" name="name" placeholder="Введите название на русском">
+            <input type="text" name="ru_name" placeholder="Введите название на русском" required 
+            value="@if(isset($category)){{$category['ru_name']}}@else{{old('ru_name')}}@endif">
         </div>
         <div class="input-label-col">
             <div class="d-flex">
                 <label for="phone">Название</label>
                 <img src="{{ asset('/assets/images/tm.png') }}" alt="" width="24" height="24">
             </div>
-            <input type="text" name="phone" placeholder="Введите название на туркменском">
+            <input type="text" name="tm_name" placeholder="Введите название на туркменском" required
+            value="@if(isset($category)){{$category['tm_name']}}@else{{old('tm_name')}}@endif">
         </div>
     </div>
     <div class="input-group-flex d-flex">
         <div class="input-label-col">
             <label for="phone">Родитель</label>
-            <button class="modal-button" data-bs-toggle="modal" data-bs-target="#categoryModal"
-                id="categoryModalButton">Выберите категорию</button>
-            <input type="hidden" class="categoryValue">
+            <button type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#categoryModal"
+                id="categoryModalButton">@if(isset($category)){{$category['parent']}}@else Выберите категорию @endif</button>
+            <input type="hidden" class="categoryValue" name="department">
             <!-- Modal -->
             <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -38,6 +40,12 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            @if(count($department) == 0)
+                                <div class="text-center">
+                                    <p class="fs-5 pb-3">Нет данных</p>
+                                </div>
+                        </div>    
+                            @else
                             <p class="category-option" data-value="Недвижимость">Недвижимость</p>
                             <p class="category-option" data-value="Автомобили">Автомобили</p>
                             <p class="category-option" data-value="Работа">Работа</p>
@@ -46,6 +54,7 @@
                             <button type="button" class="btn btn-primary modal-select-button" data-bs-dismiss="modal"
                                 id="category-select-button">Выбрать</button>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -53,11 +62,12 @@
 
         <div class="input-label-col">
             <label for="phone">Иконка</label>
-            <form action="/fetch-files" method="POST" >
-                <button class="modal-button" data-bs-toggle="modal" data-bs-target="#iconModal"
-                    id="iconModalButton">Выберите
-                    иконку</button>
-                <input type="hidden" class="iconValue">
+                <div class="d-flex flex-column">
+                    <button type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#iconModal"
+                        id="iconModalButton">@if(isset($category)){{$category['icon']}}@else Выберите иконку @endif</button>
+                    <span class="text-danger">@error('icon'){{$message}}@enderror</span>
+                </div>
+                <input type="hidden" id="iconValue" name="icon">
                 <!-- Modal -->
                 <div class="modal fade" id="iconModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -70,7 +80,12 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <ul class="icon-list"></ul>
+                                <ul class="icon-list d-flex flex-wrap m-auto"></ul>
+                                <div id="preloader">
+                                    <div class="spinner-border" role="status">
+                                        {{-- <span class="sr-only">Loading...</span> --}}
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary modal-select-button" data-bs-dismiss="modal"
@@ -79,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+           
         </div>
     </div>
 @endsection

@@ -16,21 +16,33 @@
             </tr>
         </thead>
         <tbody>
-            @for ($i = 0; $i < 4; $i++)
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Нет</td>
-                    <td>
-                        <div class="d-flex justify-content-end">
-                            <a href="/categories/edit/1"><i class="ti ti-pencil table-icon"></i></a>
-                            <i class="ti ti-ban table-icon"></i>
-                            <i class="ti ti-trash table-icon"></i>
-                        </div>
-                    </td>
+            @if(count($category) == 0)
+                <tr class="text-center fs-4 fw-bold">
+                    <td colspan="5">Нет данных</td>
                 </tr>
-            @endfor
+            @else
+                @foreach ($category as $categ)
+                    <tr>
+                        <td>{{$categ['ru_name']}}</td>
+                        <td>{{$categ['created_at']}}</td>
+                        <td>{{$categ['status'] ? "Включен" : "Отключен"}}</td>
+                        <td>{{$categ['parent'] == 0 ? "Нет" : "Тест"}}</td>
+                        <td>
+                            <div class="d-flex justify-content-end">
+                                <a href="/categories/edit/{{$categ['id']}}">
+                                    <i class="ti ti-pencil table-icon"></i>
+                                </a>
+                                <a href="/categories/status/{{$categ['id']}}">
+                                    <i class="ti ti-ban table-icon"></i>
+                                </a>
+                                <a href="/categories/delete/{{$categ['id']}}">
+                                    <i class="ti ti-trash table-icon"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
         </tbody>
     </table>
 @endsection

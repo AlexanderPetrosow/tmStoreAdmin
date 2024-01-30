@@ -19,26 +19,26 @@
                     <td colspan="4">Нет данных</td>
                 </tr>
             @else
-                @for ($i = 0; $i < count($users); $i++)
+                @foreach($users as $user)
                 <tr>
-                    <td>{{$users[$i]['name']}}</td>
-                    <td>{{$users[$i]['updated_at']}}</td>
-                    <td>{{$users[$i]['status'] ? "Включен" : "Отключен"}}</td>
+                    <td>{{$user['name']}}</td>
+                    <td>{{$user['created_at']}}</td>
+                    <td>{{$user['status'] ? "Включен" : "Отключен"}}</td>
                     <td>
                         <div class="d-flex justify-content-end">
-                            <a href="/users/edit/{{$users[$i]['id']}}">
+                            <a href="/users/edit/{{$user['id']}}">
                                 <i class="ti ti-pencil table-icon"></i>
                             </a>
-                            <a href="/users/status/{{$users[$i]['id']}}">
+                            <a href="/users/status/{{$user['id']}}">
                                 <i class="ti ti-ban table-icon"></i>
                             </a>
-                            <a href="/users/delete/{{$users[$i]['id']}}">
+                            <a href="/users/delete/{{$user['id']}}">
                                 <i class="ti ti-trash table-icon"></i>
                             </a>
                         </div>
                     </td>
                 </tr>
-                @endfor
+                @endforeach
             @endif
         </tbody>
     </table>

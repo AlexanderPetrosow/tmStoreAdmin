@@ -15,8 +15,7 @@ class FileController extends Controller
         if (File::isDirectory($folderPath)) {
             // Получите список файлов в директории
             $files = File::files($folderPath);
-
-            // Создайте массив с именами файлов без расширения .svg
+            
             $fileList = [];
             foreach ($files as $file) {
                 $fileList[] = pathinfo($file, PATHINFO_FILENAME);
@@ -24,6 +23,7 @@ class FileController extends Controller
 
             // Верните список файлов в виде JSON-ответа
             return response()->json($fileList);
+            // var_dump($files);
         } else {
             // Если директория не существует, верните ошибку
             return response()->json(['error' => 'Папка не существует.'], 404);
