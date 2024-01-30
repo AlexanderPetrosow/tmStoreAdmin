@@ -35,10 +35,28 @@ body {
     height: 100%;
 }
 
+.checkbox-input{
+    display:flex;
+    align-items:center;
+    margin-top:50px;
+    margin-left:20px;
+}
+
+input[type="checkbox"]{
+    width:20px;
+    height:20px;
+}
+
+.checkbox-input label{
+    margin-left:10px;
+    font-size:18px;
+}
+
 body {
     background-color: #ecedf8;
     font-family: "ZenKaku";
     overflow-y: hidden;
+    accent-color: #010057;
     /* display: flex; */
 }
 
@@ -749,7 +767,7 @@ input[type="date"]:not(.has-value):before {
 
 .auth-card{
     width:400px;
-    height:400px;
+    height:max-content;
     display: block;
     margin: auto;
     border-radius:15px;
@@ -758,9 +776,52 @@ input[type="date"]:not(.has-value):before {
 }
 
 .search-input input{
-    outline:none;
-    border-bottom:1px;
+    border:none;
+    border-bottom:1px solid rgba(1, 0, 87, 0.7);
+    min-width:300px;
+    background-color: transparent;
+    margin-right:80px;
+    font-size: 16px;
+    font-family: 'Noto-Regular';    
 }
+.search-input input::placeholder{
+    color:rgba(43, 43, 53, 0.8);
+    font-size: 16px;
+    font-family: 'Noto-Regular';
+}
+
+
+.auth-p{
+    color:#010057;
+    font-family: 'Noto-Sans';
+    font-weight: 700;
+    font-size: 24px;
+    margin-top:30px;
+    margin-bottom:30px !important;
+}
+
+.auth-button{
+    background-color: #010057;
+    color: #fff;
+    padding:15px 10px;
+    width: 200px;
+    border-radius:10px;
+    text-align:center;
+    margin-bottom:30px !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.auth-button:hover{
+    background-color: rgba(1, 0, 87, 0.7);
+}
+
+.auth-button p{
+    font-size:16px;
+    font-family: 'Noto-Sans';
+    font-weight: 700;
+}
+
+
 
 @media (min-width: 1620px) {
     .main-sidebar-menu {

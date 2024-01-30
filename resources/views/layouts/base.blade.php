@@ -126,7 +126,6 @@
                     <p>@yield('title')</p>
                     
                     <div class="d-flex">
-
                         @yield('buttons')
                     </div>
                 </div>

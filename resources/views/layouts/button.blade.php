@@ -1,4 +1,7 @@
 @if ($create)
+<div class="search-input">
+        <input type="text"  placeholder="Поиск">
+    </div>
 <button class="btn btn-primary  create-button m-auto text-center">Создать<i
         class="ti ti-plus m-auto pl-1"></i></button>
 @else
