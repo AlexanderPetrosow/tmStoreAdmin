@@ -7,7 +7,6 @@
     <table class="table">
         <thead>
             <tr>
-
                 <th scope="col">Имя</th>
                 <th scope="col">Дата добавления</th>
                 <th scope="col">Статус</th>
@@ -15,20 +14,32 @@
             </tr>
         </thead>
         <tbody>
-            @for ($i = 0; $i < 4; $i++)
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>
-                        <div class="d-flex justify-content-end">
-                            <a href="/cities/edit"><i class="ti ti-pencil table-icon"></i></a>
-                            <i class="ti ti-ban table-icon"></i>
-                            <i class="ti ti-trash table-icon"></i>
-                        </div>
-                    </td>
+            @if(count($cities) == 0)
+                <tr class="text-center fs-4 fw-bold">
+                    <td colspan="4">Нет данных</td>
                 </tr>
-            @endfor
+            @else
+                @for ($i = 0; $i < count($cities); $i++)
+                    <tr>
+                        <td>{{$cities[$i]['ru_name']}}</td>
+                        <td>{{$cities[$i]['created_at']}}</td>
+                        <td>{{$cities[$i]['status'] ? "Включен" : "Отключен"}}</td>
+                        <td>
+                            <div class="d-flex justify-content-end">
+                                <a href="/cities/edit/{{$cities[$i]['id']}}">
+                                    <i class="ti ti-pencil table-icon"></i>
+                                </a>
+                                <a href="/cities/status/{{$cities[$i]['id']}}">
+                                    <i class="ti ti-ban table-icon"></i>
+                                </a>
+                                <a href="/cities/delete/{{$cities[$i]['id']}}">
+                                    <i class="ti ti-trash table-icon"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                @endfor
+            @endif
         </tbody>
     </table>
 @endsection

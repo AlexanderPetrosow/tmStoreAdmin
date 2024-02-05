@@ -21,27 +21,27 @@
                     <td colspan="5">Нет данных</td>
                 </tr>
             @else
-                @foreach ($category as $categ)
+                @for ($i = 0; $i < count($category); $i++)
                     <tr>
-                        <td>{{$categ['ru_name']}}</td>
-                        <td>{{$categ['created_at']}}</td>
-                        <td>{{$categ['status'] ? "Включен" : "Отключен"}}</td>
-                        <td>{{$categ['parent'] == 0 ? "Нет" : "Тест"}}</td>
+                        <td>{{$category[$i]['ru_name']}}</td>
+                        <td>{{$category[$i]['created_at']}}</td>
+                        <td>{{$category[$i]['status'] ? "Включен" : "Отключен"}}</td>
+                        <td>{{$department_name[$i] == '' ? "Нет" : $department_name[$i]}}</td>
                         <td>
                             <div class="d-flex justify-content-end">
-                                <a href="/categories/edit/{{$categ['id']}}">
+                                <a href="/categories/edit/{{$category[$i]['id']}}">
                                     <i class="ti ti-pencil table-icon"></i>
                                 </a>
-                                <a href="/categories/status/{{$categ['id']}}">
+                                <a href="/categories/status/{{$category[$i]['id']}}">
                                     <i class="ti ti-ban table-icon"></i>
                                 </a>
-                                <a href="/categories/delete/{{$categ['id']}}">
+                                <a href="/categories/delete/{{$category[$i]['id']}}">
                                     <i class="ti ti-trash table-icon"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                @endforeach
+                @endfor
             @endif
         </tbody>
     </table>

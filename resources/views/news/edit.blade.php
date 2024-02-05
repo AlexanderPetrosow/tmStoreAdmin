@@ -39,12 +39,11 @@
     <div class="input-label-col">
         <div class="input-label-col">
             <label for="name">Прикрепите фото</label>
-            <form id="upload-container" method="POST" action="/upload">
+            <div id="upload-container">
                 <input id="file-input" type="file" name="file" multiple>
                 <label for="file-input" class="upload-label">Выберите или перетащите сюда несколько фотографий для загрузки </label>
-                <div class="success" style="display:none;">Worked!</div>
                 <div class="uploaded-carousel"></div>
-            </form>
+            </div>
         </div>
     </div>
 @endsection

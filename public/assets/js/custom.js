@@ -62,12 +62,12 @@ $(document).ready(function () {
 
 
     $("#category-select-button").click(function () {
-        var selectedCategory = $(".selected").data("value");
+        var selectedCategory = $(".selected").data("name");
         $("#categoryModalButton").text(selectedCategory);
         $("#categoryModalButton").attr("data-selected", selectedCategory);
         $("#categoryModalButton").addClass("selected-text-color"); 
-        $(".category-option").removeClass("selected"); 
-        $('.categoryValue').val(selectedCategory);
+        $('.categoryValue').val($(".selected").data("value"));
+        // $(".category-option").removeClass("selected"); 
     });
     $("#user-select-button").click(function () {
         var selectedUser = $(".selected").data("value");
@@ -118,36 +118,36 @@ $(document).ready(function () {
     });
 
     $(".district-option").click(function () {
-        var selectedDistrict = $(this).data("value");
+        var selectedDistrict = $(this).data("name");
         var accordionButton = $("#districtAccordion").find(".accordion-button");
         accordionButton.text(selectedDistrict);
         accordionButton.css("color", "#2b2b35");
         accordionButton.trigger("click");
-        $('.districtValue').val(selectedDistrict);
+        $('.districtValue').val($(this).data("value"));
     });
     $(".main-page-banner-option").click(function () {
-        var selectedStatus = $(this).data("value");
+        var selectedStatus = $(this).data("name");
         var accordionButton = $("#mainPageBannerAccordion").find(".accordion-button");
         accordionButton.text(selectedStatus);
         accordionButton.css("color", "#2b2b35");
         accordionButton.trigger("click");
-        $('.mainPageBannerValue').val(selectedStatus);
+        $('.mainPageBannerValue').val($(this).data("value"));
     });
     $(".adv-page-banner-option").click(function () {
-        var selectedStatus = $(this).data("value");
+        var selectedStatus = $(this).data("name");
         var accordionButton = $("#advPageBannerAccordion").find(".accordion-button");
         accordionButton.text(selectedStatus);
         accordionButton.css("color", "#2b2b35");
         accordionButton.trigger("click");
-        $('.advPageBannerValue').val(selectedStatus);
+        $('.advPageBannerValue').val($(this).data("value"));
     });
     $(".category-page-banner-option").click(function () {
-        var selectedStatus = $(this).data("value");
+        var selectedStatus = $(this).data("name");
         var accordionButton = $("#categoryBannerAccordion").find(".accordion-button");
         accordionButton.text(selectedStatus);
         accordionButton.css("color", "#2b2b35");
         accordionButton.trigger("click");
-        $('.categoryBannerValue').val(selectedStatus);
+        $('.categoryBannerValue').val($(this).data("value"));
     });
 
 

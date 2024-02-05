@@ -24,17 +24,32 @@ class CategoryController extends Controller
         $category->ru_name = $req->ru_name;
         $category->tm_name = $req->tm_name;
         $category->icon = $req->icon;
-        // if(isset($req->department)){
-
-        // }
+        if(isset($req->department)){
+            $category->parent = $req->department;
+        }
         $category->save();
         return redirect('/categories');
     }
     public function editCategory(Request $req, $id){
+
+        $validator = \Validator::make(request()->all(),
+            [
+                'icon' => 'required',
+            ],
+            [
+                'icon.required' => 'Выберите иконку',
+            ] 
+        );
+
+        $validator->validate();
+        
         $category = Category::find($id);
         $category->ru_name = $req->ru_name;
         $category->tm_name = $req->tm_name;
         $category->icon = $req->icon;
+        if(isset($req->department)){
+            $category->parent = $req->department;
+        }
         $category->save();
         return redirect('/categories');
     }

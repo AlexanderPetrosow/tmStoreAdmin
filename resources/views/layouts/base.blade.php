@@ -9,7 +9,45 @@
     <title>@yield('title')</title>
     @include('layouts.styles')
 </head>
-
+@php
+    $menu = [
+        [
+            'name'=>'Пользователи',
+            'route'=>'users',
+            'icon'=>'users'
+        ],
+        [
+            'name'=>'Категория',
+            'route'=>'categories',
+            'icon'=>'category'
+        ],
+        [
+            'name'=>'Объявления',
+            'route'=>'advertisements',
+            'icon'=>'clipboard-text'
+        ],
+        [
+            'name'=>'Города',
+            'route'=>'cities',
+            'icon'=>'map-pin'
+        ],
+        [
+            'name'=>'Баннеры',
+            'route'=>'banners',
+            'icon'=>'photo'
+        ],
+        [
+            'name'=>'Новости',
+            'route'=>'news',
+            'icon'=>'news'
+        ],
+        [
+            'name'=>'Чат с пользователем',
+            'route'=>'chat',
+            'icon'=>'message-circle-2'
+        ]
+    ];
+@endphp
 <body>
     <div class="w-100 " id="baseLayout">
         <div class="col-12" id="navbarContainer">
@@ -28,12 +66,14 @@
                     <div class="offcanvas-body">
                         <div>
                             <ul class="navbar-nav">
+                                @foreach ($menu as $m)
                                 <li class="nav-item main-sidebar-menu-item">
-                                    <a class="nav-link active" href="/users">
-                                        <i class="ti ti-users"></i> Пользователи
+                                    <a class="nav-link " href="/{{$m['route']}}/{{Route::currentRouteName()}}">
+                                        <i class="ti ti-{{$m['icon']}}"></i>{{$m['name']}}
                                     </a>
                                 </li>
-                                <li class="nav-item main-sidebar-menu-item">
+                                @endforeach
+                                {{-- <li class="nav-item main-sidebar-menu-item">
                                     <a class="nav-link" href="/categories">
                                         <i class="ti ti-category"></i> Категория
                                     </a>
@@ -62,7 +102,7 @@
                                     <a class="nav-link" href="/chat">
                                         <i class="ti ti-message-circle-2"></i> Чат с пользователем
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -75,12 +115,14 @@
                     <p class="logo-p">TM STORE</p>
                 </div>
                 <ul class="nav flex-column main-ul">
-                    <li class="nav-item main-sidebar-menu-item">
-                        <a class="nav-link active" href="/users">
-                            <i class="ti ti-users"></i> Пользователи
+                    @foreach ($menu as $m)
+                    <li class="nav-item main-sidebar-menu-item @if(Route::currentRouteName() == $m['route'])menu-active @endif">
+                        <a class="nav-link" href="/{{$m['route']}}">
+                            <i class="ti ti-{{$m['icon']}}"></i>{{$m['name']}}
                         </a>
                     </li>
-                    <li class="nav-item main-sidebar-menu-item">
+                    @endforeach
+                    {{-- <li class="nav-item main-sidebar-menu-item">
                         <a class="nav-link" href="/categories">
                             <i class="ti ti-category"></i> Категория
                         </a>
@@ -109,7 +151,7 @@
                         <a class="nav-link" href="/chat">
                             <i class="ti ti-message-circle-2"></i> Чат с пользователем
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

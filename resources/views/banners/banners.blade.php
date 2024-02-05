@@ -7,7 +7,6 @@
     <table class="table">
         <thead>
             <tr>
-
                 <th scope="col">Имя</th>
                 <th scope="col">Дата добавления</th>
                 <th scope="col">Статус</th>
@@ -16,23 +15,35 @@
             </tr>
         </thead>
         <tbody>
-            @for ($i = 0; $i < 5; $i++)
-                <tr>
-
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Главная, Объявления</td>
-                    <td>
-                        <div class="d-flex justify-content-end">
-                            <a href="/banners/edit"><i class="ti ti-pencil table-icon"></i></a>
-                            <i class="ti ti-ban table-icon"></i>
-                            <i class="ti ti-trash table-icon"></i>
-                        </div>
-                    </td>
+            @if(count($banners) == 0)
+                <tr class="text-center fs-4 fw-bold">
+                    <td colspan="5">Нет данных</td>
                 </tr>
-            @endfor
-
+            @else
+                @foreach ($banners as $banner)
+                    <tr>
+                        <td>{{$banner['name']}}</td>
+                        <td>{{$banner['created_at']}}</td>
+                        <td>{{$banner['status'] ? "Включен" : "Отключен"}}</td>
+                        <td class="d-flex align-items-center">
+                            <img src="/storage/{{$banner['image']}}" alt="banner" class="border rounded-2" style="width: 3rem;">
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-end">
+                                <a href="/banners/edit/{{$banner['id']}}">
+                                    <i class="ti ti-pencil table-icon"></i>
+                                </a>
+                                <a href="/banners/status/{{$banner['id']}}">
+                                    <i class="ti ti-ban table-icon"></i>
+                                </a>
+                                <a href="/banners/delete/{{$banner['id']}}">
+                                    <i class="ti ti-trash table-icon"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
         </tbody>
     </table>
 @endsection

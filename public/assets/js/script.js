@@ -1,9 +1,13 @@
 $(document).ready(function () {
 	var dropZone = $('#upload-container');
 
+	$('.delete-slide-button').click(function(){
+		$(this).parent().remove();
+	});
+
 	$('#file-input').change(function () {
 		let files = this.files;
-		sendFiles(files);
+		sendFiles(files, $(this).hasClass('oneImage'));
 	});
 
 	dropZone.on('drag dragstart dragend dragover dragenter dragleave drop', function (event) {
@@ -26,43 +30,51 @@ $(document).ready(function () {
 		e.preventDefault();
 		dropZone.removeClass('dragover');
 		let files = e.originalEvent.dataTransfer.files;
-		sendFiles(files);
+		if($(this).hasClass('oneImage') && $('.uploaded-image').length > 0){
+			alert('В достигли максимально доступного количество изображений');
+		} else {
+			sendFiles(files);
+		}
 	});
 
-	function sendFiles(files) {
+	function sendFiles(files, oneImage) {
 		let maxFileSize = 5242880;
 		let Data = new FormData();
 
-		$(files).each(function (index, file) {
-			if ((file.size <= maxFileSize) && ((file.type == 'image/png') || (file.type == 'image/jpeg'))) {
-				Data.append('images[]', file);
-				let reader = new FileReader();
-				reader.onload = function (e) {
+		if(oneImage && $('.uploaded-image').length > 0){
+			alert('В достигли максимально доступного количество изображений');
+		} else {
+			$(files).each(function (index, file) {
+				if ((file.size <= maxFileSize) && ((file.type == 'image/png') || (file.type == 'image/jpeg'))) {
+					Data.append('images[]', file);
+					let reader = new FileReader();
+					reader.onload = function (e) {
 
-					var slide = $('<div><img class="uploaded-image" src="' + e.target.result + '" alt="Изображение"><div class="delete-slide-button"><i class="ti ti-trash"></i></div></div>');
-					$('.uploaded-carousel').slick('slickAdd', slide);
+						var slide = $('<div><img class="uploaded-image" src="' + e.target.result + '" alt="Изображение"><div class="delete-slide-button"><i class="ti ti-trash"></i></div><input type="hidden" name="images[]" value="'+e.target.result+'"></div>');
+						$('.uploaded-carousel').slick('slickAdd', slide);
 
-					slide.find('.delete-slide-button').on('click', function() {
-						var currentSlide = $(this).closest('.slick-slide'); // Получаем текущий слайд
-						$('.uploaded-carousel').slick('slickRemove', currentSlide.index()); // Удаляем текущий слайд по его индексу
-					});
+						slide.find('.delete-slide-button').on('click', function() {
+							var currentSlide = $(this).closest('.slick-slide'); // Получаем текущий слайд
+							$('.uploaded-carousel').slick('slickRemove', currentSlide.index()); // Удаляем текущий слайд по его индексу
+						});
 
-					// console.log(e.target.result);
-				};
-				reader.readAsDataURL(file);
-			}
-		});
-		$.ajax({
-			url: dropZone.attr('action'),
-			type: dropZone.attr('method'),
-			headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
-			data: Data,
-			contentType: false,
-			processData: false,
-			success: function (data) {
-				// $('.success').fadeIn();
-			}
-		});
+						// console.log(e.target.result);
+					};
+					reader.readAsDataURL(file);
+				}
+			});
+			$.ajax({
+				url: dropZone.attr('action'),
+				type: dropZone.attr('method'),
+				headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
+				data: Data,
+				contentType: false,
+				processData: false,
+				success: function (data) {
+					// $('.success').fadeIn();
+				}
+			});
+		}
 	}
 
 
