@@ -26,7 +26,10 @@
                         <td>{{$banner['created_at']}}</td>
                         <td>{{$banner['status'] ? "Включен" : "Отключен"}}</td>
                         <td class="d-flex align-items-center">
-                            <img src="/storage/{{$banner['image']}}" alt="banner" class="border rounded-2" style="width: 3rem;">
+                            {{-- <img src="/storage/{{$banner['image']}}" alt="banner" class="border rounded-2" style="width: 3rem;"> --}}
+                            {{$banner['status_main'] ? "| Главная" : ""}}
+                            {{$banner['status_category'] ? "| Категории" : ""}}
+                            {{$banner['status_advert'] ? " | Баннеры" : ""}} |
                         </td>
                         <td>
                             <div class="d-flex justify-content-end">

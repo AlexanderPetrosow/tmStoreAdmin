@@ -536,9 +536,28 @@ table {
     font-size: 20px;
 }
 
+
+
 .uploaded-image img {
     object-fit: cover;
 }
+
+
+.highlight{
+    border: 1px solid #010057;
+}
+.main-photo-icon{
+    margin-top:-145px;
+    margin-left:-5px;
+
+}
+.main-photo-icon i{
+    background-color: #010057;
+    border-radius:50%;
+    padding:5px;
+    color:#fff;
+}
+
 
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
@@ -779,6 +798,10 @@ input[type="date"]:not(.has-value):before {
     background-color: #fff;
 }
 
+.search-input{
+    position: relative;
+}
+
 .search-input input{
     border:none;
     border-bottom:1px solid rgba(1, 0, 87, 0.7);
@@ -793,6 +816,20 @@ input[type="date"]:not(.has-value):before {
     font-size: 16px;
     font-family: 'Noto-Regular';
 }
+
+.search-button{
+    position: absolute;
+    right:20%;
+    bottom:20%;
+    /* background-color: #010057; */
+}
+
+.search-button i{
+    color:#010057;
+    font-size: 22px;
+    border-radius: 40px;
+}
+
 
 
 .auth-p{

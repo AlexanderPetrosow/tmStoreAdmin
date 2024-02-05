@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	var dropZone = $('#upload-container');
 
-	$('.delete-slide-button').click(function(){
+	$('.delete-slide-button').click(function () {
 		$(this).parent().remove();
 	});
 
@@ -30,7 +30,7 @@ $(document).ready(function () {
 		e.preventDefault();
 		dropZone.removeClass('dragover');
 		let files = e.originalEvent.dataTransfer.files;
-		if($(this).hasClass('oneImage') && $('.uploaded-image').length > 0){
+		if ($(this).hasClass('oneImage') && $('.uploaded-image').length > 0) {
 			alert('В достигли максимально доступного количество изображений');
 		} else {
 			sendFiles(files);
@@ -41,7 +41,7 @@ $(document).ready(function () {
 		let maxFileSize = 5242880;
 		let Data = new FormData();
 
-		if(oneImage && $('.uploaded-image').length > 0){
+		if (oneImage && $('.uploaded-image').length > 0) {
 			alert('В достигли максимально доступного количество изображений');
 		} else {
 			$(files).each(function (index, file) {
@@ -50,13 +50,27 @@ $(document).ready(function () {
 					let reader = new FileReader();
 					reader.onload = function (e) {
 
-						var slide = $('<div><img class="uploaded-image" src="' + e.target.result + '" alt="Изображение"><div class="delete-slide-button"><i class="ti ti-trash"></i></div><input type="hidden" name="images[]" value="'+e.target.result+'"></div>');
+						var slide = $('<div><img class="uploaded-image" src="' + e.target.result + '" alt="Изображение"><div class="delete-slide-button"><i class="ti ti-trash"></i></div><input type="hidden" name="images[]" value="' + e.target.result + '"></div>');
 						$('.uploaded-carousel').slick('slickAdd', slide);
 
-						slide.find('.delete-slide-button').on('click', function() {
+						slide.find('.delete-slide-button').on('click', function () {
 							var currentSlide = $(this).closest('.slick-slide'); // Получаем текущий слайд
 							$('.uploaded-carousel').slick('slickRemove', currentSlide.index()); // Удаляем текущий слайд по его индексу
 						});
+
+						$('.uploaded-image').on('click', function(){
+							$('.uploaded-image').removeClass('highlight');
+							$('.main-image-hidden').remove();
+							$('.main-photo-icon').remove();
+
+							$(this).addClass('highlight');
+							$(this).parent().append('<div class="main-photo-icon"><i class="ti ti-home"></i></div>');
+							$(this).parent().append('<input type="hidden" class="main-image-hidden" name="main_image" value="' + e.target.result + '">');
+
+						});
+
+						
+
 
 						// console.log(e.target.result);
 					};
@@ -109,5 +123,5 @@ $(document).ready(function () {
 		});
 	}
 
-	
+
 });
