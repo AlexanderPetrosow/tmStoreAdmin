@@ -40,56 +40,64 @@ $(document).ready(function () {
 	function sendFiles(files, oneImage) {
 		let maxFileSize = 5242880;
 		let Data = new FormData();
-
+		let validFiles = 0;
+	
 		if (oneImage && $('.uploaded-image').length > 0) {
-			alert('В достигли максимально доступного количество изображений');
+			alert('Вы уже загрузили одно изображение.');
 		} else {
 			$(files).each(function (index, file) {
 				if ((file.size <= maxFileSize) && ((file.type == 'image/png') || (file.type == 'image/jpeg'))) {
-					Data.append('images[]', file);
-					let reader = new FileReader();
-					reader.onload = function (e) {
-
-						var slide = $('<div><img class="uploaded-image" src="' + e.target.result + '" alt="Изображение"><div class="delete-slide-button"><i class="ti ti-trash"></i></div><input type="hidden" name="images[]" value="' + e.target.result + '"></div>');
-						$('.uploaded-carousel').slick('slickAdd', slide);
-
-						slide.find('.delete-slide-button').on('click', function () {
-							var currentSlide = $(this).closest('.slick-slide'); // Получаем текущий слайд
-							$('.uploaded-carousel').slick('slickRemove', currentSlide.index()); // Удаляем текущий слайд по его индексу
-						});
-
-						$('.uploaded-image').on('click', function(){
-							$('.uploaded-image').removeClass('highlight');
-							$('.main-image-hidden').remove();
-							$('.main-photo-icon').remove();
-
-							$(this).addClass('highlight');
-							$(this).parent().append('<div class="main-photo-icon"><i class="ti ti-home"></i></div>');
-							$(this).parent().append('<input type="hidden" class="main-image-hidden" name="main_image" value="' + e.target.result + '">');
-
-						});
-
-						
-
-
-						// console.log(e.target.result);
-					};
-					reader.readAsDataURL(file);
+					if (validFiles < 10) { // Проверяем, что загружено не более 10 изображений
+						Data.append('images[]', file);
+						validFiles++;
+						let reader = new FileReader();
+						reader.onload = function (e) {
+	
+							var slide = $('<div><img class="uploaded-image" src="' + e.target.result + '" alt="Изображение"><div class="delete-slide-button"><i class="ti ti-trash"></i></div><input type="hidden" name="images[]" value="' + e.target.result + '"></div>');
+							$('.uploaded-carousel').slick('slickAdd', slide);
+	
+							slide.find('.delete-slide-button').on('click', function () {
+								var currentSlide = $(this).closest('.slick-slide'); // Получаем текущий слайд
+								$('.uploaded-carousel').slick('slickRemove', currentSlide.index()); // Удаляем текущий слайд по его индексу
+							});
+	
+							if ($('#upload-container').hasClass('adverts-img')) {
+								$('.uploaded-image').click(function () {
+									$('.uploaded-image').removeClass('highlight');
+									$('.main-image-hidden').remove();
+									$('.main-photo-icon').remove();
+	
+									$(this).addClass('highlight');
+									$(this).parent().append('<div class="main-photo-icon"><i class="ti ti-home"></i></div>');
+									$(this).parent().append('<input type="hidden" class="main-image-hidden" name="main_image" value="' + e.target.result + '">');
+								});
+							}
+						};
+						reader.readAsDataURL(file);
+					} else {
+						alert('Превышено максимальное количество допустимых изображений (10). Лишние изображения будут удалены.');
+						return false; // Останавливаем цикл each
+					}
 				}
 			});
-			$.ajax({
-				url: dropZone.attr('action'),
-				type: dropZone.attr('method'),
-				headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
-				data: Data,
-				contentType: false,
-				processData: false,
-				success: function (data) {
-					// $('.success').fadeIn();
-				}
-			});
+	
+			if (validFiles <= 10) { // Добавьте условие, чтобы избежать дублирования сообщения
+				$.ajax({
+					url: dropZone.attr('action'),
+					type: dropZone.attr('method'),
+					headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
+					data: Data,
+					contentType: false,
+					processData: false,
+					success: function (data) {
+						// $('.success').fadeIn();
+					}
+				});
+			}
 		}
 	}
+	
+	
 
 
 
@@ -101,15 +109,15 @@ $(document).ready(function () {
 		$('.uploaded-carousel').slick({
 
 			slidesToShow: 4, // Количество отображаемых слайдов одновременно
-			slidesToScroll: 1, // Количество прокручиваемых слайдов
+			slidesToScroll: 2, // Количество прокручиваемых слайдов
 			infinite: false,
-			autoplay: true, // Бесконечная прокрутка
+			autoplay: false, // Бесконечная прокрутка
 			centerPadding: false,
 			arrows: true, // Показывать стрелки навигации
 			dots: false, // Показывать точки навигации
 			variableWidth: true,
 			prevArrow: "<div></div>",
-			nextArrow: "<div class='next-arrow'><i class='ti ti-chevron-right'></i></div>",
+			nextArrow: "<i class='ti ti-chevron-right m-auto '></i>",
 			responsive: [
 				{
 					breakpoints: 768,

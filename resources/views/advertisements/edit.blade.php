@@ -79,11 +79,11 @@
 </div>
 <div class="input-label-col">
     <label for="name">Прикрепите фото</label>
-    <div id="upload-container">
+    <div id="upload-container" class="tenImages adverts-img">
         <input id="file-input" type="file" name="file" multiple>
         <label for="file-input" class="upload-label">Выберите или перетащите сюда несколько фотографий для загрузки в
             ваше объявление(до 10 фото)</label>
-        <div class="uploaded-carousel"></div>
+        <div class="uploaded-carousel "></div>
         <div class="test-class"></div>
     </div>
 </div>

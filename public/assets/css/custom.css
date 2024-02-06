@@ -463,10 +463,12 @@ table {
 }
 
 .uploaded-carousel {
-    height: 200px; /* Замените на желаемую высоту слайдера */
+    height: 155px; /* Замените на желаемую высоту слайдера */
     /* background-color: red; */
     overflow: hidden; /* Чтобы скрыть избыточное содержимое */
+    display: flex;
 }
+
 
 #upload-container label {
     font-weight: bold;
@@ -549,6 +551,7 @@ table {
 .main-photo-icon{
     margin-top:-145px;
     margin-left:-5px;
+    width:max-content;
 
 }
 .main-photo-icon i{
