@@ -463,12 +463,11 @@ table {
 }
 
 .uploaded-carousel {
+    display: flex;
     height: 155px; /* Замените на желаемую высоту слайдера */
     /* background-color: red; */
     overflow: hidden; /* Чтобы скрыть избыточное содержимое */
-    display: flex;
 }
-
 
 #upload-container label {
     font-weight: bold;
@@ -552,7 +551,6 @@ table {
     margin-top:-145px;
     margin-left:-5px;
     width:max-content;
-
 }
 .main-photo-icon i{
     background-color: #010057;
@@ -1086,3 +1084,32 @@ input[type="date"]:not(.has-value):before {
         width: 300px;
     }
 }
+
+/* Loading */
+.loader {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+    margin:15px auto;
+    position: relative;
+    color: #010057;
+    box-sizing: border-box;
+    animation: animloader 1s linear infinite alternate;
+  }
+  
+  @keyframes animloader {
+    0% {
+      box-shadow: -38px -12px ,  -14px 0,  14px 0, 38px 0;
+    }
+    33% {
+      box-shadow: -38px 0px, -14px -12px,  14px 0, 38px 0;
+    }
+    66% {
+      box-shadow: -38px 0px , -14px 0, 14px -12px, 38px 0;
+    }
+    100% {
+      box-shadow: -38px 0 , -14px 0, 14px 0 , 38px -12px;
+    }
+  }
+  

@@ -14,25 +14,25 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($users) == 0)
+            @if(count($list) == 0)
                 <tr class="text-center fs-4 fw-bold">
                     <td colspan="4">Нет данных</td>
                 </tr>
             @else
-                @foreach($users as $user)
+                @foreach($list as $content)
                 <tr>
-                    <td>{{$user['name']}}</td>
-                    <td>{{$user['created_at']}}</td>
-                    <td>{{$user['status'] ? "Включен" : "Отключен"}}</td>
+                    <td>{{$content['name']}}</td>
+                    <td>{{$content['created_at']}}</td>
+                    <td>{{$content['status'] ? "Включен" : "Отключен"}}</td>
                     <td>
                         <div class="d-flex justify-content-end">
-                            <a href="/users/edit/{{$user['id']}}">
+                            <a href="/users/edit/{{$content['id']}}">
                                 <i class="ti ti-pencil table-icon"></i>
                             </a>
-                            <a href="/users/status/{{$user['id']}}">
+                            <a href="/users/status/{{$content['id']}}">
                                 <i class="ti ti-ban table-icon"></i>
                             </a>
-                            <a href="/users/delete/{{$user['id']}}">
+                            <a href="/users/delete/{{$content['id']}}">
                                 <i class="ti ti-trash table-icon"></i>
                             </a>
                         </div>

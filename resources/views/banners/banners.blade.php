@@ -15,31 +15,30 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($banners) == 0)
+            @if(count($list) == 0)
                 <tr class="text-center fs-4 fw-bold">
                     <td colspan="5">Нет данных</td>
                 </tr>
             @else
-                @foreach ($banners as $banner)
+                @foreach ($list as $content)
                     <tr>
-                        <td>{{$banner['name']}}</td>
-                        <td>{{$banner['created_at']}}</td>
-                        <td>{{$banner['status'] ? "Включен" : "Отключен"}}</td>
+                        <td>{{$content['name']}}</td>
+                        <td>{{$content['created_at']}}</td>
+                        <td>{{$content['status'] ? "Включен" : "Отключен"}}</td>
                         <td class="d-flex align-items-center">
-                            {{-- <img src="/storage/{{$banner['image']}}" alt="banner" class="border rounded-2" style="width: 3rem;"> --}}
-                            {{$banner['status_main'] ? "| Главная" : ""}}
-                            {{$banner['status_category'] ? "| Категории" : ""}}
-                            {{$banner['status_advert'] ? " | Баннеры" : ""}} |
+                            {{$content['status_main'] ? "| Главная" : ""}}
+                            {{$content['status_category'] ? "| Категории" : ""}}
+                            {{$content['status_advert'] ? " | Баннеры" : ""}} |
                         </td>
                         <td>
                             <div class="d-flex justify-content-end">
-                                <a href="/banners/edit/{{$banner['id']}}">
+                                <a href="/banners/edit/{{$content['id']}}">
                                     <i class="ti ti-pencil table-icon"></i>
                                 </a>
-                                <a href="/banners/status/{{$banner['id']}}">
+                                <a href="/banners/status/{{$content['id']}}">
                                     <i class="ti ti-ban table-icon"></i>
                                 </a>
-                                <a href="/banners/delete/{{$banner['id']}}">
+                                <a href="/banners/delete/{{$content['id']}}">
                                     <i class="ti ti-trash table-icon"></i>
                                 </a>
                             </div>

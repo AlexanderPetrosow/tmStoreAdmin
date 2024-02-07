@@ -31,7 +31,7 @@ $(document).ready(function () {
 		dropZone.removeClass('dragover');
 		let files = e.originalEvent.dataTransfer.files;
 		if ($(this).hasClass('oneImage') && $('.uploaded-image').length > 0) {
-			alert('В достигли максимально доступного количество изображений');
+			alert('Вы уже загрузили одно изображение.');
 		} else {
 			sendFiles(files);
 		}
@@ -40,8 +40,9 @@ $(document).ready(function () {
 	function sendFiles(files, oneImage) {
 		let maxFileSize = 5242880;
 		let Data = new FormData();
+
 		let validFiles = 0;
-	
+
 		if (oneImage && $('.uploaded-image').length > 0) {
 			alert('Вы уже загрузили одно изображение.');
 		} else {
@@ -52,21 +53,21 @@ $(document).ready(function () {
 						validFiles++;
 						let reader = new FileReader();
 						reader.onload = function (e) {
-	
+
 							var slide = $('<div><img class="uploaded-image" src="' + e.target.result + '" alt="Изображение"><div class="delete-slide-button"><i class="ti ti-trash"></i></div><input type="hidden" name="images[]" value="' + e.target.result + '"></div>');
 							$('.uploaded-carousel').slick('slickAdd', slide);
-	
+
 							slide.find('.delete-slide-button').on('click', function () {
 								var currentSlide = $(this).closest('.slick-slide'); // Получаем текущий слайд
 								$('.uploaded-carousel').slick('slickRemove', currentSlide.index()); // Удаляем текущий слайд по его индексу
 							});
-	
+
 							if ($('#upload-container').hasClass('adverts-img')) {
 								$('.uploaded-image').click(function () {
 									$('.uploaded-image').removeClass('highlight');
 									$('.main-image-hidden').remove();
 									$('.main-photo-icon').remove();
-	
+
 									$(this).addClass('highlight');
 									$(this).parent().append('<div class="main-photo-icon"><i class="ti ti-home"></i></div>');
 									$(this).parent().append('<input type="hidden" class="main-image-hidden" name="main_image" value="' + e.target.result + '">');
@@ -80,7 +81,7 @@ $(document).ready(function () {
 					}
 				}
 			});
-	
+
 			if (validFiles <= 10) { // Добавьте условие, чтобы избежать дублирования сообщения
 				$.ajax({
 					url: dropZone.attr('action'),
@@ -96,8 +97,6 @@ $(document).ready(function () {
 			}
 		}
 	}
-	
-	
 
 
 
@@ -117,7 +116,7 @@ $(document).ready(function () {
 			dots: false, // Показывать точки навигации
 			variableWidth: true,
 			prevArrow: "<div></div>",
-			nextArrow: "<i class='ti ti-chevron-right m-auto '></i>",
+			nextArrow: "<i class='ti ti-chevron-right m-auto'></i>",
 			responsive: [
 				{
 					breakpoints: 768,

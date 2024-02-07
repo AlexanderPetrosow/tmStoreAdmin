@@ -1,5 +1,8 @@
-$(document).ready(function () {
+$(window).on('load', function(){
+    $('.loading').fadeOut(500);
+});
 
+$(document).ready(function () {
     $("#categoryModal").on("show.bs.modal", function () {
         $("#category-select-button").prop("disabled", true);
     });
