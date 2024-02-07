@@ -11,7 +11,7 @@
     </div>
     <div class="input-label-col">
         <label for="phone">Категория</label>
-        <button class="modal-button" data-bs-toggle="modal" data-bs-target="#categoryModal"
+        <button type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#categoryModal"
             id="categoryModalButton">Выберите категорию</button>
         <input type="hidden" class="categoryValue">
         <!-- Modal -->
@@ -46,7 +46,7 @@
 </div>
 <div class="input-label-col mb-4">
     <label for="phone">Город</label>
-    <button class="modal-button" data-bs-toggle="modal" data-bs-target="#cityModal" id="cityModalButton">Выберите
+    <button type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#cityModal" id="cityModalButton">Выберите
         город</button>
     <input type="hidden" class="cityValue">
     <!-- Modal -->
@@ -101,7 +101,7 @@
 <div class="input-group-flex  mb-4">
     <div class="input-label-col">
         <label for="name">Пользователь</label>
-        <button class="modal-button" data-bs-toggle="modal" data-bs-target="#userModal"
+        <button type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#userModal"
             id="userModalButton">Выберите пользователя</button>
         <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalTitle"
             aria-hidden="true">

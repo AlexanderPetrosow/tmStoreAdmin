@@ -154,6 +154,9 @@ Route::get('/chat/edit', function () {
     return view('chat.edit');
 })->middleware('auth')->name('chat');
 
+// Search
+Route::post('/search', $path . '\AdminController@search');
+
 // Other
 Route::post('/fetch-files', $path . '\FileController@fetchFiles');
 Route::post('/upload', function (Request $request) {

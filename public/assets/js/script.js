@@ -40,49 +40,55 @@ $(document).ready(function () {
 	function sendFiles(files, oneImage) {
 		let maxFileSize = 5242880;
 		let Data = new FormData();
+		let validFiles = $('.uploaded-image').length;
 
-		let validFiles = 0;
 
 		if (oneImage && $('.uploaded-image').length > 0) {
 			alert('Вы уже загрузили одно изображение.');
 		} else {
-			$(files).each(function (index, file) {
-				if ((file.size <= maxFileSize) && ((file.type == 'image/png') || (file.type == 'image/jpeg'))) {
-					if (validFiles < 10) { // Проверяем, что загружено не более 10 изображений
-						Data.append('images[]', file);
-						validFiles++;
-						let reader = new FileReader();
-						reader.onload = function (e) {
+			if (validFiles == 10) {
+				alert('Превышено максимальное количество допустимых изображений (10). Лишние изображения будут удалены.');
+				return false;
+			} else {
 
-							var slide = $('<div><img class="uploaded-image" src="' + e.target.result + '" alt="Изображение"><div class="delete-slide-button"><i class="ti ti-trash"></i></div><input type="hidden" name="images[]" value="' + e.target.result + '"></div>');
-							$('.uploaded-carousel').slick('slickAdd', slide);
+				$(files).each(function (index, file) {
+					if ((file.size <= maxFileSize) && ((file.type == 'image/png') || (file.type == 'image/jpeg'))) {
+						if (validFiles < 10) {
+							Data.append('images[]', file);
+							validFiles++;
+							let reader = new FileReader();
+							reader.onload = function (e) {
 
-							slide.find('.delete-slide-button').on('click', function () {
-								var currentSlide = $(this).closest('.slick-slide'); // Получаем текущий слайд
-								$('.uploaded-carousel').slick('slickRemove', currentSlide.index()); // Удаляем текущий слайд по его индексу
-							});
+								var slide = $('<div><img class="uploaded-image" src="' + e.target.result + '" alt="Изображение"><div class="delete-slide-button"><i class="ti ti-trash"></i></div><input type="hidden" name="images[]" value="' + e.target.result + '"></div>');
+								$('.uploaded-carousel').slick('slickAdd', slide);
 
-							if ($('#upload-container').hasClass('adverts-img')) {
-								$('.uploaded-image').click(function () {
-									$('.uploaded-image').removeClass('highlight');
-									$('.main-image-hidden').remove();
-									$('.main-photo-icon').remove();
-
-									$(this).addClass('highlight');
-									$(this).parent().append('<div class="main-photo-icon"><i class="ti ti-home"></i></div>');
-									$(this).parent().append('<input type="hidden" class="main-image-hidden" name="main_image" value="' + e.target.result + '">');
+								slide.find('.delete-slide-button').on('click', function () {
+									var currentSlide = $(this).closest('.slick-slide');
+									$('.uploaded-carousel').slick('slickRemove', currentSlide.index());
 								});
-							}
-						};
-						reader.readAsDataURL(file);
-					} else {
-						alert('Превышено максимальное количество допустимых изображений (10). Лишние изображения будут удалены.');
-						return false; // Останавливаем цикл each
-					}
-				}
-			});
 
-			if (validFiles <= 10) { // Добавьте условие, чтобы избежать дублирования сообщения
+								if ($('#upload-container').hasClass('adverts-img')) {
+									$('.uploaded-image').click(function () {
+										$('.uploaded-image').removeClass('highlight');
+										$('.main-image-hidden').remove();
+										$('.main-photo-icon').remove();
+
+										$(this).addClass('highlight');
+										$(this).parent().append('<div class="main-photo-icon"><i class="ti ti-home"></i></div>');
+										$(this).parent().append('<input type="hidden" class="main-image-hidden" name="main_image" value="' + e.target.result + '">');
+									});
+								}
+							};
+							reader.readAsDataURL(file);
+						} else {
+							alert('Превышено максимальное количество допустимых изображений (10). Лишние изображения будут удалены.');
+							return false;
+						}
+					}
+				});
+			}
+
+			if (validFiles <= 10) { 
 				$.ajax({
 					url: dropZone.attr('action'),
 					type: dropZone.attr('method'),
@@ -97,6 +103,8 @@ $(document).ready(function () {
 			}
 		}
 	}
+
+
 
 
 
