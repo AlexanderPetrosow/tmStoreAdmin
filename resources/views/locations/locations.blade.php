@@ -14,31 +14,31 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($cities) == 0)
+            @if(count($list) == 0)
                 <tr class="text-center fs-4 fw-bold">
                     <td colspan="4">Нет данных</td>
                 </tr>
             @else
-                @for ($i = 0; $i < count($cities); $i++)
+                @foreach ($list as $content)
                     <tr>
-                        <td>{{$cities[$i]['ru_name']}}</td>
-                        <td>{{$cities[$i]['created_at']}}</td>
-                        <td>{{$cities[$i]['status'] ? "Включен" : "Отключен"}}</td>
+                        <td>{{$content['ru_name']}}</td>
+                        <td>{{$content['created_at']}}</td>
+                        <td>{{$content['status'] ? "Включен" : "Отключен"}}</td>
                         <td>
                             <div class="d-flex justify-content-end">
-                                <a href="/cities/edit/{{$cities[$i]['id']}}">
+                                <a href="/cities/edit/{{$content['id']}}">
                                     <i class="ti ti-pencil table-icon"></i>
                                 </a>
-                                <a href="/cities/status/{{$cities[$i]['id']}}">
+                                <a href="/cities/status/{{$content['id']}}">
                                     <i class="ti ti-ban table-icon"></i>
                                 </a>
-                                <a href="/cities/delete/{{$cities[$i]['id']}}">
+                                <a href="/cities/delete/{{$content['id']}}">
                                     <i class="ti ti-trash table-icon"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                @endfor
+                @endforeach
             @endif
         </tbody>
     </table>

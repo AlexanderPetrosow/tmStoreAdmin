@@ -16,32 +16,38 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($category) == 0)
+            @if(count($list) == 0)
                 <tr class="text-center fs-4 fw-bold">
                     <td colspan="5">Нет данных</td>
                 </tr>
             @else
-                @for ($i = 0; $i < count($category); $i++)
+                @php
+                    $i = 0;
+                @endphp
+                @foreach ($list as $content)
                     <tr>
-                        <td>{{$category[$i]['ru_name']}}</td>
-                        <td>{{$category[$i]['created_at']}}</td>
-                        <td>{{$category[$i]['status'] ? "Включен" : "Отключен"}}</td>
+                        <td>{{$content['ru_name']}}</td>
+                        <td>{{$content['created_at']}}</td>
+                        <td>{{$content['status'] ? "Включен" : "Отключен"}}</td>
                         <td>{{$department_name[$i] == '' ? "Нет" : $department_name[$i]}}</td>
                         <td>
                             <div class="d-flex justify-content-end">
-                                <a href="/categories/edit/{{$category[$i]['id']}}">
+                                <a href="/categories/edit/{{$content['id']}}">
                                     <i class="ti ti-pencil table-icon"></i>
                                 </a>
-                                <a href="/categories/status/{{$category[$i]['id']}}">
+                                <a href="/categories/status/{{$content['id']}}">
                                     <i class="ti ti-ban table-icon"></i>
                                 </a>
-                                <a href="/categories/delete/{{$category[$i]['id']}}">
+                                <a href="/categories/delete/{{$content['id']}}">
                                     <i class="ti ti-trash table-icon"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                @endfor
+                    @php
+                        $i++;
+                    @endphp
+                @endforeach
             @endif
         </tbody>
     </table>

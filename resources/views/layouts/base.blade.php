@@ -49,6 +49,9 @@
     ];
 @endphp
 <body>
+    <div class="loading bg-white vh-100 vw-100 position-fixed justify-content-center align-items-center" style="display: flex; z-index: 3">
+        <span class="loader"></span>
+    </div>
     <div class="w-100 " id="baseLayout">
         <div class="col-12" id="navbarContainer">
             <nav class="navbar navbar-expand-lg navbar-light ">
@@ -73,36 +76,11 @@
                                     </a>
                                 </li>
                                 @endforeach
-                                {{-- <li class="nav-item main-sidebar-menu-item">
-                                    <a class="nav-link" href="/categories">
-                                        <i class="ti ti-category"></i> Категория
+                                <li class="nav-item main-sidebar-menu-item">
+                                    <a href="/logout" class="nav-link">
+                                        <i class="ti ti-logout"></i>Выйти
                                     </a>
                                 </li>
-                                <li class="nav-item main-sidebar-menu-item">
-                                    <a class="nav-link" href="/advertisements">
-                                        <i class="ti ti-clipboard-text"></i> Объявления
-                                    </a>
-                                </li>
-                                <li class="nav-item main-sidebar-menu-item">
-                                    <a class="nav-link" href="/cities">
-                                        <i class="ti ti-map-pin"></i> Города
-                                    </a>
-                                </li>
-                                <li class="nav-item main-sidebar-menu-item">
-                                    <a class="nav-link" href="/banners">
-                                        <i class="ti ti-photo"></i> Баннеры
-                                    </a>
-                                </li>
-                                <li class="nav-item main-sidebar-menu-item">
-                                    <a class="nav-link" href="/news">
-                                        <i class="ti ti-news"></i> Новости
-                                    </a>
-                                </li>
-                                <li class="nav-item main-sidebar-menu-item">
-                                    <a class="nav-link" href="/chat">
-                                        <i class="ti ti-message-circle-2"></i> Чат с пользователем
-                                    </a>
-                                </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -122,36 +100,11 @@
                         </a>
                     </li>
                     @endforeach
-                    {{-- <li class="nav-item main-sidebar-menu-item">
-                        <a class="nav-link" href="/categories">
-                            <i class="ti ti-category"></i> Категория
+                    <li class="nav-item main-sidebar-menu-item">
+                        <a href="/logout" class="nav-link">
+                            <i class="ti ti-logout"></i>Выйти
                         </a>
                     </li>
-                    <li class="nav-item main-sidebar-menu-item">
-                        <a class="nav-link" href="/advertisements">
-                            <i class="ti ti-clipboard-text"></i> Объявления
-                        </a>
-                    </li>
-                    <li class="nav-item main-sidebar-menu-item">
-                        <a class="nav-link" href="/cities">
-                            <i class="ti ti-map-pin"></i> Города
-                        </a>
-                    </li>
-                    <li class="nav-item main-sidebar-menu-item">
-                        <a class="nav-link" href="/banners">
-                            <i class="ti ti-photo"></i> Баннеры
-                        </a>
-                    </li>
-                    <li class="nav-item main-sidebar-menu-item">
-                        <a class="nav-link" href="/news">
-                            <i class="ti ti-news"></i> Новости
-                        </a>
-                    </li>
-                    <li class="nav-item main-sidebar-menu-item">
-                        <a class="nav-link" href="/chat">
-                            <i class="ti ti-message-circle-2"></i> Чат с пользователем
-                        </a>
-                    </li> --}}
                 </ul>
             </div>
         </div>

@@ -31,7 +31,7 @@ $(document).ready(function () {
 		dropZone.removeClass('dragover');
 		let files = e.originalEvent.dataTransfer.files;
 		if ($(this).hasClass('oneImage') && $('.uploaded-image').length > 0) {
-			alert('В достигли максимально доступного количество изображений');
+			alert('Вы уже загрузили одно изображение.');
 		} else {
 			sendFiles(files);
 		}
@@ -124,7 +124,7 @@ $(document).ready(function () {
 			dots: false, // Показывать точки навигации
 			variableWidth: true,
 			prevArrow: "<div></div>",
-			nextArrow: "<i class='ti ti-chevron-right m-auto '></i>",
+			nextArrow: "<i class='ti ti-chevron-right m-auto'></i>",
 			responsive: [
 				{
 					breakpoints: 768,
