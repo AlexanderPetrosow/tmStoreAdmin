@@ -4,6 +4,7 @@
     @include('layouts.button', ['create' => true, 'route' => 'users'])
 @endsection
 @section('content')
+
     <table class="table">
         <thead>
             <tr>
@@ -35,6 +36,7 @@
                             <a href="/users/delete/{{$content['id']}}">
                                 <i class="ti ti-trash table-icon"></i>
                             </a>
+                            @if(isset($testo)){{$testo[0]['name']}}@endif
                         </div>
                     </td>
                 </tr>

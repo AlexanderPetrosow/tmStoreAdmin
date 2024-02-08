@@ -28,14 +28,15 @@ Route::get('/auth', function () {
         return view('auth');
     }
 });
-Route::post('/auth', $path . '\AdminController@auth');
-Route::get('/logout', $path . '\AdminController@logout');
+Route::post('/auth', $path . '\AllController@auth');
+Route::get('/logout', $path . '\AllController@logout');
 
 // Users
 Route::get('/users', function () {
     $users = Users::orderBy('updated_at', 'DESC')->get();
     return view('users.users', ['list'=>$users]);
 })->middleware('auth')->name('users');
+Route::post('/users', $path . '\AllController@search');
 Route::get('/users/add', function () {
     return view('users.edit');
 })->middleware('auth')->name('users');
@@ -62,6 +63,7 @@ Route::get('/categories', function () {
     }
     return view('categories.categories', ['list'=>$category, 'department_name'=>$department_name]);
 })->middleware('auth')->name('categories');
+Route::post('/categories', $path . '\AllController@search');
 Route::get('/categories/add', function () {
     $department = Category::where('parent', 0)->get();
     return view('categories.edit', ['department'=>$department, 'childCheck'=>0]);
@@ -86,6 +88,7 @@ Route::get('/categories/delete/{id}', $path . '\CategoryController@deleteCategor
 Route::get('/advertisements', function () {
     return view('advertisements.advertisements');
 })->middleware('auth')->name('advertisements');
+Route::post('/advertisements', $path . '\AllController@search');
 Route::get('/advertisements/add', function () {
     return view('advertisements.edit');
 })->middleware('auth')->name('advertisements');
@@ -97,16 +100,18 @@ Route::get('/advertisements/edit', function () {
 Route::get('/cities', function () {
     $cities = City::orderBy('updated_at', 'DESC')->get();
     $districts = District::all();
-    return view('locations.locations', ['list'=>$cities, 'districts'=>$districts]);
+    return view('cities.cities', ['list'=>$cities, 'districts'=>$districts]);
 })->middleware('auth')->name('cities');
+Route::post('/cities', $path . '\AllController@search');
 Route::get('/cities/add', function () {
-    return view('locations.edit');
+    $districts = District::all();
+    return view('cities.edit', ['districts'=>$districts]);
 })->middleware('auth')->name('cities');
 Route::post('/cities/add', $path . '\CitiesController@addCity');
 Route::get('/cities/edit/{id}', function ($id) {
     $cities = City::find($id);
     $districts = District::all();
-    return view('locations.edit', ['cities'=>$cities, 'districts'=>$districts]);
+    return view('cities.edit', ['cities'=>$cities, 'districts'=>$districts]);
 })->middleware('auth')->name('cities');
 Route::post('/cities/edit/{id}', $path . '\CitiesController@editCity');
 Route::get('/cities/status/{id}', $path . '\CitiesController@statusCity');
@@ -117,6 +122,7 @@ Route::get('/banners', function () {
     $banners = Banner::orderBy('updated_at', 'DESC')->get();
     return view('banners.banners', ['list'=>$banners]);
 })->middleware('auth')->name('banners');
+Route::post('/banners', $path . '\AllController@search');
 Route::get('/banners/add', function () {
     return view('banners.edit');
 })->middleware('auth')->name('banners');
@@ -134,6 +140,7 @@ Route::get('/news', function () {
     $news = News::orderBy('updated_at', 'DESC')->get();
     return view('news.news', ['list'=>$news]);
 })->middleware('auth')->name('news');
+Route::post('/news', $path . '\AllController@search');
 Route::get('/news/add', function () {
     return view('news.edit');
 })->middleware('auth')->name('news');
@@ -153,9 +160,6 @@ Route::get('/chat', function () {
 Route::get('/chat/edit', function () {
     return view('chat.edit');
 })->middleware('auth')->name('chat');
-
-// Search
-Route::post('/search', $path . '\AdminController@search');
 
 // Other
 Route::post('/fetch-files', $path . '\FileController@fetchFiles');

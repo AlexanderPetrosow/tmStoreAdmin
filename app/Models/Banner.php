@@ -9,5 +9,5 @@ class Banner extends Model
 {
     use HasFactory;
 
-    public $table = 'banner';
+    public $table = 'banners';
 }
