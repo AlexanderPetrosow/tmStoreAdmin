@@ -104,4 +104,16 @@ class AllController extends Controller
         }
         return view($req->type.'.'.$req->type, ['list'=>$res, 'department_name'=>$department_name]);
     }
+
+    function getSubCategory(Request $req){
+        $subCategories = Category::where('parent', $req->id)->get();
+        $json = json_encode($subCategories);
+        return $json;
+    }
+
+    function getCities(Request $req){
+        $cities = City::where('district', $req->id)->get();
+        $json = json_encode($cities);
+        return $json;
+    }
 }

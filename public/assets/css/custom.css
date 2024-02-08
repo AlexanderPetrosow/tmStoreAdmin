@@ -424,7 +424,9 @@ table {
 .category-option:hover p,
 .city-option:hover p,
 .category-option.selected p,
-.city-option.selected p {
+.city-option.selected p,
+.user-option:hover,
+.user-option.selected {
     color: #fff;
 }
 
@@ -487,7 +489,7 @@ table {
     border-radius: 10px;
     border: 1px solid #010057;
     outline: none;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
 }
 
 .uploaded-carousel {

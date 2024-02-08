@@ -7,12 +7,22 @@ $(document).ready(function () {
         $("#category-select-button").prop("disabled", true);
     });
 
+    // Category
     $(".category-option").click(function () {
-        if ($(this).data('category') == '') {
+        if ($(this).data('category') != '') {
             $(".category-option").removeClass("selected");
-            $(this).addClass("selected");
+            $(this).addClass("selectedCategory");
             $("#category-select-button").prop("disabled", false);
         }
+    });
+    $("#category-select-button").click(function () {
+
+        var selectedCategory = $(".selected").data("category");
+        $("#categoryModalButton").text(selectedCategory);
+        $("#categoryModalButton").attr("data-selected", selectedCategory);
+        $("#categoryModalButton").addClass("selected-text-color");
+        $('.categoryValue').val($(".selected").data("value"));
+        // $(".category-option").removeClass("selected"); 
     });
 
 
@@ -22,8 +32,8 @@ $(document).ready(function () {
         $("#user-select-button").prop("disabled", true);
     });
     $(".user-option").click(function () {
-        $(".user-option").removeClass("selected");
-        $(this).addClass("selected");
+        $(".user-option").removeClass("selectedUser");
+        $(this).addClass("selectedUser");
         $("#user-select-button").prop("disabled", false);
     });
 
@@ -35,8 +45,8 @@ $(document).ready(function () {
     });
     $(".city-option").click(function () {
         if ($(this).data('district') == "") {
-            $(".city-option").removeClass("selected");
-            $(this).addClass("selected");
+            $(".city-option").removeClass("selectedCities");
+            $(this).addClass("selectedCities");
             $("#city-select-button").prop("disabled", false);
         }
 
@@ -68,36 +78,26 @@ $(document).ready(function () {
         $(this).addClass("selected");
     });
 
-
-    $("#category-select-button").click(function () {
-
-        var selectedCategory = $(".selected").data("name");
-        $("#categoryModalButton").text(selectedCategory);
-        $("#categoryModalButton").attr("data-selected", selectedCategory);
-        $("#categoryModalButton").addClass("selected-text-color");
-        $('.categoryValue').val($(".selected").data("name"));
-        // $(".category-option").removeClass("selected"); 
-    });
     $("#user-select-button").click(function () {
-        var selectedUser = $(".selected").data("value");
+        var selectedUser = $('.selectedUser').data("name");
         $("#userModalButton").text(selectedUser);
         $("#userModalButton").attr("data-selected", selectedUser);
         $("#userModalButton").addClass("selected-text-color");
-        $(".user-option").removeClass("selected");
-        $('.user').val(selectedUser);
+        $('.userValue').val($(this).data("value"));
+        $(".user-option").removeClass("selectedUser");
     });
     $("#city-select-button").prop("disabled", true);
 
     $("#city-select-button").click(function () {
-        var selectedCity = $(".selected").data("name");
+        var selectedCity = $(".selectedCities").data("name");
         $("#cityModalButton").text(selectedCity);
         $("#cityModalButton").attr("data-selected", selectedCity);
         $("#cityModalButton").addClass("selected-text-color");
-        $(".city-option").val(".selected").data("name");
-        $('.cityValue').val(selectedCity);
+        $(".city-option").val(".selectedCities").data("name");
+        $('.cityValue').val($(".selectedCities").data("value"));
     });
     $("#icon-select-button").click(function () {
-        var selectedIcon = $(".selected").data("value");
+        var selectedIcon = $(this).data("value");
         $("#iconModalButton").text(selectedIcon);
         $("#iconModalButton").attr("data-selected", selectedIcon);
         $("#iconModalButton").addClass("selected-text-color");
@@ -110,7 +110,6 @@ $(document).ready(function () {
     $(".status-option").click(function () {
         var selectedStatus = $(this).data("value");
         var accordionButton = $("#statusAccordion").find(".accordion-button");
-
         accordionButton.text(selectedStatus);
         accordionButton.css("color", "#2b2b35");
         accordionButton.trigger("click");
@@ -234,68 +233,96 @@ $(document).ready(function () {
 
 });
 
-$('#goToSub').click(function () {
+$('.goToSub').click(function () {
     var categParent = $(this).parent().data('category');
-    console.log(categParent);
-    if (categParent == 'cars') {
-        $('.category-body').fadeOut();
-        $('.sub-category-body').fadeIn();
+    // console.log(categParent);
+    // if (categParent == '2') {
+        $('.category-body').fadeOut(10);
+        $('.sub-category-body').fadeIn(10);
         $('.sub-category-body').removeClass('d-none');
-        $('.sub-category-body').html('<div class="back-to-categ-btn" style="margin-left:20px;cursor:pointer"><i class="ti ti-chevron-left"></i></div><p class="category-option" data-name="Мазда Мията">Мазда Мията</p><p class="category-option" data-name="Форд Фокус">Форд Фокус</p>');
-        $("#category-select-button").prop("disabled", true)
-        $(".category-option").click(function () {
-            $(".category-option").removeClass("selected");
-            $(this).addClass("selected");
-            $("#category-select-button").prop("disabled", false);
+        $.ajax({
+            type: 'POST',
+            url: "/getSubCategory",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
+            data: { id: categParent },
+            dataType: 'json',
+            success: function(sub){
+                let subContent = '<div class="back-to-categ-btn" style="margin-left:20px;cursor:pointer"><i class="ti ti-chevron-left"></i></div>';
+                console.log(sub);
+                sub.forEach(s => {
+                    subContent += '<p class="category-option" data-value="'+s['id']+'" data-name="'+s['ru_name']+'">'+s['ru_name']+'</p>';
+                });
+                $('.sub-category-body').html(subContent);
+                $("#category-select-button").prop("disabled", true)
+                $(".category-option").click(function () {
+                    $(".category-option").removeClass("selected");
+                    $(this).addClass("selected");
+                    $("#category-select-button").prop("disabled", false);
+                });
+
+                $("#category-select-button").click(function () {
+                    var selectedCategory = $(".selected").data("name");
+                    $("#categoryModalButton").text(selectedCategory);
+                    $("#categoryModalButton").attr("data-selected", selectedCategory);
+                    $("#categoryModalButton").addClass("selected-text-color");
+                    $('.categoryValue').val($(".selected").data("value"));
+                    $('.sub-category-body').addClass('d-none');
+                    $('.category-body').fadeIn(10);
+                    $('.sub-category-body').fadeOut(10);
+                });
+                $('.back-to-categ-btn').click(function () {
+                    $('.sub-category-body').addClass('d-none');
+                    $('.category-body').fadeIn(10);
+                    $('.sub-category-body').fadeOut(10);
+                });
+            }
         });
-        $("#category-select-button").click(function () {
-            var selectedCategory = $(".selected").data("name");
-            $("#categoryModalButton").text(selectedCategory);
-            $("#categoryModalButton").attr("data-selected", selectedCategory);
-            $("#categoryModalButton").addClass("selected-text-color");
-            $('.categoryValue').val($(".selected").data("value"));
-            $('.sub-category-body').addClass('d-none');
-            $('.category-body').fadeIn();
-            $('.sub-category-body').fadeOut();
-        });
-        $('.back-to-categ-btn').click(function () {
-            $('.sub-category-body').addClass('d-none');
-            $('.category-body').fadeIn();
-            $('.sub-category-body').fadeOut();
-        });
-    }
+    // }
 });
 
-$('#goToCity').click(function () {
+$('.goToCity').click(function () {
     var district = $(this).parent().data('district');
-    console.log(district);
-    if (district == 'ashabat') {
-        $('.district-body').fadeOut();
-        $('.city-body').fadeIn();
+    // console.log(district);
+    // if (district == 'ashabat') {
+        $('.district-body').fadeOut(10);
+        $('.city-body').fadeIn(10);
         $('.city-body').removeClass('d-none');
-        $('.city-body').html('<div class="back-to-district-btn" style="margin-left:20px;cursor:pointer"><i class="ti ti-chevron-left"></i></div><p class="city-option" data-name="Анау">Анау</p><p class="city-option" data-name="Теджен">Теджен</p>');
-        $("#city-select-button").prop("disabled", true)
-        $(".city-option").click(function () {
-            $(".city-option").removeClass("selected");
-            $(this).addClass("selected");
-            $("#city-select-button").prop("disabled", false);
+        $.ajax({
+            type: 'POST',
+            url: "/getCities",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
+            data: { id: district },
+            dataType: 'json',
+            success: function(cities){
+                let cityContent = '<div class="back-to-district-btn" style="margin-left:20px;cursor:pointer"><i class="ti ti-chevron-left"></i></div>';
+                cities.forEach(cc => {
+                    cityContent += '<p class="city-option" data-value="'+cc['id']+'" data-name="'+cc['ru_name']+'">'+cc['ru_name']+'</p>';
+                });
+                $('.city-body').html(cityContent);
+                $("#city-select-button").prop("disabled", true)
+                $(".city-option").click(function () {
+                    $(".city-option").removeClass("selected");
+                    $(this).addClass("selected");
+                    $("#city-select-button").prop("disabled", false);
+                });
+                $("#city-select-button").click(function () {
+                    var selectedCity = $(".selected").data("name");
+                    $("#cityModalButton").text(selectedCity);
+                    $("#cityModalButton").attr("data-selected", selectedCity);
+                    $("#cityModalButton").addClass("selected-text-color");
+                    $('.cityValue').val($(".selected").data("value"));
+                    $('.city-body').addClass('d-none');
+                    $('.district-body').fadeIn(10);
+                    $('.city-body').fadeOut(10);
+                });
+                $('.back-to-district-btn').click(function () {
+                    $('.city-body').addClass('d-none');
+                    $('.district-body').fadeIn(10);
+                    $('.city-body').fadeOut(10);
+                });
+            }
         });
-        $("#city-select-button").click(function () {
-            var selectedCity = $(".selected").data("name");
-            $("#cityModalButton").text(selectedCity);
-            $("#cityModalButton").attr("data-selected", selectedCity);
-            $("#cityModalButton").addClass("selected-text-color");
-            $('.cityValue').val($(".selected").data("value"));
-            $('.city-body').addClass('d-none');
-            $('.district-body').fadeIn();
-            $('.city-body').fadeOut();
-        });
-        $('.back-to-district-btn').click(function () {
-            $('.city-body').addClass('d-none');
-            $('.district-body').fadeIn();
-            $('.city-body').fadeOut();
-        });
-    }
+    // }
 });
 
 

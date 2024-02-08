@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Advertisements;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Users;
@@ -86,15 +87,43 @@ Route::get('/categories/delete/{id}', $path . '\CategoryController@deleteCategor
 
 // Advertisements
 Route::get('/advertisements', function () {
-    return view('advertisements.advertisements');
+    $advertisements = Advertisements::orderBy('updated_at', 'DESC')->get();
+    return view('advertisements.advertisements', ['list'=>$advertisements]);
 })->middleware('auth')->name('advertisements');
 Route::post('/advertisements', $path . '\AllController@search');
 Route::get('/advertisements/add', function () {
+    $category = Category::orderBy('updated_at', 'DESC')->get();
+    $departments = array();
+    foreach ($category as $categ) {
+        if($categ['parent'] != 0){    
+            $cat = Category::find($categ['parent']);
+            $departments[] = $cat;
+        } else {
+            $departments[] = [];
+        }
+    }
+    // - - - -
+    $cities = City::orderBy('updated_at', 'DESC')->get();
+    $districts = array();
+    foreach ($cities as $city) {
+        if($city['district'] != 0){    
+            $dist = District::find($city['district']);
+            $districts[] = $dist;
+        } else {
+            $districts[] = [];
+        }
+    }
+    // - - - -
+    $users = Users::all();
+    return view('advertisements.edit', ['department'=>$departments, 'district'=>$districts, 'users'=>$users]);
+})->middleware('auth')->name('advertisements');
+Route::post('/advertisements/add', $path . '\AdvertisementsController@addAdvertisements');
+Route::get('/advertisements/edit/{id}', function ($id) {
     return view('advertisements.edit');
 })->middleware('auth')->name('advertisements');
-Route::get('/advertisements/edit', function () {
-    return view('advertisements.edit');
-})->middleware('auth')->name('advertisements');
+Route::post('/advertisements/edit/{id}', $path . '\AdvertisementsController@editAdvertisements');
+Route::get('/advertisements/status/{id}', $path . '\AdvertisementsController@statusAdvertisements');
+Route::get('/advertisements/delete/{id}', $path . '\AdvertisementsController@deleteAdvertisements');
 
 // Cities
 Route::get('/cities', function () {
@@ -160,6 +189,10 @@ Route::get('/chat', function () {
 Route::get('/chat/edit', function () {
     return view('chat.edit');
 })->middleware('auth')->name('chat');
+
+// Ajax
+Route::post('/getSubCategory', $path . '\AllController@getSubCategory');
+Route::post('/getCities', $path . '\AllController@getCities');
 
 // Other
 Route::post('/fetch-files', $path . '\FileController@fetchFiles');

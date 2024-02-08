@@ -65,7 +65,7 @@ $(document).ready(function () {
 								slide.find('.delete-slide-button').on('click', function () {
 									var currentSlide = $(this).closest('.slick-slide');
 									$('.uploaded-carousel').slick('slickRemove', currentSlide.index());
-								});puis
+								});
 
 								if ($('#upload-container').hasClass('adverts-img')) {
 									$('.uploaded-image').click(function () {
@@ -75,7 +75,7 @@ $(document).ready(function () {
 
 										$(this).addClass('highlight');
 										$(this).parent().append('<div class="main-photo-icon"><i class="ti ti-home"></i></div>');
-										$(this).parent().append('<input type="hidden" class="main-image-hidden" name="main_image" value="' + e.target.result + '">');
+										$(this).parent().append('<input type="hidden" class="main-image-hidden" name="main_image[]" value="' + e.target.result + '">');
 									});
 								}
 							};

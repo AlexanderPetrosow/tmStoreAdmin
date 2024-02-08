@@ -51,7 +51,7 @@
                                     @foreach ($department as $depart)
                                         @if(isset($category))
                                             @if($depart['id'] != $category['id'])
-                                                <p class="category-option" data-name="{{$depart['ru_name']}}" data-value="{{$depart['id']}}">{{$depart['ru_name']}}</p>
+                                                <p class="category-option" data-category="{{$depart['ru_name']}}" data-value="{{$depart['id']}}">{{$depart['ru_name']}}</p>
                                             @endif
                                         @endif
                                     @endforeach
