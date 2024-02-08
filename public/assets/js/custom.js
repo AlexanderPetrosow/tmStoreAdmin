@@ -78,6 +78,17 @@ $(document).ready(function () {
         $(this).addClass("selected");
     });
 
+
+    $("#category-select-button").click(function () {
+       
+        var selectedCategory = $(".category-option.selected").data("name");
+        $("#categoryModalButton").text(selectedCategory);
+        $("#categoryModalButton").attr("data-selected", selectedCategory);
+        $("#categoryModalButton").addClass("selected-text-color");
+        $('.categoryValue').val($(".selected").data("name"));
+        // $(".category-option").removeClass("selected"); 
+       
+    });
     $("#user-select-button").click(function () {
         var selectedUser = $(".selectedUser").data("name");
         $("#userModalButton").text(selectedUser);
