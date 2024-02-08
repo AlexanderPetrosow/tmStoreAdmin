@@ -11,7 +11,7 @@ $(document).ready(function () {
     $(".category-option").click(function () {
         if ($(this).data('category') != '') {
             $(".category-option").removeClass("selected");
-            $(this).addClass("selectedCategory");
+            $(this).addClass("selected");
             $("#category-select-button").prop("disabled", false);
         }
     });
@@ -45,8 +45,8 @@ $(document).ready(function () {
     });
     $(".city-option").click(function () {
         if ($(this).data('district') == "") {
-            $(".city-option").removeClass("selectedCities");
-            $(this).addClass("selectedCities");
+            $(".city-option").removeClass("selected");
+            $(this).addClass("selected");
             $("#city-select-button").prop("disabled", false);
         }
 
@@ -79,25 +79,25 @@ $(document).ready(function () {
     });
 
     $("#user-select-button").click(function () {
-        var selectedUser = $('.selectedUser').data("name");
+        var selectedUser = $(".selectedUser").data("name");
         $("#userModalButton").text(selectedUser);
         $("#userModalButton").attr("data-selected", selectedUser);
         $("#userModalButton").addClass("selected-text-color");
-        $('.userValue').val($(this).data("value"));
+        $('.userValue').val($(".selectedUser").data("value"));
         $(".user-option").removeClass("selectedUser");
     });
     $("#city-select-button").prop("disabled", true);
 
     $("#city-select-button").click(function () {
-        var selectedCity = $(".selectedCities").data("name");
+        var selectedCity = $(".selected").data("name");
         $("#cityModalButton").text(selectedCity);
         $("#cityModalButton").attr("data-selected", selectedCity);
         $("#cityModalButton").addClass("selected-text-color");
-        $(".city-option").val(".selectedCities").data("name");
-        $('.cityValue').val($(".selectedCities").data("value"));
+        $(".city-option").val(".selected").data("name");
+        $('.cityValue').val(selectedCity);
     });
     $("#icon-select-button").click(function () {
-        var selectedIcon = $(this).data("value");
+        var selectedIcon = $(".selected").data("value");
         $("#iconModalButton").text(selectedIcon);
         $("#iconModalButton").attr("data-selected", selectedIcon);
         $("#iconModalButton").addClass("selected-text-color");
@@ -108,21 +108,21 @@ $(document).ready(function () {
 
 
     $(".status-option").click(function () {
-        var selectedStatus = $(this).data("value");
+        var selectedStatus = $(this).data("name");
         var accordionButton = $("#statusAccordion").find(".accordion-button");
         accordionButton.text(selectedStatus);
         accordionButton.css("color", "#2b2b35");
         accordionButton.trigger("click");
-        $('.statusValue').val(selectedStatus);
+        $('.statusValue').val($(this).data("value"));
     });
 
     $(".vip-status-option").click(function () {
-        var selectedVipStatus = $(this).data("value");
+        var selectedVipStatus = $(this).data("name");
         var accordionButton = $("#vipStatusAccordion").find(".accordion-button");
         accordionButton.text(selectedVipStatus);
         accordionButton.css("color", "#2b2b35");
         accordionButton.trigger("click");
-        $('.vipStatusValue').val(selectedVipStatus);
+        $('.vipStatusValue').val($(this).data("value"));
     });
 
     $(".district-option").click(function () {
@@ -255,17 +255,17 @@ $('.goToSub').click(function () {
                 $('.sub-category-body').html(subContent);
                 $("#category-select-button").prop("disabled", true)
                 $(".category-option").click(function () {
-                    $(".category-option").removeClass("selected");
-                    $(this).addClass("selected");
+                    $(".category-option").removeClass("selectedCategory");
+                    $(this).addClass("selectedCategory");
                     $("#category-select-button").prop("disabled", false);
                 });
 
                 $("#category-select-button").click(function () {
-                    var selectedCategory = $(".selected").data("name");
+                    var selectedCategory = $(".selectedCategory").data("name");
                     $("#categoryModalButton").text(selectedCategory);
                     $("#categoryModalButton").attr("data-selected", selectedCategory);
                     $("#categoryModalButton").addClass("selected-text-color");
-                    $('.categoryValue').val($(".selected").data("value"));
+                    $('.categoryValue').val($(".selectedCategory").data("value"));
                     $('.sub-category-body').addClass('d-none');
                     $('.category-body').fadeIn(10);
                     $('.sub-category-body').fadeOut(10);
@@ -301,16 +301,16 @@ $('.goToCity').click(function () {
                 $('.city-body').html(cityContent);
                 $("#city-select-button").prop("disabled", true)
                 $(".city-option").click(function () {
-                    $(".city-option").removeClass("selected");
-                    $(this).addClass("selected");
+                    $(".city-option").removeClass("selectedCity");
+                    $(this).addClass("selectedCity");
                     $("#city-select-button").prop("disabled", false);
                 });
                 $("#city-select-button").click(function () {
-                    var selectedCity = $(".selected").data("name");
+                    var selectedCity = $(".selectedCity").data("name");
                     $("#cityModalButton").text(selectedCity);
                     $("#cityModalButton").attr("data-selected", selectedCity);
                     $("#cityModalButton").addClass("selected-text-color");
-                    $('.cityValue').val($(".selected").data("value"));
+                    $('.cityValue').val($(".selectedCity").data("value"));
                     $('.city-body').addClass('d-none');
                     $('.district-body').fadeIn(10);
                     $('.city-body').fadeOut(10);
@@ -325,8 +325,48 @@ $('.goToCity').click(function () {
     // }
 });
 
+$('.user_search').on('input', function(e){
+    $.ajax({
+        type: 'POST',
+        url: "/getUsers",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="token"]').attr('content') },
+        data: { search: e.target.value },
+        dataType: 'json',
+        success: function(user){
+            let userContent = '';
+            user.forEach(u => {
+                userContent += '<p class="user-option" data-value="'+u['id']+'" data-name="'+u['name']+'">'+u['name']+'</p>';
+            });
+            $('.users_list').html(userContent);
+            $(".user-option").click(function () {
+                $(".user-option").removeClass("selectedUser");
+                $(this).addClass("selectedUser");
+                $("#user-select-button").prop("disabled", false);
+            });
+            $("#user-select-button").click(function () {
+                var selectedUser = $(".selectedUser").data("name");
+                $("#userModalButton").text(selectedUser);
+                $("#userModalButton").attr("data-selected", selectedUser);
+                $("#userModalButton").addClass("selected-text-color");
+                $('.userValue').val($(".selectedUser").data("value"));
+                $(".user-option").removeClass("selectedUser");
+            });
+        }
+    });
+    // console.log(e.target.value);
+});
 
+$('.date_vip').val($('.date_vips').val());
+$('.sucureCheckBox').click(function(){
+    if($(this).attr('checked') != undefined){
+        $('.sucureCheckBox').removeAttr('checked', 'checked');
+        $('.secureStatus').val('0');
+    } else {
+        $('.sucureCheckBox').attr('checked', 'checked');
+        $('.secureStatus').val('1');
+    }
+});
 
-
-
-
+$('.old_image').click(function(){
+    $(this).parent().parent().append('<input type="hidden" name="removeImage[]" value="'+$(this).attr('link')+'">');
+});

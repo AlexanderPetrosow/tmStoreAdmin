@@ -511,6 +511,7 @@ table {
 #upload-container div {
     position: relative;
     z-index: 10;
+    padding: 0 0.15rem;
 }
 
 #upload-container input[type="file"] {

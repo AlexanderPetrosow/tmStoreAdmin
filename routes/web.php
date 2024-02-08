@@ -9,6 +9,7 @@ use App\Models\City;
 use App\Models\District;
 use App\Models\Banner;
 use App\Models\News;
+use App\Models\Images;
 
 $path = 'App\Http\Controllers';
 
@@ -119,7 +120,35 @@ Route::get('/advertisements/add', function () {
 })->middleware('auth')->name('advertisements');
 Route::post('/advertisements/add', $path . '\AdvertisementsController@addAdvertisements');
 Route::get('/advertisements/edit/{id}', function ($id) {
-    return view('advertisements.edit');
+    $category = Category::orderBy('updated_at', 'DESC')->get();
+    $departments = array();
+    foreach ($category as $categ) {
+        if($categ['parent'] != 0){    
+            $cat = Category::find($categ['parent']);
+            $departments[] = $cat;
+        } else {
+            $departments[] = [];
+        }
+    }
+    // - - - -
+    $cities = City::orderBy('updated_at', 'DESC')->get();
+    $districts = array();
+    foreach ($cities as $city) {
+        if($city['district'] != 0){    
+            $dist = District::find($city['district']);
+            $districts[] = $dist;
+        } else {
+            $districts[] = [];
+        }
+    }
+    // - - - -
+    $users = Users::all();
+    $advert = Advertisements::find($id);
+    $category_name = Category::find($advert['category_id']);
+    $city_name = City::find($advert['city_id']);
+    $user_name = Users::find($advert['user_id']);
+    $images = Images::where('advertisements_id', $id)->get();
+    return view('advertisements.edit', ['advert'=>$advert, 'department'=>$departments, 'category_name'=>$category_name, 'district'=>$districts, 'city_name'=>$city_name, 'users'=>$users, 'user_name'=>$user_name, 'images'=>$images]);
 })->middleware('auth')->name('advertisements');
 Route::post('/advertisements/edit/{id}', $path . '\AdvertisementsController@editAdvertisements');
 Route::get('/advertisements/status/{id}', $path . '\AdvertisementsController@statusAdvertisements');
@@ -193,6 +222,7 @@ Route::get('/chat/edit', function () {
 // Ajax
 Route::post('/getSubCategory', $path . '\AllController@getSubCategory');
 Route::post('/getCities', $path . '\AllController@getCities');
+Route::post('/getUsers', $path . '\AllController@getUsers');
 
 // Other
 Route::post('/fetch-files', $path . '\FileController@fetchFiles');

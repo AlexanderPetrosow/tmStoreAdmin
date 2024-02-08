@@ -116,4 +116,9 @@ class AllController extends Controller
         $json = json_encode($cities);
         return $json;
     }
+    function getUsers(Request $req){
+        $users = Users::where('name', 'like', '%' . $req->search . '%')->orderBy('updated_at', 'DESC')->get();
+        $json = json_encode($users);
+        return $json;
+    }
 }

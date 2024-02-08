@@ -53,6 +53,8 @@
                                             @if($depart['id'] != $category['id'])
                                                 <p class="category-option" data-category="{{$depart['ru_name']}}" data-value="{{$depart['id']}}">{{$depart['ru_name']}}</p>
                                             @endif
+                                        @else   
+                                            <p class="category-option" data-category="{{$depart['ru_name']}}" data-value="{{$depart['id']}}">{{$depart['ru_name']}}</p>
                                         @endif
                                     @endforeach
                                 </div>
