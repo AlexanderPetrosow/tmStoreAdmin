@@ -1,13 +1,13 @@
 @if (isset($create))
     @if ($create)
         <div class="d-flex justify-content-end">
-            <form method="POST" action="/search">
+            {{-- <form method="POST" action="/search"> --}}
                 @csrf
                 <div class="search-input">
                     <input type="text" name="search" placeholder="Поиск">
                     <button type="submit" class="btn search-button"><i class="ti ti-search"></i></button>
                 </div>
-            </form>
+            {{-- </form> --}}
             <a href="/{{ $route }}/add">
                 <button type="button" class="btn btn-primary  create-button m-auto text-center">
                     Создать<i class="ti ti-plus m-auto pl-1"></i>

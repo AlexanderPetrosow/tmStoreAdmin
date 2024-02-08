@@ -31,7 +31,7 @@
                                 <p class="" >Недвижимость</p>
                             </div>
                             <div class="d-flex justify-content-between cat" data-category="cars">
-                                <p class="category-option" data-name="Автомобили">Автомобили</p>
+                                <p class="" data-name="Автомобили">Автомобили</p>
                                 <button type="button" id="goToSub" class="btn">
                                     <i class="ti ti-chevron-right my-auto"></i>
                                 </button>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="modal-body district-body">
                         <div class="d-flex justify-content-between cat" data-district="ashabat" data-name="Ашхабад">
-                            <p class="city-option" data-value="Ашхабад">Ашхабад</p>
+                            <p class="" data-value="Ашхабад">Ашхабад</p>
                             <button type="button" id="goToCity" class="btn">
                                 <i class="ti ti-chevron-right my-auto"></i>
                             </button>
@@ -132,7 +132,7 @@
     <div class="input-group-flex  mb-4">
         <div class="input-label-col">
             <label for="name">Пользователь</label>
-            <button class="modal-button" data-bs-toggle="modal" data-bs-target="#userModal"
+            <button type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#userModal"
                 id="userModalButton">Выберите пользователя</button>
             <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalTitle"
                 aria-hidden="true">

@@ -70,16 +70,17 @@ $(document).ready(function () {
 
 
     $("#category-select-button").click(function () {
-
-        var selectedCategory = $(".selected").data("name");
+       
+        var selectedCategory = $(".category-option.selected").data("name");
         $("#categoryModalButton").text(selectedCategory);
         $("#categoryModalButton").attr("data-selected", selectedCategory);
         $("#categoryModalButton").addClass("selected-text-color");
         $('.categoryValue').val($(".selected").data("name"));
         // $(".category-option").removeClass("selected"); 
+       
     });
     $("#user-select-button").click(function () {
-        var selectedUser = $(".selected").data("value");
+        var selectedUser = $(".user-option.selected").data("value");
         $("#userModalButton").text(selectedUser);
         $("#userModalButton").attr("data-selected", selectedUser);
         $("#userModalButton").addClass("selected-text-color");
@@ -89,7 +90,7 @@ $(document).ready(function () {
     $("#city-select-button").prop("disabled", true);
 
     $("#city-select-button").click(function () {
-        var selectedCity = $(".selected").data("name");
+        var selectedCity = $(".city-option.selected").data("name");
         $("#cityModalButton").text(selectedCity);
         $("#cityModalButton").attr("data-selected", selectedCity);
         $("#cityModalButton").addClass("selected-text-color");
@@ -97,7 +98,7 @@ $(document).ready(function () {
         $('.cityValue').val(selectedCity);
     });
     $("#icon-select-button").click(function () {
-        var selectedIcon = $(".selected").data("value");
+        var selectedIcon = $(".icon-option.selected").data("value");
         $("#iconModalButton").text(selectedIcon);
         $("#iconModalButton").attr("data-selected", selectedIcon);
         $("#iconModalButton").addClass("selected-text-color");
