@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Advertisements;
 use App\Models\Images;
+use Image;
 
 class AdvertisementsController extends Controller
 {
@@ -39,7 +40,14 @@ class AdvertisementsController extends Controller
             $img = $req->main_image;
             $ext = explode('/', mime_content_type($img[0]))[1];
             $imageName = uniqid().'.'.$ext;
-            Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $img[0])));
+            // $image = Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $img[0])));
+            $image = Image::make(base64_decode(str_replace('data:image/'.$ext.';base64,', '', $img[0])));
+            $watermark = Image::make('assets/images/watermark.png');
+            $image->insert($watermark, 'bottom-right', 10, 10);
+            $image->insert($watermark, 'bottom-left', 10, 10);
+            $image->insert($watermark, 'top-right', 10, 10);
+            $image->insert($watermark, 'top-left', 10, 10);
+            $image->insert($watermark, 'center', 0, 0);
             $advertisements->main_image = 'advertisements/'.$imageName;
         }
         if(isset($req->secure)){

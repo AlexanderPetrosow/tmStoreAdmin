@@ -123,7 +123,7 @@ Route::get('/advertisements/edit/{id}', function ($id) {
     $category = Category::orderBy('updated_at', 'DESC')->get();
     $departments = array();
     foreach ($category as $categ) {
-        if($categ['parent'] != 0){    
+        if($categ['parent'] == 0){    
             $cat = Category::find($categ['parent']);
             $departments[] = $cat;
         } else {

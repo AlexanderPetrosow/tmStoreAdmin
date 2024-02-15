@@ -46,7 +46,7 @@ class BannerController extends Controller
         $banner->name = $req->name;
 
         // Save image (base64)
-        if($req->images){
+        if(isset($req->images)){
             $img = $req->images;
             $ext = explode('/', mime_content_type($img[0]))[1];
             $imageName = uniqid().'.'.$ext;
@@ -54,13 +54,13 @@ class BannerController extends Controller
             $banner->image = 'banner/'.$imageName;
         }
         
-        if($req->status_main){
+        if(isset($req->status_main)){
             $banner->status_main = $req->status_main;
         }
-        if($req->status_category){
+        if(isset($req->status_category)){
             $banner->status_category = $req->status_category;
         }
-        if($req->status_advert){
+        if(isset($req->status_advert)){
             $banner->status_advert = $req->status_advert;
         }
         $banner->save();

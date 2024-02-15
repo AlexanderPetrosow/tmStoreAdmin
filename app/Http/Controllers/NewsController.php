@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\News;
+use Image;
 
 class NewsController extends Controller
 {
@@ -29,6 +30,18 @@ class NewsController extends Controller
         $ext = explode('/', mime_content_type($img[0]))[1];
         $imageName = uniqid().'.'.$ext;
         Storage::put('news/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $img[0])));
+
+        $image = Image::make('storage/news/'.$imageName);
+        $watermark = Image::make('assets/images/watermark.png');
+        $watermark->resize($image->width() / 6, $image->height() / 6);
+        $watermark->rotate(-45);
+        $image->insert($watermark, 'bottom-right', 10, 10);
+        $image->insert($watermark, 'bottom-left', 10, 10);
+        $image->insert($watermark, 'top-right', 10, 10);
+        $image->insert($watermark, 'top-left', 10, 10);
+        $image->insert($watermark, 'center', 0, 0);
+        $image->save('storage/news/'.$imageName);
+
         $news->image = 'news/'.$imageName;
 
         $news->save();
@@ -59,6 +72,18 @@ class NewsController extends Controller
                 $ext = explode('/', mime_content_type($img[0]))[1];
                 $imageName = uniqid().'.'.$ext;
                 Storage::put('news/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $img[0])));
+
+                $image = Image::make('storage/news/'.$imageName);
+                $watermark = Image::make('assets/images/watermark.png');
+                $watermark->resize($image->width() / 6, $image->height() / 6);
+                $watermark->rotate(-45);
+                $image->insert($watermark, 'bottom-right', 10, 10);
+                $image->insert($watermark, 'bottom-left', 10, 10);
+                $image->insert($watermark, 'top-right', 10, 10);
+                $image->insert($watermark, 'top-left', 10, 10);
+                $image->insert($watermark, 'center', 0, 0);
+                $image->save('storage/news/'.$imageName);
+
                 $news->image = 'news/'.$imageName;
             }
         }
