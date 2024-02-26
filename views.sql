@@ -1,0 +1,4 @@
+-- - - - - - - - - - - - - -
+-- - Advertisements_detail -
+-- - - - - - - - - - - - - -
+SELECT *, (SELECT ru_name FROM `cities` WHERE `cities`.id = `advertisements`.city_id) as ru_city, (SELECT tm_name FROM `cities` WHERE `cities`.id = `advertisements`.city_id) as tm_city, (SELECT ru_name FROM `categories` WHERE `categories`.`id` = `advertisements`.`category_id`) as ru_category, (SELECT tm_name FROM `categories` WHERE `categories`.`id` = `advertisements`.`category_id`) as tm_category, (SELECT parent FROM `categories` WHERE `categories`.`id` = `advertisements`.`category_id`) as department_id FROM `advertisements`;

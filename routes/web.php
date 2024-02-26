@@ -3,6 +3,7 @@
 use App\Models\Advertisements;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use App\Models\Users;
 use App\Models\Category;
 use App\Models\City;
@@ -35,7 +36,8 @@ Route::get('/logout', $path . '\AllController@logout');
 
 // Users
 Route::get('/users', function () {
-    $users = Users::orderBy('updated_at', 'DESC')->get();
+    Paginator::useBootstrap();
+    $users = Users::orderBy('updated_at', 'DESC')->paginate(6);
     return view('users.users', ['list'=>$users]);
 })->middleware('auth')->name('users');
 Route::post('/users', $path . '\AllController@search');
@@ -53,7 +55,8 @@ Route::get('/users/delete/{id}', $path . '\UsersController@deleteUser');
 
 // Categories
 Route::get('/categories', function () {
-    $category = Category::orderBy('updated_at', 'DESC')->get();
+    Paginator::useBootstrap();
+    $category = Category::orderBy('updated_at', 'DESC')->paginate(6);
     $department_name = array();
     foreach ($category as $categ) {
         if($categ['parent'] != 0){    
@@ -88,59 +91,33 @@ Route::get('/categories/delete/{id}', $path . '\CategoryController@deleteCategor
 
 // Advertisements
 Route::get('/advertisements', function () {
-    $advertisements = Advertisements::orderBy('updated_at', 'DESC')->get();
+    Paginator::useBootstrap();
+    $advertisements = Advertisements::orderBy('updated_at', 'DESC')->paginate(6);
     return view('advertisements.advertisements', ['list'=>$advertisements]);
 })->middleware('auth')->name('advertisements');
 Route::post('/advertisements', $path . '\AllController@search');
 Route::get('/advertisements/add', function () {
-    $category = Category::orderBy('updated_at', 'DESC')->get();
-    $departments = array();
-    foreach ($category as $categ) {
-        if($categ['parent'] != 0){    
-            $cat = Category::find($categ['parent']);
-            $departments[] = $cat;
-        } else {
-            $departments[] = [];
-        }
-    }
+    $departments = Category::where('parent', 0)->orderBy('updated_at', 'DESC')->get();
     // - - - -
-    $cities = City::orderBy('updated_at', 'DESC')->get();
-    $districts = array();
-    foreach ($cities as $city) {
-        if($city['district'] != 0){    
-            $dist = District::find($city['district']);
-            $districts[] = $dist;
-        } else {
-            $districts[] = [];
-        }
-    }
+    // $cities = City::orderBy('updated_at', 'DESC')->get();
+    $districts = City::join('district', 'district.id', '=', 'cities.district')->groupBy('cities.district')->get();
+    // foreach ($cities as $city) {
+    //     if($city['district'] != 0){    
+    //         $dist = District::find($city['district']);
+    //         $districts[] = $dist;
+    //     } else {
+    //         $districts[] = [];
+    //     }
+    // }
     // - - - -
     $users = Users::all();
     return view('advertisements.edit', ['department'=>$departments, 'district'=>$districts, 'users'=>$users]);
 })->middleware('auth')->name('advertisements');
 Route::post('/advertisements/add', $path . '\AdvertisementsController@addAdvertisements');
 Route::get('/advertisements/edit/{id}', function ($id) {
-    $category = Category::orderBy('updated_at', 'DESC')->get();
-    $departments = array();
-    foreach ($category as $categ) {
-        if($categ['parent'] == 0){    
-            $cat = Category::find($categ['parent']);
-            $departments[] = $cat;
-        } else {
-            $departments[] = [];
-        }
-    }
+    $departments = Category::where('parent', 0)->orderBy('updated_at', 'DESC')->get();
     // - - - -
-    $cities = City::orderBy('updated_at', 'DESC')->get();
-    $districts = array();
-    foreach ($cities as $city) {
-        if($city['district'] != 0){    
-            $dist = District::find($city['district']);
-            $districts[] = $dist;
-        } else {
-            $districts[] = [];
-        }
-    }
+    $districts = City::join('district', 'district.id', '=', 'cities.district')->groupBy('cities.district')->get();
     // - - - -
     $users = Users::all();
     $advert = Advertisements::find($id);
@@ -156,7 +133,8 @@ Route::get('/advertisements/delete/{id}', $path . '\AdvertisementsController@del
 
 // Cities
 Route::get('/cities', function () {
-    $cities = City::orderBy('updated_at', 'DESC')->get();
+    Paginator::useBootstrap();
+    $cities = City::orderBy('updated_at', 'DESC')->paginate(6);
     $districts = District::all();
     return view('cities.cities', ['list'=>$cities, 'districts'=>$districts]);
 })->middleware('auth')->name('cities');
@@ -177,7 +155,8 @@ Route::get('/cities/delete/{id}', $path . '\CitiesController@deleteCity');
 
 // Banners
 Route::get('/banners', function () {
-    $banners = Banner::orderBy('updated_at', 'DESC')->get();
+    Paginator::useBootstrap();
+    $banners = Banner::orderBy('updated_at', 'DESC')->paginate(6);
     return view('banners.banners', ['list'=>$banners]);
 })->middleware('auth')->name('banners');
 Route::post('/banners', $path . '\AllController@search');
@@ -195,7 +174,8 @@ Route::get('/banners/delete/{id}', $path . '\BannerController@deleteBanner');
 
 // News
 Route::get('/news', function () {
-    $news = News::orderBy('updated_at', 'DESC')->get();
+    Paginator::useBootstrap();
+    $news = News::orderBy('updated_at', 'DESC')->paginate(6);
     return view('news.news', ['list'=>$news]);
 })->middleware('auth')->name('news');
 Route::post('/news', $path . '\AllController@search');
@@ -213,6 +193,7 @@ Route::get('/news/delete/{id}', $path . '\NewsController@deleteNews');
 
 // Chat
 Route::get('/chat', function () {
+    Paginator::useBootstrap();
     return view('chat.chat');
 })->middleware('auth')->name('chat');
 Route::get('/chat/edit', function () {

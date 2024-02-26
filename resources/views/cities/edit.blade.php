@@ -32,7 +32,7 @@
                             data-bs-target="#districtBody" aria-expanded="true" aria-controls="districtBody">
                             @if(isset($cities)){{$districts[$cities['district']-1]['ru_name']}}@else Выберите велаят @endif
                         </button>
-                        <input type="hidden" class="districtValue" name="district">
+                        <input type="hidden" class="districtValue" name="district" value="@if(isset($cities)){{$districts[$cities['district']-1]['id']}}@endif">
                         <span class="text-danger fs-6">@error('district'){{$message}}@enderror</span>
                     </h2>
                     <div id="districtBody" class="accordion-collapse collapse" aria-labelledby="districtHeading"

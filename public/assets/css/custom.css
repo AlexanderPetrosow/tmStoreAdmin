@@ -637,12 +637,12 @@ input[type="date"]:placeholder {
     color: #fff;
 }
 
-input[type="date"]:not(.has-value):before {
+/* input[type="date"]:not(.has-value):before {
     content: attr(placeholder);
     width: 0;
     color: #fff;
     height: 10px;
-}
+} */
 
 .elevate-adv-button {
     margin-top: 50px;

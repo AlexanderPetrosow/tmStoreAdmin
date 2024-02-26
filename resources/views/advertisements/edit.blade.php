@@ -109,6 +109,7 @@
                     ваше объявление(до 10 фото)</label>
                 <div class="uploaded-carousel">
                     @if(isset($advert))
+                        @if($advert['main_image'] != '')
                         <div>
                             <img class="uploaded-image highlight" src="/storage/{{$advert['main_image']}}" alt="Изображение">
                             <div class="delete-slide-button">
@@ -116,14 +117,17 @@
                             </div>
                             <div class="main-photo-icon"><i class="ti ti-home"></i></div>
                         </div>
-                        @foreach ($images as $img)
-                            <div>
-                                <img class="uploaded-image" src="/storage/{{$img['image']}}" alt="Изображение">
-                                <div class="delete-slide-button old_image" link="{{$img['image']}}">
-                                    <i class="ti ti-trash"></i>
+                        @endif
+                        @if($images[0]['image'] != '')
+                            @foreach ($images as $img)
+                                <div>
+                                    <img class="uploaded-image" src="/storage/{{$img['image']}}" alt="Изображение">
+                                    <div class="delete-slide-button old_image" link="{{$img['image']}}">
+                                        <i class="ti ti-trash"></i>
+                                    </div>
                                 </div>
-                            </div>
                             @endforeach
+                        @endif
                     @endif
                 </div>
             </div>
@@ -249,17 +253,18 @@
                 <span class="badge small text-muted">(Введите дату окончания VIP)</span>
             </label>
             <input type="date" class="date_vip" name="date_end" placeholder="Введите дату окончания VIP" value="">
-            <input type="hidden" class="date_vips" value="@if(isset($advert)){{$advert['date_vip']}}@endif">
         </div>
     </div>
+    <input type="hidden" class="date_vips" value="@if(isset($advert)){{$advert['date_vip']}}@endif">
     <div class="input-group-flex">
-        <div class="elevate-adv-button">
-            <p>Поднять объявление</p>
-        </div>
+        @if(isset($advert))
+            <div class="elevate-adv-button">
+                <p>Поднять объявление</p>
+            </div>
+        @endif
         <div class="checkbox-input">
-            <input type="checkbox" class="sucureCheckBox" @if(isset($advert))@if($advert['secure'])checked @endif @endif>
+            <input type="checkbox" name="secureCheckbox" class="sucureCheckBox" @if(isset($advert))@if($advert['secure'])checked @endif @endif>
             <label for="attach-adv">Закрепить объявление</label>
-            <input type="hidden" name="secure" class="secureStatus" value="@if(isset($advert)){{$advert['secure']}}@else 0 @endif">
         </div>
     </div>
 @endsection

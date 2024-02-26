@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
     $(".user-option").click(function () {
         $(".user-option").removeClass("selectedUser");
-        $(this).addClass("selectedUser");
+        $(this).addClass("selectedUser").addClass('selected');
         $("#user-select-button").prop("disabled", false);
     });
 
@@ -85,7 +85,7 @@ $(document).ready(function () {
         $("#categoryModalButton").text(selectedCategory);
         $("#categoryModalButton").attr("data-selected", selectedCategory);
         $("#categoryModalButton").addClass("selected-text-color");
-        $('.categoryValue').val($(".selected").data("name"));
+        $('.categoryValue').val($(".category-option.selected").data("value"));
         // $(".category-option").removeClass("selected"); 
        
     });
@@ -108,7 +108,7 @@ $(document).ready(function () {
         $('.cityValue').val(selectedCity);
     });
     $("#icon-select-button").click(function () {
-        var selectedIcon = $(".selected").data("value");
+        var selectedIcon = $(".ti.selected").data("value");
         $("#iconModalButton").text(selectedIcon);
         $("#iconModalButton").attr("data-selected", selectedIcon);
         $("#iconModalButton").addClass("selected-text-color");
@@ -313,7 +313,7 @@ $('.goToCity').click(function () {
                 $("#city-select-button").prop("disabled", true)
                 $(".city-option").click(function () {
                     $(".city-option").removeClass("selectedCity");
-                    $(this).addClass("selectedCity");
+                    $(this).addClass("selectedCity").addClass("selected");
                     $("#city-select-button").prop("disabled", false);
                 });
                 $("#city-select-button").click(function () {
@@ -351,15 +351,15 @@ $('.user_search').on('input', function(e){
             $('.users_list').html(userContent);
             $(".user-option").click(function () {
                 $(".user-option").removeClass("selectedUser");
-                $(this).addClass("selectedUser");
+                $(this).addClass("selectedUser").addClass("selected");
+                $('.userValue').val($(".selectedUser").data("value"));
                 $("#user-select-button").prop("disabled", false);
             });
             $("#user-select-button").click(function () {
-                var selectedUser = $(".selectedUser").data("name");
+                $('.userValue').val($(".selectedUser").data("value"));
                 $("#userModalButton").text(selectedUser);
                 $("#userModalButton").attr("data-selected", selectedUser);
                 $("#userModalButton").addClass("selected-text-color");
-                $('.userValue').val($(".selectedUser").data("value"));
                 $(".user-option").removeClass("selectedUser");
             });
         }
