@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
+use App\Mail\Claim;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -117,8 +119,18 @@ class AllController extends Controller
         return $json;
     }
     function getUsers(Request $req){
-        $users = Users::where('name', 'like', '%' . $req->search . '%')->orderBy('updated_at', 'DESC')->get();
+        $users = Users::where('phone', 'like', '%' . $req->search . '%')->orderBy('updated_at', 'DESC')->get();
         $json = json_encode($users);
         return $json;
+    }
+
+    // - - - - - - -
+    //  - - Mail - -
+    // - - - - - - -
+    function sendClaim(Request $req){
+        $user = Users::where('phone', $req->userPhone)->get();
+        $adv = Advertisements::find($req->advId);
+        Mail::to('i.baylyev@lotta-tm.com')->send(new Claim($user[0], $adv, $req->claim));
+        return true;
     }
 }

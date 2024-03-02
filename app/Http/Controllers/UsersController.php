@@ -9,15 +9,15 @@ class UsersController extends Controller
 {
     public function addUser(Request $req){
         $user = new Users;
-        $user->name = $req->name;
-        $user->phone = $req->phone;
+        // $user->name = $req->name;
+        $user->phone = "+".$req->phone;
         $user->save();
         return redirect('/users');
     }
     public function editUser(Request $req, $id){
         $user = Users::find($id);
-        $user->name = $req->name;
-        $user->phone = $req->phone;
+        // $user->name = $req->name;
+        $user->phone = "+".$req->phone;
         $user->save();
         return redirect('/users');
     }

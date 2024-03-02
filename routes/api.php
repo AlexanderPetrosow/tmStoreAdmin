@@ -2,12 +2,19 @@
 
 use App\Models\AdvertDetail;
 use App\Models\Category;
+use App\Models\CategoryDetail;
+use App\Models\City;
+use App\Models\DepartmentDetail;
+use App\Models\DistrictDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Views;
 use App\Models\News;
 use App\Models\Images;
 use App\Models\Banner;
+use App\Models\Users;
+
+$path = 'App\Http\Controllers';
 
 // Views statis
 Route::post('/add-view', function (Request $req) {
@@ -32,8 +39,8 @@ Route::get('/news', function () {
 });
 
 // Images
-Route::post('/images', function (Request $req) {
-    $img = Images::where('advertisements_id', $req->id)->where('status', 1)->orderBy('updated_at', 'DESC')->get();
+Route::post('/get-images', function (Request $req) {
+    $img = Images::where('advertisements_id', $req->id)->orderBy('updated_at', 'DESC')->get();
     $json = json_encode($img);
     return $json;
 });
@@ -70,7 +77,10 @@ Route::post('/advertisements', function (Request $req) {
     if($req->search != ''){
         $adv = $adv->where('name', 'like', '%' . $req->search . '%');
     }
-    $adv = $adv->where('status', 1)->orderBy('updated_at', 'DESC')->get();
+    if($req->price != ''){
+        $adv = $adv->where('price', '>=', $req->price);
+    }
+    $adv = $adv->where('status', 1)->orderBy('dates', 'DESC')->get();
     $json = json_encode($adv);
     return $json;
 });
@@ -78,13 +88,72 @@ Route::post('/advertisements', function (Request $req) {
 // Categories
 // Department
 Route::get('/department', function () {
-    $dep = Category::where('parent', 0)->where('status', 1)->orderBy('updated_at', 'DESC')->get();
+    $dep = DepartmentDetail::where('status', 1)->orderBy('updated_at', 'DESC')->get();
     $json = json_encode($dep);
     return $json;
 });
 // Category
 Route::post('/category', function (Request $req) {
-    $categ = Category::where('parent', $req->id)->where('status', 1)->orderBy('updated_at', 'DESC')->get();
+    $categ = CategoryDetail::where('parent', $req->id)->where('status', 1)->orderBy('updated_at', 'DESC')->get();
     $json = json_encode($categ);
     return $json;
 });
+
+// Cities
+// District
+Route::get('/district', function () {
+    $dis = DistrictDetail::orderBy('updated_at', 'DESC')->get();
+    $json = json_encode($dis);
+    return $json;
+});
+
+Route::post('/cities', function (Request $req) {
+    $city = City::where('district', $req->id)->orderBy('updated_at', 'DESC')->get();
+    $json = json_encode($city);
+    return $json;
+});
+
+
+// Auth
+// Check
+Route::post('/auth', function (Request $req) {
+    $user = Users::where('phone', $req->phone)->get();
+    if(count($user) != 0){
+        if($user[0]['status'] != '1'){
+            echo 0;
+        } else {
+            echo 1; 
+        }
+    } else {
+        echo 0;
+    }
+});
+
+// Registration
+Route::post('/regUser', function (Request $req) {
+    $user = Users::where('phone', $req->phone)->get();
+    if(count($user) != 0){
+        $u = Users::find($user[0]['id']);
+        $u->status = 1;
+        $u->save();
+    } else {
+        $u = new Users;
+        $u->phone = $req->phone;
+        $u->status = 1;
+        $u->save();
+    }
+});
+
+// Logout
+Route::post('/logout', function (Request $req) {
+    $user = Users::where('phone', $req->phone)->get();
+    if(count($user) != 0){
+        $u = Users::find($user[0]['id']);
+        $u->status = 0;
+        $u->save();
+    }
+});
+
+// Mail
+// Claim
+Route::post('/claim', $path . '\AllController@sendClaim');

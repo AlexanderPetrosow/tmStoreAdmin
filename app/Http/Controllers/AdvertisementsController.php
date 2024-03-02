@@ -44,23 +44,25 @@ class AdvertisementsController extends Controller
             } else {
                 $img = $req->images;
             }
-            $ext = explode('/', mime_content_type($img[0]))[1];
-            $imageName = uniqid().'.'.$ext;
-            $image = Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $img[0])));
-
-            $image = Image::make('storage/advertisements/'.$imageName);
-            $watermark = Image::make('assets/images/watermark.png');
-            $watermark->resize($image->width(), $image->height());
-            // $watermark->resize($image->width() / 6, $image->height() / 6);
-            // $watermark->rotate(-45);
-            // $image->insert($watermark, 'bottom-right', 10, 10);
-            // $image->insert($watermark, 'bottom-left', 10, 10);
-            // $image->insert($watermark, 'top-right', 10, 10);
-            // $image->insert($watermark, 'top-left', 10, 10);
-            $image->insert($watermark, 'center', 0, 0);
-            $image->save('storage/advertisements/'.$imageName);
-            
-            $advertisements->main_image = 'advertisements/'.$imageName;
+            if($img[0] != 'old'){
+                $ext = explode('/', mime_content_type($img[0]))[1];
+                $imageName = uniqid().'.'.$ext;
+                $image = Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $img[0])));
+    
+                $image = Image::make('storage/advertisements/'.$imageName);
+                $watermark = Image::make('assets/images/watermark.png');
+                $watermark->resize($image->width(), $image->height());
+                // $watermark->resize($image->width() / 6, $image->height() / 6);
+                // $watermark->rotate(-45);
+                // $image->insert($watermark, 'bottom-right', 10, 10);
+                // $image->insert($watermark, 'bottom-left', 10, 10);
+                // $image->insert($watermark, 'top-right', 10, 10);
+                // $image->insert($watermark, 'top-left', 10, 10);
+                $image->insert($watermark, 'center', 0, 0);
+                $image->save('storage/advertisements/'.$imageName);
+                
+                $advertisements->main_image = 'advertisements/'.$imageName;
+            }
         } else {
             $advertisements->main_image = '';
         }
@@ -88,27 +90,29 @@ class AdvertisementsController extends Controller
 
         if(isset($req->images)){
             $imagess = $req->images;
-            for ($ii=0; $ii < count($imagess); $ii++) { 
-                $ext = explode('/', mime_content_type($imagess[$ii]))[1];
-                $imageName = uniqid().'.'.$ext;
-                Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $imagess[$ii])));
-
-                $image = Image::make('storage/advertisements/'.$imageName);
-                $watermark = Image::make('assets/images/watermark.png');
-                $watermark->resize($image->width(), $image->height());
-                // $watermark->resize($image->width() / 6, $image->height() / 6);
-                // $watermark->rotate(-45);
-                // $image->insert($watermark, 'bottom-right', 10, 10);
-                // $image->insert($watermark, 'bottom-left', 10, 10);
-                // $image->insert($watermark, 'top-right', 10, 10);
-                // $image->insert($watermark, 'top-left', 10, 10);
-                $image->insert($watermark, 'center', 0, 0);
-                $image->save('storage/advertisements/'.$imageName);
-                
-                $imageC = new Images;
-                $imageC->advertisements_id = $advertId;
-                $imageC->image = 'advertisements/'.$imageName;
-                $imageC->save();
+            for ($ii=0; $ii < count($imagess); $ii++) {
+                if($imagess[$ii] != 'old'){
+                    $ext = explode('/', mime_content_type($imagess[$ii]))[1];
+                    $imageName = uniqid().'.'.$ext;
+                    Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $imagess[$ii])));
+    
+                    $image = Image::make('storage/advertisements/'.$imageName);
+                    $watermark = Image::make('assets/images/watermark.png');
+                    $watermark->resize($image->width(), $image->height());
+                    // $watermark->resize($image->width() / 6, $image->height() / 6);
+                    // $watermark->rotate(-45);
+                    // $image->insert($watermark, 'bottom-right', 10, 10);
+                    // $image->insert($watermark, 'bottom-left', 10, 10);
+                    // $image->insert($watermark, 'top-right', 10, 10);
+                    // $image->insert($watermark, 'top-left', 10, 10);
+                    $image->insert($watermark, 'center', 0, 0);
+                    $image->save('storage/advertisements/'.$imageName);
+                    
+                    $imageC = new Images;
+                    $imageC->advertisements_id = $advertId;
+                    $imageC->image = 'advertisements/'.$imageName;
+                    $imageC->save();
+                } 
             }
         } else {
             $imageC = new Images;
@@ -151,23 +155,25 @@ class AdvertisementsController extends Controller
             } else {
                 $img = $req->images;
             }
-            $ext = explode('/', mime_content_type($img[0]))[1];
-            $imageName = uniqid().'.'.$ext;
-            Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $img[0])));
-    
-            $image = Image::make('storage/advertisements/'.$imageName);
-            $watermark = Image::make('assets/images/watermark.png');
-            $watermark->resize($image->width(), $image->height());
-            // $watermark->resize($image->width() / 6, $image->height() / 6);
-            // $watermark->rotate(-45);
-            // $image->insert($watermark, 'bottom-right', 10, 10);
-            // $image->insert($watermark, 'bottom-left', 10, 10);
-            // $image->insert($watermark, 'top-right', 10, 10);
-            // $image->insert($watermark, 'top-left', 10, 10);
-            $image->insert($watermark, 'center', 0, 0);
-            $image->save('storage/advertisements/'.$imageName);
-    
-            $advertisements->main_image = 'advertisements/'.$imageName;
+            if($img[0] != 'old'){
+                $ext = explode('/', mime_content_type($img[0]))[1];
+                $imageName = uniqid().'.'.$ext;
+                Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $img[0])));
+        
+                $image = Image::make('storage/advertisements/'.$imageName);
+                $watermark = Image::make('assets/images/watermark.png');
+                $watermark->resize($image->width(), $image->height());
+                // $watermark->resize($image->width() / 6, $image->height() / 6);
+                // $watermark->rotate(-45);
+                // $image->insert($watermark, 'bottom-right', 10, 10);
+                // $image->insert($watermark, 'bottom-left', 10, 10);
+                // $image->insert($watermark, 'top-right', 10, 10);
+                // $image->insert($watermark, 'top-left', 10, 10);
+                $image->insert($watermark, 'center', 0, 0);
+                $image->save('storage/advertisements/'.$imageName);
+        
+                $advertisements->main_image = 'advertisements/'.$imageName;
+            }
         } else {
             $advertisements->main_image = '';
         }
@@ -200,26 +206,28 @@ class AdvertisementsController extends Controller
         if(isset($req->images)){
             $imagess = $req->images;
             for ($ii=0; $ii < count($imagess); $ii++) { 
-                $ext = explode('/', mime_content_type($imagess[$ii]))[1];
-                $imageName = uniqid().'.'.$ext;
-                Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $imagess[$ii])));
+                if($imagess[$ii] != 'old'){
+                    $ext = explode('/', mime_content_type($imagess[$ii]))[1];
+                    $imageName = uniqid().'.'.$ext;
+                    Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $imagess[$ii])));
 
-                $image = Image::make('storage/advertisements/'.$imageName);
-                $watermark = Image::make('assets/images/watermark.png');
-                $watermark->resize($image->width(), $image->height());
-                // $watermark->resize($image->width() / 6, $image->height() / 6);
-                // $watermark->rotate(-45);
-                // $image->insert($watermark, 'bottom-right', 10, 10);
-                // $image->insert($watermark, 'bottom-left', 10, 10);
-                // $image->insert($watermark, 'top-right', 10, 10);
-                // $image->insert($watermark, 'top-left', 10, 10);
-                $image->insert($watermark, 'center', 0, 0);
-                $image->save('storage/advertisements/'.$imageName);
+                    $image = Image::make('storage/advertisements/'.$imageName);
+                    $watermark = Image::make('assets/images/watermark.png');
+                    $watermark->resize($image->width(), $image->height());
+                    // $watermark->resize($image->width() / 6, $image->height() / 6);
+                    // $watermark->rotate(-45);
+                    // $image->insert($watermark, 'bottom-right', 10, 10);
+                    // $image->insert($watermark, 'bottom-left', 10, 10);
+                    // $image->insert($watermark, 'top-right', 10, 10);
+                    // $image->insert($watermark, 'top-left', 10, 10);
+                    $image->insert($watermark, 'center', 0, 0);
+                    $image->save('storage/advertisements/'.$imageName);
 
-                $imageC = new Images;
-                $imageC->advertisements_id = $advertId;
-                $imageC->image = 'advertisements/'.$imageName;
-                $imageC->save();
+                    $imageC = new Images;
+                    $imageC->advertisements_id = $advertId;
+                    $imageC->image = 'advertisements/'.$imageName;
+                    $imageC->save();
+                }
             }
         } else {
             $imageC = new Images;

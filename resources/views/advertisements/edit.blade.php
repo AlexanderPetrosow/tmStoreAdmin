@@ -115,7 +115,10 @@
                             <div class="delete-slide-button">
                                 <i class="ti ti-trash"></i>
                             </div>
-                            <div class="main-photo-icon"><i class="ti ti-home"></i></div>
+                            <div class="main-photo-icon">
+                                <input type="hidden" name="main_image[]" value="old">
+                                <i class="ti ti-home"></i>
+                            </div>
                         </div>
                         @endif
                         @if($images[0]['image'] != '')
@@ -123,6 +126,7 @@
                                 <div>
                                     <img class="uploaded-image" src="/storage/{{$img['image']}}" alt="Изображение">
                                     <div class="delete-slide-button old_image" link="{{$img['image']}}">
+                                        <input type="hidden" name="images[]" value="old">
                                         <i class="ti ti-trash"></i>
                                     </div>
                                 </div>
@@ -151,7 +155,7 @@
             <div class="d-flex flex-column">
                 <label for="name">Пользователь</label>
                 <button type="button" class="modal-button" data-bs-toggle="modal" data-bs-target="#userModal"
-                    id="userModalButton">@if(isset($advert)){{$user_name['name']}} @else Выберите пользователя@endif</button>
+                    id="userModalButton">@if(isset($advert)){{$user_name['phone']}} @else Выберите пользователя@endif</button>
                 <input type="hidden" class="userValue" name="user" value="@if(isset($advert)){{$advert['user_id']}}@endif">
                 <span class="text-danger">@error('user'){{$message}}@enderror</span>
             </div>
@@ -169,7 +173,7 @@
                             <input type="text" placeholder="Введите имя для поиска" class="m-auto mb-3 user_search">
                             <div class="users_list">
                                 @foreach ($users as $user)
-                                    <p class="user-option" data-value="{{$user['id']}}" data-name="{{$user['name']}}">{{$user['name']}}</p>
+                                    <p class="user-option" data-value="{{$user['id']}}" data-name="{{$user['phone']}}">{{$user['phone']}}</p>
                                 @endforeach
                             </div>
                             {{-- <p class="user-option" data-value="Аннамередов Аннамеред">Аннамередов Аннамеред</p>

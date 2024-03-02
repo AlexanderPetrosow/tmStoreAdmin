@@ -346,7 +346,7 @@ $('.user_search').on('input', function(e){
         success: function(user){
             let userContent = '';
             user.forEach(u => {
-                userContent += '<p class="user-option" data-value="'+u['id']+'" data-name="'+u['name']+'">'+u['name']+'</p>';
+                userContent += '<p class="user-option" data-value="'+u['id']+'" data-name="'+u['phone']+'">'+u['phone']+'</p>';
             });
             $('.users_list').html(userContent);
             $(".user-option").click(function () {

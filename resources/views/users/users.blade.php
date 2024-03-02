@@ -22,7 +22,7 @@
             @else
                 @foreach($list as $content)
                 <tr>
-                    <td>{{$content['name']}}</td>
+                    <td>{{$content['phone']}}</td>
                     <td>{{$content['created_at']}}</td>
                     <td>{{$content['status'] ? "Включен" : "Отключен"}}</td>
                     <td>
