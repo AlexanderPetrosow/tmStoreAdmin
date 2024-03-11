@@ -4,6 +4,12 @@
     @include('layouts.button', ['create' => false])
 @endsection
 @section('content')
+    @if(session()->has('msg'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{session('msg')}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div class="input-group-flex d-flex mb-4">
         <div class="input-label-col">
             <label for="name">Название</label>
@@ -170,7 +176,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <input type="text" placeholder="Введите имя для поиска" class="m-auto mb-3 user_search">
+                            <input type="text" placeholder="Введите номер для поиска" class="m-auto mb-3 user_search">
                             <div class="users_list">
                                 @foreach ($users as $user)
                                     <p class="user-option" data-value="{{$user['id']}}" data-name="{{$user['phone']}}">{{$user['phone']}}</p>
@@ -262,12 +268,12 @@
     <input type="hidden" class="date_vips" value="@if(isset($advert)){{$advert['date_vip']}}@endif">
     <div class="input-group-flex">
         @if(isset($advert))
-            <div class="elevate-adv-button">
+            <a href="/advertisements/upAdv/{{$advert['id']}}" class="elevate-adv-button">
                 <p>Поднять объявление</p>
-            </div>
+            </a>
         @endif
         <div class="checkbox-input">
-            <input type="checkbox" name="secureCheckbox" class="sucureCheckBox" @if(isset($advert))@if($advert['secure'])checked @endif @endif>
+            <input type="checkbox" name="secure" class="sucureCheckBox" @if(isset($advert))@if($advert['secure'] == '1')checked @endif @endif>
             <label for="attach-adv">Закрепить объявление</label>
         </div>
     </div>

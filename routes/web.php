@@ -128,6 +128,7 @@ Route::get('/advertisements/edit/{id}', function ($id) {
     return view('advertisements.edit', ['advert'=>$advert, 'department'=>$departments, 'category_name'=>$category_name, 'district'=>$districts, 'city_name'=>$city_name, 'users'=>$users, 'user_name'=>$user_name, 'images'=>$images]);
 })->middleware('auth')->name('advertisements');
 Route::post('/advertisements/edit/{id}', $path . '\AdvertisementsController@editAdvertisements');
+Route::get('/advertisements/upAdv/{id}', $path . '\AdvertisementsController@upAdvertisements');
 Route::get('/advertisements/status/{id}', $path . '\AdvertisementsController@statusAdvertisements');
 Route::get('/advertisements/delete/{id}', $path . '\AdvertisementsController@deleteAdvertisements');
 

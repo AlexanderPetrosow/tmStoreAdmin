@@ -32,7 +32,7 @@ $(document).ready(function () {
         $("#user-select-button").prop("disabled", true);
     });
     $(".user-option").click(function () {
-        $(".user-option").removeClass("selectedUser");
+        $(".user-option").removeClass("selectedUser").removeClass("selected");
         $(this).addClass("selectedUser").addClass('selected');
         $("#user-select-button").prop("disabled", false);
     });
@@ -95,7 +95,7 @@ $(document).ready(function () {
         $("#userModalButton").attr("data-selected", selectedUser);
         $("#userModalButton").addClass("selected-text-color");
         $('.userValue').val($(".selectedUser").data("value"));
-        $(".user-option").removeClass("selectedUser");
+        $(".user-option").removeClass("selectedUser").removeClass("selected");
     });
     $("#city-select-button").prop("disabled", true);
 
@@ -350,13 +350,13 @@ $('.user_search').on('input', function(e){
             });
             $('.users_list').html(userContent);
             $(".user-option").click(function () {
-                $(".user-option").removeClass("selectedUser");
+                $(".user-option").removeClass("selectedUser").removeClass("selected");
                 $(this).addClass("selectedUser").addClass("selected");
                 $('.userValue').val($(".selectedUser").data("value"));
                 $("#user-select-button").prop("disabled", false);
             });
             $("#user-select-button").click(function () {
-                $('.userValue').val($(".selectedUser").data("value"));
+                // $('.userValue').val($(".selectedUser").data("value"));
                 $("#userModalButton").text(selectedUser);
                 $("#userModalButton").attr("data-selected", selectedUser);
                 $("#userModalButton").addClass("selected-text-color");

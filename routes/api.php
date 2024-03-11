@@ -6,6 +6,7 @@ use App\Models\CategoryDetail;
 use App\Models\City;
 use App\Models\DepartmentDetail;
 use App\Models\DistrictDetail;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Views;
@@ -13,6 +14,7 @@ use App\Models\News;
 use App\Models\Images;
 use App\Models\Banner;
 use App\Models\Users;
+use App\Models\Tokens;
 
 $path = 'App\Http\Controllers';
 
@@ -80,7 +82,25 @@ Route::post('/advertisements', function (Request $req) {
     if($req->price != ''){
         $adv = $adv->where('price', '>=', $req->price);
     }
-    $adv = $adv->where('status', 1)->orderBy('dates', 'DESC')->get();
+    if($req->city != ''){
+        $adv = $adv->where('city_id', $req->city);
+    }
+    if($req->userId != '0'){
+        $adv= $adv->selectRaw('advertisements_detail.*, (SELECT true FROM `favorite` WHERE `favorite`.`adv_id` = `advertisements_detail`.`id` AND `favorite`.`user_id` = "'.$req->userId.'") as favorite');  
+    }
+    if($req->favorite != ''){
+        $adv = $adv->whereRaw('(SELECT true FROM `favorite` WHERE `favorite`.`adv_id` = `advertisements_detail`.`id` AND `favorite`.`user_id` = "'.$req->userId.'") = 1');
+    }
+    if($req->myAdv != '0'){
+        $adv = $adv->where('user_id', $req->myAdv);
+    }
+    if($req->secure != '0'){
+        $adv = $adv->orderBy('secure', 'DESC');
+    }
+    if($req->status == ''){
+        $adv = $adv->where('status', 1);
+    }
+    $adv = $adv->orderBy('dates', 'DESC')->get();
     $json = json_encode($adv);
     return $json;
 });
@@ -122,7 +142,7 @@ Route::post('/auth', function (Request $req) {
         if($user[0]['status'] != '1'){
             echo 0;
         } else {
-            echo 1; 
+            echo $user[0]['id']; 
         }
     } else {
         echo 0;
@@ -157,3 +177,53 @@ Route::post('/logout', function (Request $req) {
 // Mail
 // Claim
 Route::post('/claim', $path . '\AllController@sendClaim');
+
+// Favorite
+Route::post('/favorite', function (Request $req) {
+    $favCheck = Favorite::where('adv_id', $req->adv)->where('user_id', $req->user)->get();
+    if(count($favCheck) == 0){
+        $f = new Favorite;
+        $f->adv_id = $req->adv;
+        $f->user_id = $req->user;
+        $f->save();
+    } else {
+        Favorite::find($favCheck[0]['id'])->delete();
+    }
+});
+
+// Up advert
+Route::post('/checkUpAdvert', function(Request $req){
+    $check = AdvertDetail::whereRaw('dates + interval 3 day <= now() AND `id` = '.$req->id)->get();
+    if(count($check) == 0){
+        $checkDate = AdvertDetail::find($req->id);
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $checkDate['dates']);
+        $date->add(new DateInterval('P3D'));
+        $newDate = $date->format('Y-m-d H:i:s');
+        return $newDate;
+    } else {
+        $a = AdvertDetail::find($req->id);
+        $a->dates = now();
+        $a->save();
+        return true;
+    }
+});
+
+// Add advert
+Route::post('/addAdvert', $path . '\AdvertisementsController@addAdvertApi');
+
+// PUSH
+// Save phone token
+Route::post('saveToken', function(Request $req){
+    $check = Tokens::where('token', $req->token)->get();
+    if(count($check) != 0){
+        $t = Tokens::find($check[0]['id']);
+        $t->user_id = $req->user;
+        $t->save();
+    } else {
+        $t = new Tokens;
+        $t->user_id = $req->user;
+        $t->token = $req->token;
+        $t->save();
+    }
+    return true;
+}); 
