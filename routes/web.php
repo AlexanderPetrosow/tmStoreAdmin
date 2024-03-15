@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Advertisements;
+use App\Models\Chats;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -195,10 +196,12 @@ Route::get('/news/delete/{id}', $path . '\NewsController@deleteNews');
 // Chat
 Route::get('/chat', function () {
     Paginator::useBootstrap();
-    return view('chat.chat');
+    $chats = Chats::selectRaw('chats.*, users.phone as phone')->join('users', 'chats.user_id', '=', 'users.id')->groupBy('user_id')->paginate(6);
+    return view('chat.chat', ['chats'=>$chats]);
 })->middleware('auth')->name('chat');
-Route::get('/chat/edit', function () {
-    return view('chat.edit');
+Route::get('/chat/edit/{id}', function ($id) {
+    $chats = Chats::where('user_id', $id)->get();
+    return view('chat.edit', ['chats'=>$chats]);
 })->middleware('auth')->name('chat');
 
 // Ajax
@@ -210,4 +213,13 @@ Route::post('/getUsers', $path . '\AllController@getUsers');
 Route::post('/fetch-files', $path . '\FileController@fetchFiles');
 Route::post('/upload', function (Request $request) {
     var_dump($request->images);
+});
+
+// Send msg
+Route::post('/sendMsg', function(Request $req){
+    $c = new Chats;
+    $c->type = 0;
+    $c->user_id = $req->user;
+    $c->text = $req->msg;
+    $c->save(); 
 });

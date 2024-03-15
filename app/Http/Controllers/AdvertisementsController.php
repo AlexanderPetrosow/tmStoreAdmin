@@ -275,14 +275,14 @@ class AdvertisementsController extends Controller
         // Main Image
         if(isset($req->main_image) || isset($req->images)){
             if(isset($req->main_image)){
-                $img = $req->main_image;
+                $img = json_decode($req->main_image);
             } else {
-                $img = $req->images;
+                $img = json_decode($req->images);
             }
             if($img[0] != 'old'){
-                $ext = explode('/', mime_content_type($img[0]))[1];
-                $imageName = uniqid().'.'.$ext;
-                $image = Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $img[0])));
+                // $ext = explode('/', mime_content_type($img[0]))[1];
+                $imageName = uniqid().'.png';
+                $image = Storage::put('advertisements/'.$imageName, base64_decode($img[0]));
     
                 $image = Image::make('storage/advertisements/'.$imageName);
                 $watermark = Image::make('assets/images/watermark.png');
@@ -327,12 +327,11 @@ class AdvertisementsController extends Controller
         $advertId = $advertisements->id;
 
         if(isset($req->images)){
-            $imagess = $req->images;
+            $imagess = json_decode($req->images);
             for ($ii=0; $ii < count($imagess); $ii++) {
                 if($imagess[$ii] != 'old'){
-                    $ext = explode('/', mime_content_type($imagess[$ii]))[1];
-                    $imageName = uniqid().'.'.$ext;
-                    Storage::put('advertisements/'.$imageName, base64_decode(str_replace('data:image/'.$ext.';base64,', '', $imagess[$ii])));
+                    $imageName = uniqid().'.png';
+                    $image = Storage::put('advertisements/'.$imageName, base64_decode($imagess[$ii]));
     
                     $image = Image::make('storage/advertisements/'.$imageName);
                     $watermark = Image::make('assets/images/watermark.png');

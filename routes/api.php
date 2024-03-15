@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Advertisements;
 use App\Models\AdvertDetail;
 use App\Models\Category;
 use App\Models\CategoryDetail;
+use App\Models\Chats;
 use App\Models\City;
 use App\Models\DepartmentDetail;
 use App\Models\DistrictDetail;
@@ -201,7 +203,7 @@ Route::post('/checkUpAdvert', function(Request $req){
         $newDate = $date->format('Y-m-d H:i:s');
         return $newDate;
     } else {
-        $a = AdvertDetail::find($req->id);
+        $a = Advertisements::find($req->id);
         $a->dates = now();
         $a->save();
         return true;
@@ -213,7 +215,7 @@ Route::post('/addAdvert', $path . '\AdvertisementsController@addAdvertApi');
 
 // PUSH
 // Save phone token
-Route::post('saveToken', function(Request $req){
+Route::post('/saveToken', function(Request $req){
     $check = Tokens::where('token', $req->token)->get();
     if(count($check) != 0){
         $t = Tokens::find($check[0]['id']);
@@ -226,4 +228,19 @@ Route::post('saveToken', function(Request $req){
         $t->save();
     }
     return true;
-}); 
+});
+
+// Chat
+// Check
+Route::post('/checkMsg', function(Request $req){
+    return Chats::where('user_id', $req->user)->orderBy('created_at', 'DESC')->get();
+});
+
+// Send msg
+Route::post('/sendMsg', function(Request $req){
+    $c = new Chats;
+    $c->type = 1;
+    $c->user_id = $req->user;
+    $c->text = $req->msg;
+    $c->save(); 
+});

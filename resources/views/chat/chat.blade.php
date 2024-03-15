@@ -14,21 +14,19 @@
             </tr>
         </thead>
         <tbody>
-            @for ($i = 0; $i < 4; $i++)
+            @foreach ($chats as $chat)
                 <tr>
-
-                    <td>Mark</td>
-                    <td>Otto</td>
+                    <td>{{$chat['phone']}}</td>
+                    <td>{{$chat['created_at']}}</td>
                     <td>
                         <div class="d-flex justify-content-end">
-                            <a href="/chat/edit"><i class="ti ti-pencil table-icon"></i></a>
-                            <i class="ti ti-ban table-icon"></i>
+                            <a href="/chat/edit/{{$chat['user_id']}}"><i class="ti ti-message table-icon"></i></a>
+                            {{-- <i class="ti ti-ban table-icon"></i> --}}
                             <i class="ti ti-trash table-icon"></i>
                         </div>
                     </td>
                 </tr>
-            @endfor
-           
+            @endforeach
         </tbody>
     </table>
 @endsection

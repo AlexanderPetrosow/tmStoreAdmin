@@ -71,7 +71,7 @@
                             <ul class="navbar-nav">
                                 @foreach ($menu as $m)
                                 <li class="nav-item main-sidebar-menu-item">
-                                    <a class="nav-link " href="/{{$m['route']}}/{{Route::currentRouteName()}}">
+                                    <a class="nav-link " href="/{{$m['route']}}">
                                         <i class="ti ti-{{$m['icon']}}"></i>{{$m['name']}}
                                     </a>
                                 </li>
@@ -112,7 +112,7 @@
 
 
         <!-- Page Content -->
-        <form method="POST" class="col-lg-10 col-sm-12">
+        <form method="POST" class="col-lg-10 col-sm-12" id="my_form">
             @csrf
             <div class="page-title mobile-none">
                 <div class="d-flex justify-content-between m-auto">
